@@ -1,0 +1,605 @@
+VERSION 5.00
+Begin VB.PropertyPage ppProgressCircular 
+   Caption         =   "Gradients Colors"
+   ClientHeight    =   4830
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   5310
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   4830
+   ScaleWidth      =   5310
+   Begin VB.Frame Frame2 
+      Caption         =   "Predefined"
+      Height          =   4095
+      Left            =   4080
+      TabIndex        =   15
+      Top             =   600
+      Width           =   1095
+      Begin VB.CommandButton CmdPredefined 
+         Height          =   615
+         Index           =   4
+         Left            =   240
+         MaskColor       =   &H0000FF00&
+         Picture         =   "ppProgressCircular.pgx":0000
+         Style           =   1  'Graphical
+         TabIndex        =   20
+         Top             =   3240
+         UseMaskColor    =   -1  'True
+         Width           =   615
+      End
+      Begin VB.CommandButton CmdPredefined 
+         Height          =   615
+         Index           =   1
+         Left            =   240
+         MaskColor       =   &H0000FF00&
+         Picture         =   "ppProgressCircular.pgx":0C42
+         Style           =   1  'Graphical
+         TabIndex        =   19
+         Top             =   1080
+         UseMaskColor    =   -1  'True
+         Width           =   615
+      End
+      Begin VB.CommandButton CmdPredefined 
+         Height          =   615
+         Index           =   0
+         Left            =   240
+         MaskColor       =   &H0000FF00&
+         Picture         =   "ppProgressCircular.pgx":1884
+         Style           =   1  'Graphical
+         TabIndex        =   18
+         Top             =   360
+         UseMaskColor    =   -1  'True
+         Width           =   615
+      End
+      Begin VB.CommandButton CmdPredefined 
+         Height          =   615
+         Index           =   2
+         Left            =   240
+         MaskColor       =   &H0000FF00&
+         Picture         =   "ppProgressCircular.pgx":24C6
+         Style           =   1  'Graphical
+         TabIndex        =   17
+         Top             =   1800
+         UseMaskColor    =   -1  'True
+         Width           =   615
+      End
+      Begin VB.CommandButton CmdPredefined 
+         Height          =   615
+         Index           =   3
+         Left            =   240
+         MaskColor       =   &H0000FF00&
+         Picture         =   "ppProgressCircular.pgx":3108
+         Style           =   1  'Graphical
+         TabIndex        =   16
+         Top             =   2520
+         UseMaskColor    =   -1  'True
+         Width           =   615
+      End
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Edit"
+      Height          =   1740
+      Left            =   120
+      TabIndex        =   3
+      Top             =   600
+      Width           =   3735
+      Begin VB.CommandButton CmdDelete 
+         Caption         =   "Delete"
+         Height          =   375
+         Left            =   2760
+         TabIndex        =   14
+         Top             =   720
+         Width           =   855
+      End
+      Begin VB.CommandButton CmdChose 
+         Caption         =   "Open"
+         Height          =   375
+         Left            =   2760
+         TabIndex        =   13
+         Top             =   240
+         Width           =   855
+      End
+      Begin VB.PictureBox Picture2 
+         Appearance      =   0  'Flat
+         AutoRedraw      =   -1  'True
+         BackColor       =   &H00FFFFFF&
+         ForeColor       =   &H80000008&
+         Height          =   1360
+         Left            =   1320
+         ScaleHeight     =   89
+         ScaleMode       =   3  'Pixel
+         ScaleWidth      =   89
+         TabIndex        =   8
+         Top             =   240
+         Width           =   1360
+      End
+      Begin VB.TextBox TxtARGB 
+         Height          =   285
+         Index           =   3
+         Left            =   720
+         MaxLength       =   3
+         TabIndex        =   7
+         Text            =   "255"
+         Top             =   1320
+         Width           =   495
+      End
+      Begin VB.TextBox TxtARGB 
+         Height          =   285
+         Index           =   2
+         Left            =   720
+         MaxLength       =   3
+         TabIndex        =   6
+         Text            =   "255"
+         Top             =   960
+         Width           =   495
+      End
+      Begin VB.TextBox TxtARGB 
+         Height          =   285
+         Index           =   1
+         Left            =   720
+         MaxLength       =   3
+         TabIndex        =   5
+         Text            =   "255"
+         Top             =   600
+         Width           =   495
+      End
+      Begin VB.TextBox TxtARGB 
+         Height          =   285
+         Index           =   0
+         Left            =   720
+         MaxLength       =   3
+         TabIndex        =   4
+         Text            =   "255"
+         Top             =   240
+         Width           =   495
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         Caption         =   "Alpha:"
+         Height          =   195
+         Index           =   3
+         Left            =   120
+         TabIndex        =   12
+         Top             =   1360
+         Width           =   450
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         Caption         =   "Blue:"
+         Height          =   195
+         Index           =   2
+         Left            =   120
+         TabIndex        =   11
+         Top             =   1000
+         Width           =   360
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         Caption         =   "Green:"
+         Height          =   195
+         Index           =   1
+         Left            =   120
+         TabIndex        =   10
+         Top             =   640
+         Width           =   480
+      End
+      Begin VB.Label Label1 
+         AutoSize        =   -1  'True
+         Caption         =   "Red:"
+         Height          =   195
+         Index           =   0
+         Left            =   120
+         TabIndex        =   9
+         Top             =   280
+         Width           =   345
+      End
+   End
+   Begin VB.CommandButton CmdClear 
+      BackColor       =   &H00003399&
+      Caption         =   "Clear"
+      Height          =   375
+      Left            =   4560
+      TabIndex        =   2
+      Top             =   120
+      Width           =   615
+   End
+   Begin VB.PictureBox Picture1 
+      Appearance      =   0  'Flat
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H80000005&
+      ForeColor       =   &H80000008&
+      Height          =   375
+      Left            =   120
+      ScaleHeight     =   23
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   255
+      TabIndex        =   1
+      Top             =   120
+      Width           =   3855
+   End
+   Begin VB.CommandButton CmdAdd 
+      BackColor       =   &H00009900&
+      Caption         =   "+"
+      Height          =   375
+      Left            =   4080
+      TabIndex        =   0
+      Top             =   120
+      Width           =   375
+   End
+   Begin VB.Timer Timer1 
+      Interval        =   100
+      Left            =   240
+      Top             =   3480
+   End
+End
+Attribute VB_Name = "ppProgressCircular"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
+Option Explicit
+Private Declare Function GetSysColor Lib "user32.dll" (ByVal nIndex As Long) As Long
+Private Declare Function CHOOSECOLOR Lib "comdlg32.dll" Alias "ChooseColorA" (pChoosecolor As CHOOSECOLOR) As Long
+Private Declare Function GdipCreateFromHDC Lib "GdiPlus.dll" (ByVal mhDC As Long, ByRef mGraphics As Long) As Long
+Private Declare Function GdipDeleteGraphics Lib "GdiPlus.dll" (ByVal mGraphics As Long) As Long
+Private Declare Function GdipCreateSolidFill Lib "GdiPlus.dll" (ByVal mColor As Long, ByRef mBrush As Long) As Long
+Private Declare Function GdipDeleteBrush Lib "GdiPlus.dll" (ByVal mBrush As Long) As Long
+Private Declare Function GdipFillRectangle Lib "GdiPlus.dll" (ByVal mGraphics As Long, ByVal mBrush As Long, ByVal mX As Single, ByVal mY As Single, ByVal mWidth As Single, ByVal mHeight As Single) As Long
+
+Private Type CHOOSECOLOR
+    lStructSize As Long
+    hwndOwner As Long
+    hInstance As Long
+    rgbResult As Long
+    lpCustColors As Long
+    flags As Long
+    lCustData As Long
+    lpfnHook As Long
+    lpTemplateName As String
+End Type
+  
+
+Dim oPC As Object
+Dim m_ucProgressCircular As ucProgressCircular
+Dim m_PF_Colors() As Long
+Dim PF_ColorsCount As Long
+Dim CC_Custcolor(16) As Long
+Dim m_Index As Long
+Dim bUpdate As Boolean
+
+Private Sub FillPicture(ByVal lColor As Long)
+    Dim hGraphics As Long
+    Dim hBrush As Long
+    Picture2.Cls
+    GdipCreateFromHDC Picture2.hDC, hGraphics
+    GdipCreateSolidFill lColor, hBrush
+    GdipFillRectangle hGraphics, hBrush, 0, 0, Picture2.ScaleWidth, Picture2.ScaleHeight
+    GdipDeleteBrush hBrush
+    GdipDeleteGraphics hGraphics
+    Picture2.Refresh
+End Sub
+
+Private Function DrawPalette()
+    Dim i As Long
+    Dim H As Single, W As Single
+    Dim M As Single
+    Dim L As Single
+    Dim lColor As Long
+    
+    bUpdate = False
+    Picture1.Cls
+    M = 2
+    H = Picture1.ScaleHeight - M
+    W = H
+
+    For i = 0 To PF_ColorsCount - 1
+        L = i * W
+        Picture1.Line (L + M, M / 2)-(L + W, H), ARGBtoRGB(m_PF_Colors(i)), BF
+        If m_Index = i Then
+            Picture1.Line (L + M, M / 2)-(L + W, H), vbBlack, B
+            
+            TxtARGB(0) = (m_PF_Colors(i) And &HFF0000) \ &H10000
+            TxtARGB(1) = (m_PF_Colors(i) And &HFF00&) \ &H100
+            TxtARGB(2) = (m_PF_Colors(i) And &HFF)
+            TxtARGB(3) = (m_PF_Colors(i) And &HFF000000) \ &H1000000 And &HFF
+            
+            
+        End If
+    Next
+    bUpdate = True
+    Picture1.Refresh
+End Function
+
+
+Function ShowColor(Optional bExtDlg As Boolean = True, Optional InitColor As Long = -1) As Long
+      
+    Dim CustomColors() As Byte
+    Dim CC As CHOOSECOLOR
+    Dim lReturn As Long
+    Dim i As Long
+
+    With CC
+        .lStructSize = Len(CC)
+        .hwndOwner = PropertyPage.hWnd
+        .hInstance = App.hInstance
+        .lpCustColors = VarPtr(CC_Custcolor(0))
+        .rgbResult = InitColor ' -- Color por defecto
+          
+        If bExtDlg Then .flags = 2
+        If InitColor <> -1 Then .flags = .flags + 1
+          
+        Dim lColor As Long
+        lColor = CHOOSECOLOR(CC)
+        If lColor <> 0 Then
+            ShowColor = .rgbResult
+            'CustomColors = StrConv(.lpCustColors, vbFromUnicode)
+        Else
+            ShowColor = -1
+        End If
+    End With
+End Function
+
+
+Private Sub CmdAdd_Click()
+    Dim lColorRet As Long
+    Dim DefalutColor As Long
+    Dim Opacity As Variant
+
+    lColorRet = ShowColor(True, m_PF_Colors(PF_ColorsCount - 1))
+ 
+    If lColorRet <> -1 Then
+        Opacity = InputBox("enter the value for the color alpha channel (opacity), a value from 0 to 100", , 100)
+        If Not IsNumeric(Opacity) Then Opacity = 100
+    
+        ReDim Preserve m_PF_Colors(PF_ColorsCount)
+        m_PF_Colors(PF_ColorsCount) = RGBtoARGB(lColorRet, Opacity)
+        PF_ColorsCount = PF_ColorsCount + 1
+    End If
+    oPC.AddPaletteColors m_PF_Colors
+    Call DrawPalette
+    Changed = True
+End Sub
+
+Private Sub CmdChose_Click()
+    Dim lColorRet As Long
+    Dim DefalutColor As Long
+    Dim Opacity As Variant
+
+    lColorRet = ShowColor(True, m_PF_Colors(m_Index))
+    If lColorRet <> -1 Then
+        TxtARGB(0) = (lColorRet And &HFF)
+        TxtARGB(1) = (lColorRet And &HFF00&) \ &H100
+        TxtARGB(2) = (lColorRet And &HFF0000) \ &H10000
+    End If
+End Sub
+
+Private Sub CmdClear_Click()
+    ReDim Preserve m_PF_Colors(0)
+    PF_ColorsCount = 1
+    m_Index = 0
+    DrawPalette
+End Sub
+
+Private Sub CmdDelete_Click()
+    Dim i As Long
+    If PF_ColorsCount = 1 Then Exit Sub
+    For i = m_Index To UBound(m_PF_Colors) - 1
+        m_PF_Colors(i) = m_PF_Colors(i + 1)
+    Next
+    PF_ColorsCount = PF_ColorsCount - 1
+    ReDim Preserve m_PF_Colors(PF_ColorsCount - 1)
+    oPC.AddPaletteColors m_PF_Colors
+    DrawPalette
+    UpdateColor
+    Changed = True
+End Sub
+
+Private Sub CmdPredefined_Click(Index As Integer)
+    Select Case Index
+        Case 0
+            PF_ColorsCount = 7
+            ReDim m_PF_Colors(6)
+            m_PF_Colors(0) = RGBtoARGB(vbRed, 100)
+            m_PF_Colors(1) = RGBtoARGB(vbMagenta, 100)
+            m_PF_Colors(2) = RGBtoARGB(vbBlue, 100)
+            m_PF_Colors(3) = RGBtoARGB(vbCyan, 100)
+            m_PF_Colors(4) = RGBtoARGB(vbGreen, 100)
+            m_PF_Colors(5) = RGBtoARGB(vbYellow, 100)
+            m_PF_Colors(6) = RGBtoARGB(vbRed, 100)
+        Case 1
+            PF_ColorsCount = 5
+            ReDim m_PF_Colors(4)
+            m_PF_Colors(0) = RGBtoARGB(vbGreen, 100)
+            m_PF_Colors(1) = RGBtoARGB(vbGreen, 100)
+            m_PF_Colors(2) = RGBtoARGB(vbYellow, 100)
+            m_PF_Colors(3) = RGBtoARGB(vbRed, 100)
+        Case 2
+            PF_ColorsCount = 2
+            ReDim m_PF_Colors(1)
+            m_PF_Colors(0) = 0
+            m_PF_Colors(1) = RGBtoARGB(vbBlack, 100)
+        Case 3
+            PF_ColorsCount = 2
+            ReDim m_PF_Colors(1)
+            m_PF_Colors(0) = RGBtoARGB(vbYellow, 100)
+            m_PF_Colors(1) = RGBtoARGB(vbMagenta, 100)
+        Case 4
+            PF_ColorsCount = 3
+            ReDim m_PF_Colors(2)
+            m_PF_Colors(0) = RGBtoARGB(vbRed, 100)
+            m_PF_Colors(1) = RGBtoARGB(vbYellow, 100)
+            m_PF_Colors(2) = RGBtoARGB(vbGreen, 100)
+    End Select
+    oPC.AddPaletteColors m_PF_Colors
+    DrawPalette
+    Changed = True
+End Sub
+
+Private Sub UpdateColor()
+  
+    m_PF_Colors(m_Index) = ARGB(TxtARGB(3), TxtARGB(0), TxtARGB(1), TxtARGB(2))
+    oPC.AddPaletteColors m_PF_Colors
+    DrawPalette
+    FillPicture ARGB(TxtARGB(3), TxtARGB(0), TxtARGB(1), TxtARGB(2))
+    Changed = True
+    
+End Sub
+
+Private Sub Picture1_MouseDown(Button As Integer, Shift As Integer, X As Single, Y As Single)
+    m_Index = X \ (Picture1.ScaleHeight - 2)
+    If m_Index > PF_ColorsCount - 1 Then m_Index = PF_ColorsCount - 1
+    DrawPalette
+End Sub
+
+Private Sub PropertyPage_ApplyChanges()
+    'if PF_ColorsCount >0
+    m_ucProgressCircular.AddPaletteColors m_PF_Colors
+End Sub
+
+Private Sub PropertyPage_Initialize()
+    Set oPC = Controls.Add(App.Title & ".ucProgressCircular", "ProgCirc")
+
+    With oPC
+        .Move 0, PropertyPage.ScaleHeight / 2, Frame2.Left, PropertyPage.ScaleHeight / 2
+        .Visible = True
+    End With
+    
+    
+    Dim X As Long, Y As Long
+    Dim iStart As Integer, i As Integer
+    
+    For X = 0 To Picture2.ScaleWidth Step 11
+        If (X Mod 2) = 0 Then iStart = 11 Else iStart = 0
+        For Y = iStart To Picture2.ScaleHeight Step 22
+            Picture2.Line (X, Y)-(X + 11, Y + 11), &H999999, BF
+        Next
+    Next
+    Picture2.Picture = Picture2.Image
+    
+    
+End Sub
+
+
+Private Sub PropertyPage_Terminate()
+    Controls.Remove "ProgCirc"
+End Sub
+
+
+Private Sub PropertyPage_SelectionChanged()
+
+    Set m_ucProgressCircular = SelectedControls(0)
+    With m_ucProgressCircular
+        oPC.Angle = .Angle
+        oPC.Caption1 = .Caption1
+        oPC.Caption1_Font = .Caption1_Font
+        oPC.Caption1_ForeColor = .Caption1_ForeColor
+        oPC.Caption1_OffsetY = .Caption1_OffsetY
+        oPC.Caption2 = .Caption2
+        oPC.Caption2_Font = .Caption2_Font
+        oPC.Caption2_ForeColor = .Caption2_ForeColor
+        oPC.Caption2_OffsetY = .Caption2_OffsetY
+        oPC.CenterColor1 = .CenterColor1
+        oPC.CenterColor1Opacity = .CenterColor1Opacity
+        oPC.CenterColor2 = .CenterColor2
+        oPC.CenterColor2Opacity = .CenterColor2Opacity
+        oPC.CenterGradient = .CenterGradient
+        oPC.DisplayInPercent = .DisplayInPercent
+        oPC.GradientAngle = .GradientAngle
+        oPC.PB_Border = .PB_Border
+        oPC.PB_BorderColor = .PB_BorderColor
+        oPC.PB_BorderColorOpacity = .PB_BorderColorOpacity
+        oPC.PB_BorderWidth = .PB_BorderWidth
+        oPC.PB_Color1 = .PB_Color1
+        oPC.PB_Color1Opacity = .PB_Color1Opacity
+        oPC.PB_Color2 = .PB_Color2
+        oPC.PB_Color2 = .PB_Color2
+        oPC.PB_Color2Opacity = .PB_Color2Opacity
+        oPC.PB_ColorGradient = .PB_ColorGradient
+        oPC.PB_Steps = .PB_Steps
+        oPC.PB_Width = .PB_Width
+        oPC.PF_ForeColor = .PF_ForeColor
+        oPC.PF_ForeColorOpacity = .PF_ForeColorOpacity
+        oPC.PF_Steps = .PF_Steps
+        oPC.PF_Width = .PF_Width
+        oPC.RoundEndStyle = .RoundEndStyle
+        oPC.RoundStartStyle = .RoundStartStyle
+        oPC.ShowAnimation = .ShowAnimation
+        oPC.StartAngle = .StartAngle
+        oPC.StepSpaceSize = .StepSpaceSize
+        m_PF_Colors = .GetPaletteColors
+        oPC.AddPaletteColors m_PF_Colors
+        PF_ColorsCount = UBound(m_PF_Colors) + 1
+        m_Index = 0
+        Call DrawPalette
+        FillPicture ARGB(TxtARGB(3), TxtARGB(0), TxtARGB(1), TxtARGB(2))
+   End With
+   If Not oPC.ShowAnimation Then
+        Timer1.Interval = 100
+   Else
+        Timer1.Interval = 0
+   End If
+End Sub
+
+
+Private Function ARGB(ByVal Alpha As Byte, Red As Byte, Green As Byte, Blue As Byte)
+    If Alpha < 128& Then
+        ARGB = Alpha * &H1000000
+    Else
+        ARGB = (Alpha - 128&) * &H1000000 Or &H80000000
+    End If
+    ARGB = ARGB Or CLng(Red) * &H10000 Or CLng(Green) * &H100 Or Blue
+End Function
+
+Public Function RGBtoARGB(ByVal RGBColor As Long, ByVal Opacity As Long) As Long
+    'By LaVople
+    ' GDI+ color conversion routines. Most GDI+ functions require ARGB format vs standard RGB format
+    ' This routine will return the passed RGBcolor to RGBA format
+    ' Passing VB system color constants is allowed, i.e., vbButtonFace
+    ' Pass Opacity as a value from 0 to 255
+
+    If (RGBColor And &H80000000) Then RGBColor = GetSysColor(RGBColor And &HFF&)
+    RGBtoARGB = (RGBColor And &HFF00&) Or (RGBColor And &HFF0000) \ &H10000 Or (RGBColor And &HFF) * &H10000
+    Opacity = CByte((Abs(Opacity) / 100) * 255)
+    If Opacity < 128 Then
+        If Opacity < 0& Then Opacity = 0&
+        RGBtoARGB = RGBtoARGB Or Opacity * &H1000000
+    Else
+        If Opacity > 255& Then Opacity = 255&
+        RGBtoARGB = RGBtoARGB Or (Opacity - 128&) * &H1000000 Or &H80000000
+    End If
+    
+End Function
+
+Public Function ARGBtoRGB(ByVal ARGBColor As Long) As Long
+    'ARGBtoRGB = (ARGBColor And &HFF00&) Or (ARGBColor And &HFF0000) \ &H10000 Or (ARGBColor And &HFF) * &H10000
+    
+    
+    ARGBtoRGB = (ARGBColor And &HFF) * &H10000 Or (ARGBColor And &HFF0000) \ &H10000 Or (ARGBColor And &HFF00&)
+
+End Function
+
+Private Sub Timer1_Timer()
+    oPC.Value = oPC.Value + 1
+    If oPC.Value = oPC.Max Then oPC.Value = oPC.Min
+End Sub
+
+Private Sub TxtARGB_Change(Index As Integer)
+    If TxtARGB(Index) > 255 Then TxtARGB(Index) = 255
+    If TxtARGB(Index) < 0 Then TxtARGB(Index) = 0
+    If Not IsNumeric(TxtARGB(Index)) Then TxtARGB(Index) = 0
+    FillPicture ARGB(TxtARGB(3), TxtARGB(0), TxtARGB(1), TxtARGB(2))
+    If bUpdate Then Call UpdateColor
+End Sub
+
+Private Sub TxtARGB_GotFocus(Index As Integer)
+    With TxtARGB(Index)
+        .SelStart = 0
+        .SelLength = Len(.Text)
+    End With
+End Sub
+
+Private Sub TxtARGB_KeyPress(Index As Integer, KeyAscii As Integer)
+    If KeyAscii < 48 Or KeyAscii > 57 Then
+        KeyAscii = 0
+    End If
+End Sub

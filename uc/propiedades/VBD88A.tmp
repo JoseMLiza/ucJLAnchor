@@ -1,0 +1,359 @@
+VERSION 5.00
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Begin VB.PropertyPage ppJLAnchor 
+   Caption         =   "Anchor"
+   ClientHeight    =   4725
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   6540
+   LockControls    =   -1  'True
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   4725
+   ScaleWidth      =   6540
+   Begin VB.OptionButton optExpColl 
+      Caption         =   "Collapse All"
+      Height          =   255
+      Index           =   0
+      Left            =   120
+      TabIndex        =   1
+      Top             =   4320
+      Width           =   1215
+   End
+   Begin VB.OptionButton optExpColl 
+      Caption         =   "Expand All"
+      Height          =   255
+      Index           =   1
+      Left            =   1440
+      TabIndex        =   2
+      Top             =   4320
+      Value           =   -1  'True
+      Width           =   1215
+   End
+   Begin MSComctlLib.TreeView trvwControls 
+      Height          =   3735
+      Left            =   120
+      TabIndex        =   0
+      Top             =   480
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   6588
+      _Version        =   393217
+      HideSelection   =   0   'False
+      Indentation     =   452
+      LabelEdit       =   1
+      Style           =   6
+      HotTracking     =   -1  'True
+      BorderStyle     =   1
+      Appearance      =   0
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Lucida Sans"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin VB.Frame frmDetails 
+      Height          =   4215
+      Left            =   2880
+      TabIndex        =   15
+      Top             =   390
+      Width           =   3555
+      Begin VB.Frame fmeDetPosPercent 
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   2640
+         Index           =   0
+         Left            =   210
+         TabIndex        =   4
+         Top             =   1320
+         Width           =   3105
+         Begin VB.CommandButton cmdbAnchorAll 
+            Height          =   375
+            Left            =   1395
+            TabIndex        =   5
+            Top             =   1135
+            Width           =   375
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   375
+            Index           =   1
+            Left            =   1530
+            TabIndex        =   7
+            Top             =   760
+            Width           =   135
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   375
+            Index           =   3
+            Left            =   1530
+            TabIndex        =   9
+            Top             =   1510
+            Width           =   135
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   135
+            Index           =   0
+            Left            =   1020
+            TabIndex        =   6
+            Top             =   1245
+            Width           =   375
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   135
+            Index           =   2
+            Left            =   1770
+            TabIndex        =   8
+            Top             =   1245
+            Width           =   375
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   11
+            Left            =   1200
+            TabIndex        =   28
+            Top             =   2280
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   7
+            Left            =   1200
+            TabIndex        =   27
+            Top             =   400
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   9
+            Left            =   2235
+            TabIndex        =   26
+            Top             =   1320
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   5
+            Left            =   120
+            TabIndex        =   25
+            Top             =   1320
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Bottom:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   10
+            Left            =   1200
+            TabIndex        =   24
+            Top             =   2055
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Top:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   6
+            Left            =   1200
+            TabIndex        =   23
+            Top             =   160
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Right:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   8
+            Left            =   2235
+            TabIndex        =   22
+            Top             =   1080
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Left:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   4
+            Left            =   120
+            TabIndex        =   21
+            Top             =   1080
+            Width           =   795
+         End
+         Begin VB.Shape Shape1 
+            BackColor       =   &H8000000B&
+            BackStyle       =   1  'Opaque
+            BorderColor     =   &H8000000A&
+            Height          =   1230
+            Left            =   960
+            Top             =   720
+            Width           =   1230
+         End
+      End
+      Begin VB.Frame fmeDetPosPercent 
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   2640
+         Index           =   1
+         Left            =   210
+         TabIndex        =   29
+         Top             =   1320
+         Width           =   3105
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Width"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   2
+            Left            =   1080
+            TabIndex        =   37
+            Top             =   1770
+            Width           =   975
+         End
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Height"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   3
+            Left            =   1920
+            TabIndex        =   36
+            Top             =   930
+            Width           =   975
+         End
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Top"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   1
+            Left            =   1080
+            TabIndex        =   35
+            Top             =   210
+            Width           =   975
+         End
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Left"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   0
+            Left            =   120
+            TabIndex        =   34
+            Top             =   930
+            Width           =   975
+         End
+         Begin VB.TextBox txtDetPercent 
+            Alignment       =   1  'Right Justify
+            BeginProperty DataFormat 

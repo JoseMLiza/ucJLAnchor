@@ -1,0 +1,12 @@
+frmChild = 104, 104, 532, 581, C, 684, 0, 1368, 936, C
+MDIForm1 = 104, 104, 395, 581, C, 130, 130, 695, 771, C
+frmNoChild = 0, 0, 0, 0, C, 810, 6, 1423, 492, C
+LabelPlus = 0, 0, 0, 0, C, 130, 130, 898, 771, C
+PropPagLP = 0, 0, 0, 0, C, 156, 156, 924, 797, C
+ucChartArea = 156, 156, 1066, 633, C, 182, 182, 950, 823, C
+ucChartBar = 0, 0, 0, 0, C, 208, 208, 976, 849, C
+ucPieChart = 0, 0, 0, 0, C, 234, 234, 1002, 875, C
+ucProgressCircular = 0, 0, 0, 0, C, 260, 260, 1028, 901, C
+ucTreeMaps = 0, 0, 0, 0, C, 286, 286, 1054, 927, C
+ppProgressCircular = 0, 0, 0, 0, C, 0, 0, 768, 641, C
+frmControlsLea = 52, 52, 1305, 538, C, 0, 0, 684, 936, C

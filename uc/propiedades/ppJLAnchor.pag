@@ -1,0 +1,996 @@
+VERSION 5.00
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Begin VB.PropertyPage ppJLAnchor 
+   Caption         =   "Anchor"
+   ClientHeight    =   4725
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   6540
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   4725
+   ScaleWidth      =   6540
+   Begin VB.OptionButton optExpColl 
+      Caption         =   "Collapse All"
+      Height          =   255
+      Index           =   0
+      Left            =   120
+      TabIndex        =   1
+      Top             =   4320
+      Width           =   1215
+   End
+   Begin VB.OptionButton optExpColl 
+      Caption         =   "Expand All"
+      Height          =   255
+      Index           =   1
+      Left            =   1440
+      TabIndex        =   2
+      Top             =   4320
+      Value           =   -1  'True
+      Width           =   1215
+   End
+   Begin MSComctlLib.TreeView trvwControls 
+      Height          =   3735
+      Left            =   120
+      TabIndex        =   0
+      Top             =   480
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   6588
+      _Version        =   393217
+      HideSelection   =   0   'False
+      Indentation     =   452
+      LabelEdit       =   1
+      Style           =   6
+      HotTracking     =   -1  'True
+      BorderStyle     =   1
+      Appearance      =   0
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Lucida Sans"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+   End
+   Begin VB.Frame frmDetails 
+      Height          =   4215
+      Left            =   2880
+      TabIndex        =   19
+      Top             =   390
+      Width           =   3555
+      Begin VB.Frame fmeDetPosPercent 
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   2640
+         Index           =   0
+         Left            =   210
+         TabIndex        =   4
+         Top             =   1320
+         Width           =   3105
+         Begin VB.CommandButton cmdbAnchorAll 
+            Height          =   375
+            Left            =   1395
+            TabIndex        =   5
+            Top             =   1135
+            Width           =   375
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   375
+            Index           =   1
+            Left            =   1530
+            TabIndex        =   7
+            Top             =   760
+            Width           =   135
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   375
+            Index           =   3
+            Left            =   1530
+            TabIndex        =   9
+            Top             =   1510
+            Width           =   135
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   135
+            Index           =   0
+            Left            =   1020
+            TabIndex        =   6
+            Top             =   1245
+            Width           =   375
+         End
+         Begin VB.Label lblAnchor 
+            Appearance      =   0  'Flat
+            BackColor       =   &H80000005&
+            BorderStyle     =   1  'Fixed Single
+            ForeColor       =   &H80000008&
+            Height          =   135
+            Index           =   2
+            Left            =   1770
+            TabIndex        =   8
+            Top             =   1245
+            Width           =   375
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   11
+            Left            =   1200
+            TabIndex        =   32
+            Top             =   2280
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   7
+            Left            =   1200
+            TabIndex        =   31
+            Top             =   400
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   9
+            Left            =   2235
+            TabIndex        =   30
+            Top             =   1320
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Appearance      =   0  'Flat
+            Caption         =   "0"
+            ForeColor       =   &H80000008&
+            Height          =   255
+            Index           =   5
+            Left            =   120
+            TabIndex        =   29
+            Top             =   1320
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Bottom:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   10
+            Left            =   1200
+            TabIndex        =   28
+            Top             =   2055
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Top:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   6
+            Left            =   1200
+            TabIndex        =   27
+            Top             =   160
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Right:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   8
+            Left            =   2235
+            TabIndex        =   26
+            Top             =   1080
+            Width           =   795
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   2  'Center
+            Caption         =   "Left:"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   4
+            Left            =   120
+            TabIndex        =   25
+            Top             =   1080
+            Width           =   795
+         End
+         Begin VB.Shape Shape1 
+            BackColor       =   &H8000000B&
+            BackStyle       =   1  'Opaque
+            BorderColor     =   &H8000000A&
+            Height          =   1230
+            Left            =   960
+            Top             =   720
+            Width           =   1230
+         End
+      End
+      Begin VB.Frame fmeDetPosPercent 
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   2640
+         Index           =   1
+         Left            =   210
+         TabIndex        =   33
+         Top             =   1320
+         Width           =   3105
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Width"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   2
+            Left            =   1080
+            TabIndex        =   14
+            Top             =   1770
+            Width           =   975
+         End
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Height"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   3
+            Left            =   1920
+            TabIndex        =   16
+            Top             =   930
+            Width           =   975
+         End
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Top"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   1
+            Left            =   1080
+            TabIndex        =   12
+            Top             =   210
+            Width           =   975
+         End
+         Begin VB.CheckBox chkPercent 
+            Caption         =   "Left"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   255
+            Index           =   0
+            Left            =   120
+            TabIndex        =   10
+            Top             =   930
+            Width           =   975
+         End
+         Begin VB.TextBox txtDetPercent 
+            Alignment       =   1  'Right Justify
+            BeginProperty DataFormat 
+               Type            =   0
+               Format          =   "#,##0.000"
+               HaveTrueFalseNull=   0
+               FirstDayOfWeek  =   0
+               FirstWeekOfYear =   0
+               LCID            =   10250
+               SubFormatType   =   0
+            EndProperty
+            Height          =   315
+            Index           =   3
+            Left            =   1920
+            Locked          =   -1  'True
+            TabIndex        =   17
+            Text            =   "0"
+            Top             =   1170
+            Width           =   840
+         End
+         Begin VB.TextBox txtDetPercent 
+            Alignment       =   1  'Right Justify
+            BeginProperty DataFormat 
+               Type            =   0
+               Format          =   "#,##0.000"
+               HaveTrueFalseNull=   0
+               FirstDayOfWeek  =   0
+               FirstWeekOfYear =   0
+               LCID            =   10250
+               SubFormatType   =   0
+            EndProperty
+            Height          =   315
+            Index           =   1
+            Left            =   1080
+            Locked          =   -1  'True
+            TabIndex        =   13
+            Text            =   "0"
+            Top             =   450
+            Width           =   840
+         End
+         Begin VB.TextBox txtDetPercent 
+            Alignment       =   1  'Right Justify
+            BeginProperty DataFormat 
+               Type            =   0
+               Format          =   "#,##0.000"
+               HaveTrueFalseNull=   0
+               FirstDayOfWeek  =   0
+               FirstWeekOfYear =   0
+               LCID            =   10250
+               SubFormatType   =   0
+            EndProperty
+            Height          =   315
+            Index           =   2
+            Left            =   1080
+            Locked          =   -1  'True
+            TabIndex        =   15
+            Text            =   "0"
+            Top             =   2010
+            Width           =   840
+         End
+         Begin VB.TextBox txtDetPercent 
+            Alignment       =   1  'Right Justify
+            BeginProperty DataFormat 
+               Type            =   0
+               Format          =   "#,##0.000"
+               HaveTrueFalseNull=   0
+               FirstDayOfWeek  =   0
+               FirstWeekOfYear =   0
+               LCID            =   10250
+               SubFormatType   =   0
+            EndProperty
+            Height          =   315
+            Index           =   0
+            Left            =   120
+            Locked          =   -1  'True
+            TabIndex        =   11
+            Text            =   "0"
+            Top             =   1170
+            Width           =   840
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   1  'Right Justify
+            Caption         =   "%"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   16
+            Left            =   1920
+            TabIndex        =   37
+            Top             =   1200
+            Width           =   960
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   1  'Right Justify
+            Caption         =   "%"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   17
+            Left            =   1080
+            TabIndex        =   36
+            Top             =   480
+            Width           =   960
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   1  'Right Justify
+            Caption         =   "%"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   18
+            Left            =   1080
+            TabIndex        =   35
+            Top             =   2040
+            Width           =   960
+         End
+         Begin VB.Label lblInfo 
+            Alignment       =   1  'Right Justify
+            Caption         =   "%"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   315
+            Index           =   19
+            Left            =   120
+            TabIndex        =   34
+            Top             =   1200
+            Width           =   960
+         End
+      End
+      Begin MSComctlLib.TabStrip tsPosPercent 
+         Height          =   3135
+         Left            =   120
+         TabIndex        =   3
+         Top             =   960
+         Width           =   3300
+         _ExtentX        =   5821
+         _ExtentY        =   5530
+         _Version        =   393216
+         BeginProperty Tabs {1EFB6598-857C-11D1-B16A-00C0F0283628} 
+            NumTabs         =   2
+            BeginProperty Tab1 {1EFB659A-857C-11D1-B16A-00C0F0283628} 
+               Caption         =   "Position"
+               Key             =   "POS"
+               ImageVarType    =   2
+            EndProperty
+            BeginProperty Tab2 {1EFB659A-857C-11D1-B16A-00C0F0283628} 
+               Caption         =   "Percents"
+               Key             =   "PRC"
+               ImageVarType    =   2
+            EndProperty
+         EndProperty
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+      End
+      Begin VB.Label lblInfo 
+         Caption         =   "000000"
+         Height          =   195
+         Index           =   3
+         Left            =   1560
+         TabIndex        =   23
+         Top             =   600
+         Width           =   1725
+      End
+      Begin VB.Label lblInfo 
+         Caption         =   "..."
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   1
+         Left            =   1560
+         TabIndex        =   22
+         Top             =   240
+         Width           =   1725
+      End
+      Begin VB.Label lblInfo 
+         Alignment       =   1  'Right Justify
+         Caption         =   "Control Type:"
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   600
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   0
+         Left            =   120
+         TabIndex        =   21
+         Top             =   240
+         Width           =   1365
+      End
+      Begin VB.Label lblInfo 
+         Alignment       =   1  'Right Justify
+         Caption         =   "hWnd:"
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   600
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   195
+         Index           =   2
+         Left            =   120
+         TabIndex        =   20
+         Top             =   600
+         Width           =   1365
+      End
+   End
+   Begin VB.Label lblComment 
+      BackStyle       =   0  'Transparent
+      Caption         =   "Select an object and set anchors then click Apply"
+      BeginProperty Font 
+         Name            =   "Lucida Sans"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   255
+      Left            =   120
+      TabIndex        =   18
+      Top             =   120
+      Width           =   6915
+   End
+   Begin VB.Label lblNotify 
+      Alignment       =   2  'Center
+      Caption         =   "You have selected the root form, please select a valid control."
+      BeginProperty Font 
+         Name            =   "Lucida Sans"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   495
+      Left            =   2880
+      TabIndex        =   24
+      Top             =   1995
+      Width           =   3555
+   End
+End
+Attribute VB_Name = "ppJLAnchor"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Option Explicit
+
+Private Declare Function GetWindow Lib "user32" (ByVal Hwnd As Long, ByVal wCmd As Long) As Long
+Private Const GW_OWNER = 4
+
+Dim m_ucControl As ucJLAnchor
+Dim i As Long
+Dim TmpTag As String
+Dim LastNode As Integer
+Dim cSel As Long
+Dim UseExpColl As Boolean
+
+Private Sub chkPercent_Click(Index As Integer)
+    Dim a As Integer
+    For a = 0 To chkPercent.Count - 1
+        Changed = False
+        'LeftPercent
+        If chkPercent(0) <> m_ucControl.Controls.Item(cSel).UseLeftPercent Then
+            Changed = True
+            Exit For
+        End If
+        'TopPercent
+        If chkPercent(1) <> m_ucControl.Controls.Item(cSel).UseTopPercent Then
+            Changed = True
+            Exit For
+        End If
+        'WidthPercent
+        If chkPercent(2) <> m_ucControl.Controls.Item(cSel).UseWidthPercent Then
+            Changed = True
+            Exit For
+        End If
+        'HeightPercent
+        If chkPercent(3) <> m_ucControl.Controls.Item(cSel).UseHeightPercent Then
+            Changed = True
+            Exit For
+        End If
+    Next
+    txtDetPercent(Index).Locked = Not CBool(chkPercent(Index).Value)
+    'txtDetPercent(Index).SetFocus
+End Sub
+
+Private Sub cmdbAnchorAll_Click()
+    Dim a As Integer, ActiveAll As Boolean
+    '---
+    ActiveAll = False
+    For a = 0 To lblAnchor.Count - 1
+        If lblAnchor(a).BackColor = vbBlack Then
+            ActiveAll = True
+            Exit For
+        End If
+    Next
+    If Not ActiveAll Then
+        For a = 0 To lblAnchor.Count - 1
+            lblAnchor(a).BackColor = vbBlack
+        Next
+    Else
+        For a = 0 To lblAnchor.Count - 1
+            lblAnchor(a).BackColor = vbWhite
+        Next
+    End If
+    Changed = True
+End Sub
+
+Private Sub lblAnchor_Click(Index As Integer)
+    Changed = True
+    If lblAnchor(Index).BackColor = vbWhite Then
+      lblAnchor(Index).BackColor = vbBlack
+   Else
+      lblAnchor(Index).BackColor = vbWhite
+   End If
+End Sub
+
+Private Sub txtDetPercent_GotFocus(Index As Integer)
+    txtDetPercent(Index).SelStart = 0
+    txtDetPercent(Index).SelLength = Len(txtDetPercent(Index).Text)
+End Sub
+
+Private Sub txtDetPercent_KeyPress(Index As Integer, KeyAscii As Integer)
+    KeyAscii = Asc(UCase(Chr(KeyAscii)))
+    KeyAscii = ValidarKey(txtDetPercent(Index), KeyAscii)
+End Sub
+
+Private Sub txtDetPercent_LostFocus(Index As Integer)
+    Dim sngTemp As Single
+    If Len(txtDetPercent(Index)) Then
+        sngTemp = txtDetPercent(Index)
+        Call SafeRange(sngTemp, 0, 100)
+        txtDetPercent(Index) = sngTemp
+        For i = 0 To txtDetPercent.Count - 1
+            Changed = False
+            'LeftPercent
+            If txtDetPercent(0) <> m_ucControl.Controls.Item(cSel).LeftPercent Then
+                Changed = True
+                Exit For
+            End If
+            'TopPercent
+            If txtDetPercent(1) <> m_ucControl.Controls.Item(cSel).TopPercent Then
+                Changed = True
+                Exit For
+            End If
+            'WidthPercent
+            If txtDetPercent(2) <> m_ucControl.Controls.Item(cSel).WidthPercent Then
+                Changed = True
+                Exit For
+            End If
+            'HeightPercent
+            If txtDetPercent(3) <> m_ucControl.Controls.Item(cSel).HeightPercent Then
+                Changed = True
+                Exit For
+            End If
+        Next
+    Else
+        txtDetPercent(Index) = 0
+    End If
+End Sub
+
+Private Sub optExpColl_Click(Index As Integer)
+    NodesExpandCollapse Index
+    UseExpColl = True
+    Select Case Index
+        Case 0 'Collapse All
+            trvwControls.Nodes(1).Selected = True
+            Call trvwControls_NodeClick(trvwControls.Nodes(1))
+        Case 1 'Expand All
+            trvwControls.Nodes(LastNode).Selected = True
+            Call trvwControls_NodeClick(trvwControls.Nodes(LastNode))
+    End Select
+End Sub
+
+Private Sub trvwControls_NodeClick(ByVal Node As MSComctlLib.Node)
+    '---
+    Dim a As Integer
+    Dim PosX1 As Integer, PosX2 As Integer
+    Dim nmbControl As String, idx As String
+    '---
+    frmDetails.Visible = Not Node.Index = 1
+    '---
+    Changed = False
+    '---
+    With m_ucControl
+        For i = 1 To .Controls.Count
+            PosX1 = InStr(Node.Text, "(")
+            If PosX1 Then
+                PosX2 = InStr(Node.Text, ")")
+                nmbControl = Mid(Node.Text, 1, PosX1 - 1)
+                idx = Mid(Node.Text, PosX1 + 1, (PosX2 - PosX1 - 1))
+                nmbControl = nmbControl & idx
+            Else
+                nmbControl = Node.Text
+                idx = ""
+            End If
+            If .Controls.Item(i).Name & .Controls.Item(i).ControlIndex = Left(nmbControl, Len(.Controls.Item(i).Name) & idx) Then
+                cSel = i
+                lblInfo(1) = .Controls.Item(i).TypeName
+                lblInfo(3) = .Controls.Item(i).Hwnd
+                lblInfo(5) = .Controls.Item(i).Left
+                lblInfo(7) = .Controls.Item(i).Top
+                lblInfo(9) = .Controls.Item(i).Right
+                lblInfo(11) = .Controls.Item(i).Bottom
+                '--
+                chkPercent(0) = Abs(.Controls.Item(i).UseLeftPercent)
+                txtDetPercent(0) = .Controls.Item(i).LeftPercent
+                '--
+                chkPercent(1) = Abs(.Controls.Item(i).UseTopPercent)
+                txtDetPercent(1) = .Controls.Item(i).TopPercent
+                '--
+                chkPercent(2) = Abs(.Controls.Item(i).UseWidthPercent)
+                txtDetPercent(2) = .Controls.Item(i).WidthPercent
+                '--
+                chkPercent(3) = Abs(.Controls.Item(i).UseHeightPercent)
+                txtDetPercent(3) = .Controls.Item(i).HeightPercent
+                '--
+                'Anchor Left
+                lblAnchor(0).BackColor = IIf(.Controls.Item(i).AnchorLeft, vbBlack, vbWhite)
+                'Anchor Top
+                lblAnchor(1).BackColor = IIf(.Controls.Item(i).AnchorTop, vbBlack, vbWhite)
+                'Anchor Right
+                lblAnchor(2).BackColor = IIf(.Controls.Item(i).AnchorRight, vbBlack, vbWhite)
+                'Anchor Bottom
+                lblAnchor(3).BackColor = IIf(.Controls.Item(i).AnchorBottom, vbBlack, vbWhite)
+            End If
+        Next
+    End With
+    '---
+    If Not UseExpColl Then LastNode = trvwControls.SelectedItem.Index
+    If UseExpColl Then UseExpColl = False
+End Sub
+
+Private Sub PropertyPage_ApplyChanges()
+    Dim PosX1 As Integer, PosX2 As Integer
+    Dim nmbControl As String, idx As String
+    Dim obj As Control
+    '---
+    With m_ucControl
+        'Cambio temporal para que actualice los controles en sus Anchor
+        TmpTag = .Tag
+        m_ucControl.Tag = "Edit"
+        For i = 1 To .Controls.Count
+            '--
+            PosX1 = InStr(trvwControls.SelectedItem.Text, "(")
+            If PosX1 Then
+                PosX2 = InStr(trvwControls.SelectedItem.Text, ")")
+                nmbControl = Mid(trvwControls.SelectedItem.Text, 1, PosX1 - 1)
+                idx = Mid(trvwControls.SelectedItem.Text, PosX1 + 1, (PosX2 - PosX1 - 1))
+                nmbControl = nmbControl & idx
+            Else
+                nmbControl = trvwControls.SelectedItem.Text
+                idx = ""
+            End If
+            '--
+            If .Controls.Item(i).Name & .Controls.Item(i).ControlIndex = Left(nmbControl, Len(.Controls.Item(i).Name) & idx) Then
+                'Segun posicion fija:
+                'Anchor Left
+                .Controls.Item(i).AnchorLeft = IIf(lblAnchor(0).BackColor = vbBlack, True, False)
+                'Anchor Top
+                .Controls.Item(i).AnchorTop = IIf(lblAnchor(1).BackColor = vbBlack, True, False)
+                'Anchor Right
+                .Controls.Item(i).AnchorRight = IIf(lblAnchor(2).BackColor = vbBlack, True, False)
+                'Anchor Bottom
+                .Controls.Item(i).AnchorBottom = IIf(lblAnchor(3).BackColor = vbBlack, True, False)
+                
+                'Segun posicion y tamaño porcentual:
+                '--> Actualizar control en tiempo diseño.
+                For Each obj In CtrlParent.Controls
+                    If obj.Name & GetControlIndex(obj) = .Controls.Item(i).Name & .Controls.Item(i).ControlIndex Then
+                        If .Controls.Item(i).UseLeftPercent And .Controls.Item(i).LeftPercent <> txtDetPercent(0) Then
+                            obj.Left = GetControlScaleWidth(obj.Container) * (txtDetPercent(0) / 100)
+                            .Controls.Item(i).Left = obj.Left
+                        End If
+                        If .Controls.Item(i).UseTopPercent And .Controls.Item(i).TopPercent <> txtDetPercent(1) Then
+                            obj.Top = GetControlScaleHeight(obj.Container) * (txtDetPercent(1) / 100)
+                            .Controls.Item(i).Top = obj.Top
+                        End If
+                        If .Controls.Item(i).UseWidthPercent And .Controls.Item(i).WidthPercent <> txtDetPercent(2) Then
+                            obj.Width = GetControlScaleWidth(obj.Container) * (txtDetPercent(2) / 100)
+                            .Controls.Item(i).Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
+                        End If
+                        If .Controls.Item(i).UseHeightPercent And .Controls.Item(i).HeightPercent <> txtDetPercent(3) Then
+                            obj.Height = GetControlScaleHeight(obj.Container) * (txtDetPercent(3) / 100)
+                            .Controls.Item(i).Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                        End If
+                    End If
+                Next
+                '--> Actualizar propiedades.
+                'LeftPercent
+                .Controls.Item(i).UseLeftPercent = chkPercent(0)
+                If .Controls.Item(i).UseLeftPercent Then .Controls.Item(i).LeftPercent = txtDetPercent(0)
+                'TopPercent
+                .Controls.Item(i).UseTopPercent = chkPercent(1)
+                If .Controls.Item(i).UseTopPercent Then .Controls.Item(i).TopPercent = txtDetPercent(1)
+                'WidthPercent
+                .Controls.Item(i).UseWidthPercent = chkPercent(2)
+                If .Controls.Item(i).UseWidthPercent Then .Controls.Item(i).WidthPercent = txtDetPercent(2)
+                'HeightPercent
+                .Controls.Item(i).UseHeightPercent = chkPercent(3)
+                If .Controls.Item(i).UseHeightPercent Then .Controls.Item(i).HeightPercent = txtDetPercent(3)
+                'Devolvemos el valor guardado en variable.
+                m_ucControl.Tag = TmpTag
+            End If
+        Next
+    End With
+    '---
+    LoadTreeView
+'    trvwControls.Nodes(LastNode).Selected = True
+'    Call trvwControls_NodeClick(trvwControls.Nodes(LastNode))
+End Sub
+
+Private Sub PropertyPage_SelectionChanged()
+    Set m_ucControl = SelectedControls(0)
+    Set CtrlParent = m_ucControl.Container
+    '--
+    LoadTreeView
+    '--
+    If trvwControls.Nodes.Count > 1 Then
+        trvwControls.Nodes(2).Selected = True: Call trvwControls_NodeClick(trvwControls.Nodes(2))
+    Else
+        trvwControls.Nodes(1).Selected = True: Call trvwControls_NodeClick(trvwControls.Nodes(1))
+    End If
+End Sub
+
+Private Sub tsPosPercent_Click()
+    fmeDetPosPercent(tsPosPercent.SelectedItem.Index - 1).ZOrder
+End Sub
+
+Private Sub LoadTreeView()
+    Dim obj As Control
+    Dim sTemp As String
+    Dim Node As Node
+    '---
+    'Clear TreeView
+    If trvwControls.Nodes.Count > 0 Then trvwControls.Nodes.Clear
+    'Add Node Root
+    Set Node = trvwControls.Nodes.Add(, , "r", CtrlParent.Name)
+    Node.Expanded = True
+    Node.Bold = True
+    'Add Controls Child Root (Parents)
+    For Each obj In CtrlParent.Controls
+        If GetControlsCount(obj) > 0 And TypeName(obj.Container) <> "Form" Then
+            If sTemp <> TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container) Then
+                sTemp = TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container)
+                '---
+                Set Node = trvwControls.Nodes.Add("r", tvwChild, sTemp, IIf(Len(GetControlIndex(obj.Container)), obj.Container.Name & "(" & GetControlIndex(obj.Container) & ")", obj.Container.Name))
+            End If
+            
+        End If
+    Next
+    'Add Controls Child Root (Childs)
+    For Each obj In CtrlParent.Controls
+        If GetControlsCount(obj) = 0 And TypeName(obj) <> "ucJLAnchor" Then
+            sTemp = TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container)
+            If TypeName(obj.Container) = "Form" Then sTemp = "r"
+            Set Node = trvwControls.Nodes.Add(sTemp, tvwChild, TypeName(obj) & obj.Name & GetControlIndex(obj), IIf(Len(GetControlIndex(obj)), obj.Name & "(" & GetControlIndex(obj) & ")", obj.Name))
+        End If
+    Next
+    '---
+    'Expands nodes
+    NodesExpandCollapse True
+End Sub
+
+Private Function IsControlInArray(objControl As Object) As Boolean
+    On Error GoTo ErrorFunction
+    '---
+    Dim x As Integer
+    x = objControl.Index
+    IsControlInArray = True
+    Exit Function
+    '---
+ErrorFunction:
+    IsControlInArray = False
+End Function
+
+Private Sub NodesExpandCollapse(Optional ByVal Expand As Boolean)
+    Dim Node As Node
+    For Each Node In trvwControls.Nodes
+        If Node.Children > 0 Then
+            Node.Expanded = Expand
+        End If
+    Next
+End Sub
+
+Private Sub PropertyPage_Initialize()
+    '---
+    'LoadTreeView
+End Sub

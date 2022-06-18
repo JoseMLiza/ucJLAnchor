@@ -1,0 +1,1065 @@
+VERSION 5.00
+Begin VB.PropertyPage PropPagFMR 
+   Caption         =   "Fonts"
+   ClientHeight    =   5190
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   9165
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   5190
+   ScaleWidth      =   9165
+   Begin VB.CommandButton cmdAction 
+      Caption         =   "Add from Fonts"
+      Height          =   375
+      Index           =   1
+      Left            =   120
+      TabIndex        =   10
+      Top             =   540
+      Width           =   1215
+   End
+   Begin VB.ListBox ListSubFonts 
+      Height          =   1230
+      Left            =   4920
+      TabIndex        =   9
+      Top             =   120
+      Width           =   2055
+   End
+   Begin VB.Frame Frame1 
+      Caption         =   "Use with"
+      Height          =   1215
+      Left            =   7080
+      TabIndex        =   6
+      Top             =   120
+      Width           =   1935
+      Begin VB.CheckBox ChkGdiClassic 
+         Caption         =   "GDI Classic "
+         Height          =   255
+         Left            =   120
+         TabIndex        =   8
+         Top             =   360
+         Value           =   1  'Checked
+         Width           =   1575
+      End
+      Begin VB.CheckBox ChkGdiPlus 
+         Caption         =   "GDI Plus"
+         Height          =   255
+         Left            =   120
+         TabIndex        =   7
+         Top             =   720
+         Value           =   1  'Checked
+         Width           =   1575
+      End
+   End
+   Begin VB.ListBox lstFonts 
+      Height          =   1230
+      Left            =   1440
+      TabIndex        =   5
+      Top             =   120
+      Width           =   3015
+   End
+   Begin VB.CommandButton cmdAction 
+      Caption         =   "Add from Files"
+      Height          =   375
+      Index           =   0
+      Left            =   120
+      TabIndex        =   4
+      Top             =   120
+      Width           =   1215
+   End
+   Begin VB.CommandButton cmdAction 
+      Caption         =   "Remove"
+      Height          =   375
+      Index           =   2
+      Left            =   120
+      TabIndex        =   3
+      Top             =   980
+      Width           =   1215
+   End
+   Begin VB.CommandButton cmdMoveUp 
+      Caption         =   "5"
+      BeginProperty Font 
+         Name            =   "Webdings"
+         Size            =   8.25
+         Charset         =   2
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   615
+      Left            =   4480
+      TabIndex        =   2
+      Top             =   120
+      Width           =   300
+   End
+   Begin VB.CommandButton cmdMoveDown 
+      Caption         =   "6"
+      BeginProperty Font 
+         Name            =   "Webdings"
+         Size            =   8.25
+         Charset         =   2
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   615
+      Left            =   4480
+      TabIndex        =   1
+      Top             =   740
+      Width           =   300
+   End
+   Begin VB.PictureBox Picture1 
+      Appearance      =   0  'Flat
+      AutoRedraw      =   -1  'True
+      BackColor       =   &H80000005&
+      ForeColor       =   &H80000008&
+      Height          =   3735
+      Left            =   0
+      ScaleHeight     =   247
+      ScaleMode       =   3  'Pixel
+      ScaleWidth      =   607
+      TabIndex        =   0
+      Top             =   1440
+      Width           =   9135
+   End
+End
+Attribute VB_Name = "PropPagFMR"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = False
+Option Explicit
+'------------------------------------------------------
+'Autor: Leandro Ascierto
+'Date: 30/12/2019
+'Web: www.leandroascierto.com
+'Module name: PropPagFMR (Prop page of FontMemRes.ctl)
+'Gratitude: LaVolpe (funcions), Covein (funcions)
+'Version: 1.0.0
+'------------------------------------------------------
+Private Const FILTER_FONTS As String = "FONTS|*.EOT;*.OTF;*.TTC;*.TTF"
+
+Private Const MAX_PATH = 260
+Private Const MAX_FILE = 260
+
+Private Type LOGFONT
+    lfHeight As Long
+    lfWidth As Long
+    lfEscapement As Long
+    lfOrientation As Long
+    lfWeight As Long
+    lfItalic As Byte
+    lfUnderline As Byte
+    lfStrikeOut As Byte
+    lfCharSet As Byte
+    lfOutPrecision As Byte
+    lfClipPrecision As Byte
+    lfQuality As Byte
+    lfPitchAndFamily As Byte
+    lfFaceName As String * 31
+End Type
+
+Private Type CHOOSEFONT
+    lStructSize As Long
+    hwndOwner As Long
+    hDC As Long
+    lpLogFont As Long
+    iPointSize As Long
+    Flags As Long
+    rgbColors As Long
+    lCustData As Long
+    lpfnHook As Long
+    lpTemplateName As String
+    hInstance As Long
+    lpszStyle As String
+    nFontType As Integer
+    MISSING_ALIGNMENT As Integer
+    nSizeMin As Long
+    nSizeMax As Long
+End Type
+
+Private Enum EOpenFile
+    OFN_READONLY = &H1
+    OFN_OVERWRITEPROMPT = &H2
+    OFN_HIDEREADONLY = &H4
+    OFN_NOCHANGEDIR = &H8
+    OFN_SHOWHELP = &H10
+    OFN_ENABLEHOOK = &H20
+    OFN_ENABLETEMPLATE = &H40
+    OFN_ENABLETEMPLATEHANDLE = &H80
+    OFN_NOVALIDATE = &H100
+    OFN_ALLOWMULTISELECT = &H200
+    OFN_EXTENSIONDIFFERENT = &H400
+    OFN_PATHMUSTEXIST = &H800
+    OFN_FILEMUSTEXIST = &H1000
+    OFN_CREATEPROMPT = &H2000
+    OFN_SHAREAWARE = &H4000
+    OFN_NOREADONLYRETURN = &H8000&
+    OFN_NOTESTFILECREATE = &H10000
+    OFN_NONETWORKBUTTON = &H20000
+    OFN_NOLONGNAMES = &H40000
+    OFN_EXPLORER = &H80000
+    OFN_NODEREFERENCELINKS = &H100000
+    OFN_LONGNAMES = &H200000
+End Enum
+
+Private Type OPENFILENAME
+    lStructSize As Long          ' Filled with UDT size
+    hwndOwner As Long            ' Tied to Owner
+    hInstance As Long            ' Ignored (used only by templates)
+    lpstrFilter As String        ' Tied to Filter
+    lpstrCustomFilter As String  ' Ignored (exercise for reader)
+    nMaxCustFilter As Long       ' Ignored (exercise for reader)
+    nFilterIndex As Long         ' Tied to FilterIndex
+    lpstrFile As String          ' Tied to FileName
+    nMaxFile As Long             ' Handled internally
+    lpstrFileTitle As String     ' Tied to FileTitle
+    nMaxFileTitle As Long        ' Handled internally
+    lpstrInitialDir As String    ' Tied to InitDir
+    lpstrTitle As String         ' Tied to DlgTitle
+    Flags As Long                ' Tied to Flags
+    nFileOffset As Integer       ' Ignored (exercise for reader)
+    nFileExtension As Integer    ' Ignored (exercise for reader)
+    lpstrDefExt As String        ' Tied to DefaultExt
+    lCustData As Long            ' Ignored (needed for hooks)
+    lpfnHook As Long             ' Ignored (good luck with hooks)
+    lpTemplateName As Long       ' Ignored (good luck with templates)
+End Type
+
+Private Const FR_PRIVATE    As Long = &H10
+Private Const FR_NOT_ENUM   As Long = &H20
+Private Const CSIDL_FONTS   As Long = &H14
+
+Private Declare Function CHOOSEFONT Lib "comdlg32.dll" Alias "ChooseFontA" (pChoosefont As CHOOSEFONT) As Long
+Private Declare Function GetFileTitle Lib "comdlg32" Alias "GetFileTitleA" (ByVal szFile As String, ByVal szTitle As String, ByVal cbBuf As Long) As Long
+Private Declare Function GetOpenFileName Lib "comdlg32" Alias "GetOpenFileNameA" (file As OPENFILENAME) As Long
+Private Declare Function lstrlen Lib "kernel32" Alias "lstrlenA" (ByVal lpString As String) As Long
+Private Declare Function AddFontResourceExW Lib "gdi32.dll" (ByVal lpszFilename As Long, Optional ByVal fl As Long = FR_PRIVATE Or FR_NOT_ENUM, Optional ByVal pdv As Long) As Long
+Private Declare Function RemoveFontResourceExW Lib "gdi32.dll" (ByVal lpFileName As Long, Optional ByVal fl As Long = FR_PRIVATE Or FR_NOT_ENUM, Optional ByVal pdv As Long) As Long
+Private Declare Function AddFontMemResourceEx Lib "gdi32.dll" (ByRef pvoid As Any, ByVal dword As Long, ByRef DESIGNVECTOR, ByRef pDword As Long) As Long
+Private Declare Function RemoveFontMemResourceEx Lib "gdi32.dll" (ByVal fh As Long) As Long
+Private Declare Function VarPtrArray Lib "msvbvm60.dll" Alias "VarPtr" (Ptr() As Any) As Long
+Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
+Private Declare Function TextOut Lib "gdi32" Alias "TextOutW" (ByVal hDC As Long, ByVal X As Long, ByVal Y As Long, ByVal lpString As Long, ByVal nCount As Long) As Long
+Private Declare Function SHGetSpecialFolderLocation Lib "shell32" (ByVal hWnd As Long, ByVal nFolder As Long, Pidl As Long) As Long
+Private Declare Function SHGetPathFromIDList Lib "shell32" (Pidl As Long, ByVal FolderPath As String) As Long
+
+Private Type tFiles
+    sName                       As String
+    bvData()                    As Byte
+End Type
+
+Private m_tvFiles() As tFiles
+Private m_FontMemRes As FontMemRes
+
+Private Sub UnicodePrint(ByRef Text As String)
+    With Picture1
+        TextOut .hDC, _
+                ScaleX(.CurrentX, .ScaleMode, vbPixels), _
+                ScaleY(.CurrentY, .ScaleMode, vbPixels), _
+                StrPtr(Text), _
+                Len(Text)
+        .CurrentX = 0
+        .CurrentY = .CurrentY + .TextHeight(Text)
+    End With
+End Sub
+
+Private Function FontFileFromFontName(sFontName As String) As String
+    Dim Index As Long
+    Dim WinFontsPath As String
+    Dim FileFont As String
+    Dim sName As String
+    Dim i As Long
+    
+    WinFontsPath = SpecialFolderPath(CSIDL_FONTS)
+
+    FileFont = Dir(WinFontsPath & Left(sFontName, 1) & "*")
+    
+    While FileFont <> ""
+        Index = 0
+        
+        sName = pvParseFontNameFromFile(WinFontsPath & FileFont, Index)
+        
+        If sFontName = sName Then
+            FontFileFromFontName = WinFontsPath & FileFont
+            Exit Function
+        End If
+        
+        For Index = 1 To Index - 1
+            sName = pvParseFontNameFromFile(WinFontsPath & FileFont, Index)
+            If sFontName = sName Then
+                FontFileFromFontName = WinFontsPath & FileFont
+                Exit Function
+            End If
+            If Index = 0 Then Exit For
+        Next
+        FileFont = Dir
+    Wend
+   
+End Function
+  
+
+Private Sub DrawDemo(ByRef bvData() As Byte)
+    Dim lngFontCount As Long, hFontMemRes As Long
+    Dim sFontName As String, sFile As String, Index As Long, f As Long
+    Const Pangrama = "El veloz murciélago hindú comía feliz cardillo y kiwi. La cigüeña tocaba el saxofón detrás del palenque de paja"
+    hFontMemRes = AddFontMemResourceEx(bvData(0), UBound(bvData) + 1, 0&, lngFontCount)
+    
+    Picture1.Cls
+    
+    Picture1.Font.name = ListSubFonts.Text
+    Picture1.FontSize = 10
+    UnicodePrint "abcdefgijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    UnicodePrint "1234567890.:,;'""""(!?)+-*/="
+    Picture1.FontSize = 12
+    UnicodePrint Pangrama
+    Picture1.FontSize = 18
+    UnicodePrint Pangrama
+    Picture1.FontSize = 24
+    UnicodePrint Pangrama
+    Picture1.FontSize = 36
+    UnicodePrint Pangrama
+    Picture1.FontSize = 48
+    UnicodePrint Pangrama
+
+    Picture1.Refresh
+    
+    RemoveFontMemResourceEx hFontMemRes
+End Sub
+
+Private Function VBGetOpenFileName(FileName As String, _
+       Optional FileTitle As String, _
+       Optional FileMustExist As Boolean = True, _
+       Optional MultiSelect As Boolean = False, _
+       Optional ReadOnly As Boolean = False, _
+       Optional HideReadOnly As Boolean = False, _
+       Optional Filter As String = "All (*.*)| *.*", _
+       Optional FilterIndex As Long = 1, _
+       Optional InitDir As String, _
+       Optional DlgTitle As String, _
+       Optional DefaultExt As String, _
+       Optional Owner As Long = -1, _
+       Optional Flags As Long = 0) As Boolean
+
+    Dim opfile As OPENFILENAME, S As String, afFlags As Long
+  
+    With opfile
+        .lStructSize = Len(opfile)
+        
+        .Flags = (-FileMustExist * OFN_FILEMUSTEXIST) Or _
+           (-MultiSelect * OFN_ALLOWMULTISELECT) Or _
+           (-ReadOnly * OFN_READONLY) Or _
+           (-HideReadOnly * OFN_HIDEREADONLY) Or _
+           (Flags And CLng(Not (OFN_ENABLEHOOK Or _
+           OFN_ENABLETEMPLATE)))
+           
+        If Owner <> -1 Then .hwndOwner = Owner
+        .lpstrInitialDir = InitDir
+        .lpstrDefExt = DefaultExt
+        .lpstrTitle = DlgTitle
+    
+        ' To make Windows-style filter, replace | and : with nulls
+        Dim ch As String, i As Integer
+        For i = 1 To Len(Filter)
+            ch = Mid$(Filter, i, 1)
+            If ch = "|" Or ch = ":" Then
+                S = S & vbNullChar
+            Else
+                S = S & ch
+            End If
+        Next
+        
+        S = S & vbNullChar & vbNullChar
+        .lpstrFilter = S
+        .nFilterIndex = FilterIndex
+
+        ' Pad file and file title buffers to maximum path
+        S = FileName & String$(MAX_PATH - Len(FileName), 0)
+        .lpstrFile = S
+        .nMaxFile = MAX_PATH
+        S = FileTitle & String$(MAX_FILE - Len(FileTitle), 0)
+        .lpstrFileTitle = S
+        .nMaxFileTitle = MAX_FILE
+        ' All other fields set to zero
+    
+        If GetOpenFileName(opfile) = 1 Then
+            ' Success
+            VBGetOpenFileName = True
+            FileName = StrZToStr(.lpstrFile)
+            FileTitle = StrZToStr(.lpstrFileTitle)
+            Flags = .Flags
+            ' Return the filter index
+            FilterIndex = .nFilterIndex
+            ' Look up the filter the user selected and return that
+            Filter = FilterLookup(.lpstrFilter, FilterIndex)
+            If (.Flags And OFN_READONLY) Then ReadOnly = True
+        End If
+    End With
+End Function
+
+Private Function StrZToStr(S As String) As String
+    StrZToStr = Left$(S, lstrlen(S))
+End Function
+
+Private Function FilterLookup(ByVal sFilters As String, ByVal iCur As Long) As String
+    Dim iStart As Long, iEnd As Long, S As String
+    iStart = 1
+    If sFilters = "" Then Exit Function
+    Do
+        ' Cut out both parts marked by null character
+        iEnd = InStr(iStart, sFilters, vbNullChar)
+        If iEnd = 0 Then Exit Function
+        iEnd = InStr(iEnd + 1, sFilters, vbNullChar)
+        If iEnd Then
+            S = Mid$(sFilters, iStart, iEnd - iStart)
+        Else
+            S = Mid$(sFilters, iStart)
+        End If
+        iStart = iEnd + 1
+        If iCur = 1 Then
+            FilterLookup = S
+            Exit Function
+        End If
+        iCur = iCur - 1
+    Loop While iCur
+End Function
+
+
+Private Sub ChkGdiClassic_Click()
+    If ChkGdiClassic.Value = 0 Then
+        MsgBox "Be careful!, disabling this option will cause the controls to not use this font, it will only be useful with GDI PLUS through api.", vbExclamation
+    End If
+    PropertyPage.Changed = True
+End Sub
+
+Private Sub ChkGdiPuss_Click()
+    PropertyPage.Changed = True
+End Sub
+
+Private Sub cmdAction_Click(Index As Integer)
+    Dim sFile       As String
+    Dim svName()    As String
+    Dim bvData()    As Byte
+    Dim lIndex      As Long
+    Picture1.Cls
+    Select Case Index
+        Case 0 '//Add from file
+            If VBGetOpenFileName(sFile, Filter:=FILTER_FONTS, Owner:=PropertyPage.hWnd) Then
+                If LoadFile(sFile, bvData) Then
+                
+                    svName = Split(sFile, "\")
+                    sFile = svName(UBound(svName))
+                    If AddData(bvData, sFile) Then
+                        PropertyPage.Changed = True
+                        lIndex = UBound(m_tvFiles)
+                        With lstFonts
+                            .AddItem m_tvFiles(lIndex).sName
+                            .ItemData(.ListCount - 1) = lIndex
+                            .ListIndex = .ListCount - 1
+                        End With
+                    End If
+                End If
+            End If
+            
+
+        Case 1 '//Add from Font Sytem
+
+            Dim tCF As CHOOSEFONT
+            Dim tLF As LOGFONT
+            Dim lRet As Long
+            Dim sFontName As String
+            
+            With tCF
+                .lStructSize = Len(tCF)
+                .hwndOwner = PropertyPage.hWnd
+                .lpLogFont = VarPtr(tLF)
+            End With
+
+            lRet = CHOOSEFONT(tCF)
+    
+            If lRet <> 0 Then
+                sFontName = StrConv(tLF.lfFaceName, vbUnicode)
+                sFontName = Left(sFontName, InStr(sFontName, vbNullChar) - 1)
+                sFontName = Replace(sFontName, "@", vbNullString, 1)
+                If Len(sFontName) = 0 Then Exit Sub
+                sFile = FontFileFromFontName(sFontName)
+                Debug.Print sFontName
+                If Len(sFile) = 0 Then
+                    MsgBox "Font no found"
+                    Exit Sub
+                End If
+                
+                If LoadFile(sFile, bvData) Then
+                    svName = Split(sFile, "\")
+                    sFile = svName(UBound(svName))
+                    If AddData(bvData, sFile) Then
+                        PropertyPage.Changed = True
+                        lIndex = UBound(m_tvFiles)
+                        With lstFonts
+                            .AddItem m_tvFiles(lIndex).sName
+                            .ItemData(.ListCount - 1) = lIndex
+                            .ListIndex = .ListCount - 1
+                        End With
+                    End If
+                End If
+            End If
+        Case 2 '//Remove font
+            With lstFonts
+                If .ListIndex > -1 Then
+                    Call DeleteData(.ItemData(.ListIndex))
+                    Call .RemoveItem(.ListIndex)
+                    PropertyPage.Changed = True
+                    If .ListCount > 0 Then .ListIndex = .ListCount - 1
+                End If
+            End With
+            
+    End Select
+    
+    lstFonts_Click
+    
+End Sub
+
+Private Function LoadFile(ByVal sFile As String, ByRef bvData() As Byte) As Boolean
+    Dim iFile       As Integer
+
+    On Local Error GoTo LoadFile_Error
+
+    iFile = FreeFile
+    Open sFile For Binary Access Read As iFile
+    ReDim bvData(LOF(iFile) - 1)
+    Get iFile, , bvData
+    Close iFile
+    LoadFile = True
+
+LoadFile_Error:
+End Function
+
+Private Sub cmdMoveDown_Click()
+    Dim tTmpFiles As tFiles
+    Dim lIndex As Long
+    
+    With lstFonts
+        If .ListIndex < .ListCount - 1 Then
+            lIndex = .ListIndex
+            tTmpFiles = m_tvFiles(.ItemData(.ListIndex) + 1)
+            m_tvFiles(.ItemData(.ListIndex) + 1) = m_tvFiles(.ItemData(.ListIndex))
+            m_tvFiles(.ItemData(.ListIndex)) = tTmpFiles
+            PropertyPage.Changed = True
+            Call PropertyPage_ApplyChanges
+            Call PropertyPage_SelectionChanged
+            DoEvents
+            .ListIndex = lIndex + 1
+        End If
+    End With
+End Sub
+
+Private Sub cmdMoveUp_Click()
+    Dim tTmpFiles As tFiles
+    Dim lIndex As Long
+    
+    With lstFonts
+        If .ListIndex > 0 Then
+            lIndex = .ListIndex
+            tTmpFiles = m_tvFiles(.ItemData(.ListIndex) - 1)
+            m_tvFiles(.ItemData(.ListIndex) - 1) = m_tvFiles(.ItemData(.ListIndex))
+            m_tvFiles(.ItemData(.ListIndex)) = tTmpFiles
+            PropertyPage.Changed = True
+            Call PropertyPage_ApplyChanges
+            Call PropertyPage_SelectionChanged
+            DoEvents
+            .ListIndex = lIndex - 1
+        End If
+    End With
+End Sub
+
+Private Sub ListSubFonts_Click()
+    Dim bvData() As Byte, Index As Long
+    On Error Resume Next
+    With m_tvFiles(lstFonts.ItemData(lstFonts.ListIndex))
+        bvData = .bvData
+    End With
+    
+    DrawDemo bvData
+End Sub
+
+Private Sub lstFonts_Click()
+    Dim bvData() As Byte, Index As Long
+    On Error Resume Next
+    With m_tvFiles(lstFonts.ItemData(lstFonts.ListIndex))
+        bvData = .bvData
+    End With
+    
+    ListSubFonts.Clear
+    ListSubFonts.AddItem pvParseFontNameFromArray(bvData, 0, UBound(bvData) + 1, Index)
+
+    For Index = 1 To Index - 1
+        ListSubFonts.AddItem pvParseFontNameFromArray(bvData, 0, UBound(bvData) + 1, Index)
+        If Index = 0 Then Exit For
+    Next
+    ListSubFonts.ListIndex = 0
+    
+    DrawDemo bvData
+
+End Sub
+
+Private Sub PropertyPage_SelectionChanged()
+    Dim bvData()    As Byte
+    Dim i           As Long
+    
+    Set m_FontMemRes = SelectedControls(0)
+    
+    If Not m_FontMemRes Is Nothing Then
+        bvData = m_FontMemRes.ppgGetStream
+        ChkGdiClassic.Value = IIf(m_FontMemRes.UseGdiClassic, 1, 0)
+        ChkGdiPlus.Value = IIf(m_FontMemRes.UseGdiPlus, 1, 0)
+        Call UnpackData(bvData)
+    
+        With lstFonts
+            Call .Clear
+            If IsArrayDim(VarPtrArray(m_tvFiles)) Then
+                For i = 0 To UBound(m_tvFiles)
+                    .AddItem m_tvFiles(i).sName
+                    .ItemData(.ListCount - 1) = i
+                Next
+                .ListIndex = 0
+            End If
+        End With
+    End If
+    
+End Sub
+
+Private Sub PropertyPage_ApplyChanges()
+    Dim bvData()    As Byte
+    bvData = PackData
+    Call m_FontMemRes.ppgSetStream(bvData)
+    m_FontMemRes.UseGdiClassic = ChkGdiClassic.Value
+    m_FontMemRes.UseGdiPlus = ChkGdiPlus.Value
+End Sub
+
+Private Function PackData() As Byte()
+    Dim cBag        As New PropertyBag
+    Dim i           As Long
+    Dim lCount      As Long
+
+    If Not IsArrayDim(VarPtrArray(m_tvFiles)) Then
+        Exit Function
+    End If
+    
+    With cBag
+        For i = 0 To UBound(m_tvFiles)
+            If IsArrayDim(VarPtrArray(m_tvFiles(i).bvData)) Then
+                .WriteProperty "FILE_" & lCount, m_tvFiles(i).bvData
+                .WriteProperty "NAME_" & lCount, m_tvFiles(i).sName
+                lCount = lCount + 1
+            End If
+        Next
+        Call .WriteProperty("Index", lCount)
+        PackData = .Contents
+    End With
+    
+End Function
+
+Private Function UnpackData(ByRef bvData() As Byte) As Boolean
+    On Error Resume Next
+    Dim cBag        As New PropertyBag
+    Dim i           As Long
+    Dim lCount      As Long
+
+    
+    If Not IsArrayDim(VarPtrArray(bvData)) Then
+        Exit Function
+    End If
+    
+    With cBag
+        .Contents = bvData
+    
+        lCount = .ReadProperty("Index", 0)
+        If lCount = 0 Then Exit Function
+        lCount = lCount - 1
+    
+        ReDim m_tvFiles(lCount)
+        For i = 0 To lCount
+            m_tvFiles(i).bvData = .ReadProperty("FILE_" & i)
+            m_tvFiles(i).sName = .ReadProperty("NAME_" & i)
+        Next
+    End With
+    
+    UnpackData = True
+End Function
+
+Private Function AddData(ByRef bvData() As Byte, ByVal sName As String) As Boolean
+    Dim lIndex      As Long
+       
+    If Not IsArrayDim(VarPtrArray(bvData)) Then
+        Exit Function
+    End If
+    
+    If IsArrayDim(VarPtrArray(m_tvFiles)) Then
+        lIndex = UBound(m_tvFiles) + 1
+    Else
+        lIndex = 0
+    End If
+
+    ReDim Preserve m_tvFiles(lIndex)
+    
+    With m_tvFiles(lIndex)
+        .bvData = bvData
+        .sName = sName
+    End With
+        
+    AddData = True
+
+End Function
+
+Private Function DeleteData(ByVal lIndex As Long) As Boolean
+    
+    If IsArrayDim(VarPtrArray(m_tvFiles)) Then
+        If lIndex >= 0 Then
+            If lIndex <= UBound(m_tvFiles) Then
+                Erase m_tvFiles(lIndex).bvData
+                DeleteData = True
+            End If
+        End If
+    End If
+    
+End Function
+
+Private Function IsArrayDim(ByVal lpArray As Long) As Boolean
+    Dim lAddress    As Long
+    
+    Call CopyMemory(lAddress, ByVal lpArray, &H4)
+    IsArrayDim = Not (lAddress = 0)
+End Function
+
+
+'-----------------------------------------------------------------------
+'FUNCTIONS by LaVolpe
+'------------------------------------------------------------------------
+Private Function pvParseFontNameFromArray(fData() As Byte, ByVal beginOffset As Long, ByVal dataLength As Long, _
+                                        Optional ByRef FontIndex As Long = 0&, _
+                                        Optional ByVal LanguageID As Long = 0) As String
+
+    ' note: multi-byte values are stored in big endian (reverse order from Microsoft)
+    
+    ' beginOffset : where in the passed array, the font file data begins at
+    ' dataLength : the size of the font file contained in the array
+    ' FontIndex is passed as:
+    '   0 : no specific font index requested; on return FontIndex set to number of fonts in file
+    '   1-n : specific font requested (zero-bound); applies to multi-font files (i.e., ttc extensions)
+    '       setting FontIndex > NrFonts-1 results in failure
+    ' Usage
+    '   set FontIndex to 0 if number fonts contained is unknown
+    '       on return, FontIndex = number of fonts, function returns 1st font name found
+    '       if FontIndex > 0 on return, call again for each font name wanted, i.e.,
+    '       =======================================================================================
+    '       Index = 0: sFontName = pvParseFontNameFromArray(bArray(), 0, UBound(bArray)+1, Index)
+    '       For Index = 1 To Index - 1  ' starting with 1 because 1st font returned in previous call
+    '           sOtherFontName = pvParseFontNameFromArray(bArray(), 0, UBound(bArray)+1, Index)
+    '       Next
+    '       =======================================================================================
+    '   if FontIndex is known, simply pass it's index (0 to nr fonts -1)
+    ' LanguageID is passed if you prefer return value in a different language than US-English
+    '   by default, English (LCID=1033) names are always returned
+    '   if the Font name in requested language isn't provided, English always returned
+    '   if neither are provided in the font file, then font is considered invalid for this function
+
+    Dim lngValue As Long, nOffset As Long
+    Dim tCount As Long, lPtr As Long
+    Dim lSize As Long, sName As String
+    Dim fIndex As Long, fCount As Long
+    Dim lBase As Long, lLangID As Long
+    Dim UB As Long, LB As Long          ' binary search variables
+    Const fTAG As Long = 1851878757     ' "name" (reversed) converted to 4 bytes, case-sensitive
+    Const ttcTag As Long = 1717793908   ' "ttcf" (reversed) converted to 4 bytes, case-sensitive
+    
+    If dataLength < 12& Then GoTo EH    ' not a font file
+    If beginOffset + dataLength - 1& > UBound(fData) Then GoTo EH
+    If FontIndex < 0& Then FontIndex = 0&
+    fIndex = FontIndex: FontIndex = 0&  ' initalize Index to indicate failure
+    If LanguageID = 0& Then
+        LanguageID = 1033&
+    Else
+        LanguageID = LanguageID And &HFFFF&
+    End If
+    
+    CopyMemory lngValue, fData(beginOffset), 4& ' get the format type
+    If lngValue = ttcTag Then           ' multi-font format
+        CopyMemory lngValue, fData(beginOffset + 8&), 4& ' skip major/minor version & get font count
+        fCount = pvReverseLong(lngValue)
+        If fCount < 1& Then GoTo EH     ' sanity checks
+        If fIndex >= fCount Then GoTo EH
+        If fCount * 4& + 12& > dataLength Then GoTo EH
+        CopyMemory lngValue, fData(beginOffset + fIndex * 4& + 12&), 4&
+        lBase = pvReverseLong(lngValue) ' set base where we start getting font table data
+    ElseIf FontIndex > 0& Then
+        GoTo EH                         ' not multi-font file, return failure
+    End If
+    lPtr = beginOffset + lBase + 4&
+    
+    tCount = fData(lPtr) * &H100& Or fData(lPtr + 1&)  ' number of tables
+    If tCount < 1& Then GoTo EH
+    If tCount * 16& + 12& > dataLength Then GoTo EH
+    
+    LB = 1&: UB = tCount                ' begin binary search
+    Do Until LB > UB
+        nOffset = LB + ((UB - LB) \ 2&) ' locate table entry position
+        lPtr = beginOffset + lBase + (nOffset - 1&) * 16& + 12&
+        CopyMemory lngValue, fData(lPtr), 4&
+        lngValue = pvReverseLong(lngValue)
+        If lngValue = fTAG Then         ' found it, exit loop
+            Exit Do
+        ElseIf lngValue > fTAG Then     ' higher in sort order
+            UB = nOffset - 1&
+        Else                            ' lower in sort order
+            LB = nOffset + 1&
+        End If
+    Loop
+    If LB > UB Then GoTo EH             ' "name" table not found
+    nOffset = lBase + (nOffset - 1&) * 16& + 12& ' include 12 bytes for the 'name' table
+    If nOffset + 16& > dataLength Then GoTo EH
+    ' note: lBase no longer needed; all other offsets are relative to start of file, not ttc offsets
+
+    ' validate the target table
+    CopyMemory lngValue, fData(lPtr + 8&), 4&
+    ' skip the name & checksum field (name we already read) & read offset
+    nOffset = pvReverseLong(lngValue)
+    If nOffset > dataLength Then GoTo EH
+    CopyMemory lngValue, fData(lPtr + 12&), 4&
+    lSize = pvReverseLong(lngValue)     ' read size of the "name" table
+    If nOffset + lSize > dataLength Then GoTo EH
+    lBase = nOffset + lSize              ' set new max (any offsets > lMax is outside "name" table)
+    lPtr = nOffset
+    
+    ' process the "name" table
+    lngValue = fData(lPtr) * &H100& Or fData(lPtr + 1&): lPtr = lPtr + 2& ' specs dictate the be zero
+    If Not lngValue = 0 Then GoTo EH    ' invalid font structure?
+    tCount = fData(lPtr) * &H100& Or fData(lPtr + 1&): lPtr = lPtr + 2& ' get number of 'names' in the 'name' table
+    If (tCount * 12&) + nOffset > lBase Then GoTo EH
+    lngValue = fData(lPtr) * &H100& Or fData(lPtr + 1&) ' get offset to the strings from last cached offset
+    ' note: this should = NrNames * 12 + 6 byte "name" table header. But we won't enforce it
+    nOffset = nOffset + lngValue: lPtr = lPtr + 2&
+    If nOffset > lBase Then GoTo EH
+        
+    For tCount = 0& To tCount - 1&      ' loop thru each 'names' entry
+        ' we are specifically looking for Microsoft encoded names
+        ' in the 12byte table...
+        '   1st set of 2-bytes wanted will be 3 (Microsoft encoding)
+        '   3rd set of 2-bytes will be the language ID (LCID)
+        '   4th set of 2-bytes wanted will be 4 (Full name of the font)
+        CopyMemory lngValue, fData(lPtr), 4& ' reading 4 instead of two to prevent additional seek
+        If (lngValue And &HFFFF&) = &H300& Then
+            ' get LangID & track number of bytes remaining in table
+            lLangID = fData(lPtr + 4&) * &H100& Or fData(lPtr + 5&)
+            If lLangID = 1033& Or lLangID = LanguageID Then
+                ' get NameID (4) & track number bytes remaining in table
+                lngValue = fData(lPtr + 6&) * &H100& Or fData(lPtr + 7&)
+                If lngValue = &H4 Then
+                    ' found what we're looking for
+                    lSize = fData(lPtr + 8&) * &H100& Or fData(lPtr + 9&) ' get the size of the string
+                    lngValue = fData(lPtr + 10&) * &H100& Or fData(lPtr + 11&) ' get its additional offset
+                    ' microsoft-encoding has a 1-byte prefix (not positive how it works; think related to font subfamilies)
+                    nOffset = nOffset + lngValue + 1&
+                    If nOffset + lSize > lBase Then GoTo EH
+                    
+                    ' size our string & seek to the beginning of the string
+                    sName = String$(lSize \ 2, vbNullChar)
+                    CopyMemory ByVal StrPtr(sName), fData(nOffset), lSize
+                    If lLangID = LanguageID Then Exit For
+                End If
+            End If
+        End If
+        lPtr = lPtr + 12&               ' skip to next string table
+    Next
+    If Not sName = vbNullString Then        ' else didn't find font name
+        pvParseFontNameFromArray = sName
+        If fCount > 0& Then
+            If fIndex = 0& Then FontIndex = fCount Else FontIndex = fIndex
+        Else
+            FontIndex = fIndex + 1&
+        End If
+    End If
+EH:
+End Function
+
+Private Function pvParseFontNameFromFile(FileName As String, _
+                                        Optional ByRef FontIndex As Long = 0&, _
+                                        Optional ByVal LanguageID As Long = 0) As String
+
+    ' note: multi-byte values are stored in big endian (reverse order from Microsoft)
+    
+    ' FontIndex is passed as:
+    '   0 : no specific font index requested; on return FontIndex set to number of fonts in file
+    '   1-n : specific font requested (zero-bound); applies to multi-font files (i.e., ttc extensions)
+    '       setting FontIndex > NrFonts-1 results in failure
+    ' Usage
+    '   set FontIndex to 0 if number fonts contained is unknown
+    '       on return, FontIndex = number of fonts, function returns 1st font name found
+    '       if FontIndex > 0 on return, call again for each font name wanted, i.e.,
+    '       =======================================================================================
+    '       Index = 0: sFontName = pvParseFontNameFromFile([filename], Index)
+    '       For Index = 1 To Index - 1  ' starting with 1 because 1st font returned in previous call
+    '           sOtherFontName = pvParseFontNameFromFile([filename], Index)
+    '       Next
+    '       =======================================================================================
+    '   if FontIndex is known, simply pass it's index (0 to nr fonts -1)
+    ' LanguageID is passed if you prefer return value in a different language than US-English
+    '   by default, English (LCID=1033) names are always returned
+    '   if the Font name in requested language isn't provided, English always returned
+    '   if neither are provided in the font file, then font is considered invalid for this function
+
+    Dim lngValue As Long, intValue As Integer
+    Dim f As Integer, tCount As Long
+    Dim lSize As Long, sName As String
+    Dim lMax As Long, nOffset As Long
+    Dim fIndex As Long, fCount As Long
+    Dim lBase As Long, iLangID As Integer
+    Dim UB As Long, LB As Long          ' binary search variables
+    Const fTAG As Long = 1851878757     ' "name" (reversed) converted to 4 bytes, case-sensitive
+    Const ttcTag As Long = 1717793908   ' "ttcf" (reversed) converted to 4 bytes, case-sensitive
+
+    f = FreeFile
+    Open FileName For Binary Access Read As #f
+    
+    lMax = LOF(f)
+    If lMax < 12& Then GoTo EH          ' not a font file
+    If FontIndex < 0& Then FontIndex = 0&
+    fIndex = FontIndex: FontIndex = 0&  ' initalize Index to indicate failure
+    If LanguageID = 0& Then
+        LanguageID = &H904&             ' set to 1033 (reversed bytes)
+    Else                                ' swap bytes for loop usage below
+        LanguageID = ((LanguageID And &HFF) * &H100& Or (LanguageID And &HFFFF&) \ &H100&)
+    End If
+    
+    Get #f, 1, lngValue                 ' get the format type
+    If lngValue = ttcTag Then           ' multi-font format
+        Get #f, 9&, lngValue            ' skip major/minor version & get font count
+        fCount = pvReverseLong(lngValue)
+        If fCount < 1& Then GoTo EH     ' sanity checks
+        If fIndex >= fCount Then GoTo EH
+        If fCount * 4& + 12& > lMax Then GoTo EH
+        Get #f, (fIndex * 4&) + 13&, lngValue
+        lBase = pvReverseLong(lngValue) ' set base where we start getting font table data
+        Seek #f, lBase + 5&             ' set file pointer to font's table + next DWord
+    ElseIf FontIndex > 0& Then
+        GoTo EH                         ' not multi-font file, return failure
+    End If
+    
+    Get #f, , intValue                  ' number of tables
+    tCount = ((intValue And &HFF) * &H100& Or (intValue And &HFFFF&) \ &H100&)
+    If tCount < 1& Then GoTo EH
+    If tCount * 16& + 12& > lMax Then GoTo EH
+    
+    LB = 1&: UB = tCount                ' begin binary search
+    Do Until LB > UB
+        nOffset = LB + ((UB - LB) \ 2&) ' locate table entry position
+        Get #f, lBase + (nOffset - 1&) * 16& + 13&, lngValue
+        lngValue = pvReverseLong(lngValue)
+        If lngValue = fTAG Then         ' found it, exit loop
+            Exit Do
+        ElseIf lngValue > fTAG Then     ' higher in sort order
+            UB = nOffset - 1&
+        Else                            ' lower in sort order
+            LB = nOffset + 1&
+        End If
+    Loop
+    If LB > UB Then GoTo EH             ' "name" table not found
+    nOffset = lBase + (nOffset - 1&) * 16& + 12& ' include 12 bytes for the 'name' table
+    If nOffset + 16& > lMax Then GoTo EH
+    ' note: lBase no longer needed; all other offsets are relative to start of file, not ttc offsets
+
+    ' validate the target table
+    Get #f, nOffset + 9&, lngValue ' skip the name & checksum field (name we already read) & read offset
+    nOffset = pvReverseLong(lngValue)
+    If nOffset > lMax Then GoTo EH
+    Get #f, , lngValue
+    lSize = pvReverseLong(lngValue)     ' read size of the "name" table
+    If nOffset + lSize > lMax Then GoTo EH
+    lMax = nOffset + lSize              ' set new max (any offsets > lMax is outside "name" table)
+    Seek #f, nOffset + 1&
+    
+    ' process the "name" table
+    Get #f, , intValue                  ' specs dictate the be zero
+    If Not intValue = 0 Then GoTo EH    ' invalid font structure?
+    Get #f, , intValue                  ' get number of 'names' in the 'name' table
+    tCount = (intValue And &HFF) * &H100& Or (intValue And &HFFFF&) \ &H100&
+    If (tCount * 12&) + nOffset > lMax Then GoTo EH
+    Get #f, , intValue                  ' get offset to the strings from last cached offset
+    ' note: this should = NrNames * 12 + 6 byte "name" table header. But we won't enforce it
+    nOffset = nOffset + ((intValue And &HFF) * &H100& Or (intValue And &HFFFF&) \ &H100&)
+    If nOffset > lMax Then GoTo EH
+        
+    For tCount = 0& To tCount - 1&      ' loop thru each 'names' entry
+        ' we are specifically looking for Microsoft encoded names
+        ' in the 12byte table...
+        '   1st set of 2-bytes wanted will be 3 (Microsoft encoding)
+        '   3rd set of 2-bytes will be the language ID (LCID)
+        '   4th set of 2-bytes wanted will be 4 (Full name of the font)
+        Get #f, , lngValue  ' reading 4 instead of two to prevent additional seek
+        If (lngValue And &HFFFF&) = &H300& Then
+            Get #f, , iLangID: lngValue = 6&   ' get LangID & track number of bytes remaining in table
+            If iLangID = &H904 Or iLangID = LanguageID Then
+                Get #f, , intValue: lngValue = 4& ' get NameID (4) & track number bytes remaining in table
+                If intValue = &H400 Then
+                    ' found what we're looking for
+                    Get #f, , intValue          ' get the size of the string
+                    lSize = (intValue And &HFF) * &H100& Or (intValue And &HFFFF&) \ &H100&
+                    Get #f, , intValue          ' get its additional offset
+                    ' microsoft-encoding has a 1-byte prefix (not positive how it works; think related to font subfamilies)
+                    nOffset = nOffset + ((intValue And &HFF) * &H100& Or (intValue And &HFFFF&) \ &H100&) + 1&
+                    If nOffset + lSize > lMax Then GoTo EH
+                    
+                    Seek #f, nOffset + 1&
+                    ' size our string & seek to the beginning of the string
+                    sName = String$(lSize \ 2, vbNullChar)
+                    For lSize = 1 To lSize \ 2     ' transfer content into our string
+                        Get #f, , intValue
+                        Mid$(sName, lSize, 1) = ChrW$(intValue)
+                    Next
+                    If iLangID = LanguageID Then Exit For
+                End If
+            End If
+            Seek #f, Seek(f) + lngValue     ' skip to next string table
+        Else
+            Seek #f, Seek(f) + 8&           ' skip to next string table
+        End If
+    Next
+    If Not sName = vbNullString Then        ' else didn't find font name
+        pvParseFontNameFromFile = sName
+        If fCount > 0& Then
+            If fIndex = 0& Then FontIndex = fCount Else FontIndex = fIndex
+        Else
+            FontIndex = fIndex + 1&
+        End If
+    End If
+EH:
+    Close #f
+End Function
+
+Private Function pvReverseLong(ByVal inLong As Long) As Long
+
+    ' fast function to reverse a long value from big endian to little endian
+    ' PNG files contain reversed longs, as do ID3 v3,4 tags, TTFs & more
+    pvReverseLong = _
+      (((inLong And &HFF000000) \ &H1000000) And &HFF&) Or _
+      ((inLong And &HFF0000) \ &H100&) Or _
+      ((inLong And &HFF00&) * &H100&) Or _
+      ((inLong And &H7F&) * &H1000000)
+    If (inLong And &H80&) Then pvReverseLong = pvReverseLong Or &H80000000
+End Function
+
+
+Private Function SpecialFolderPath(ByVal lngNum As Long) As String
+  Dim lpStartupPath As String * MAX_PATH
+  Dim Pidl As Long
+  Dim hResult As Long
+  hResult = SHGetSpecialFolderLocation(0, lngNum, Pidl)
+  If hResult = 0 Then
+    hResult = SHGetPathFromIDList(ByVal Pidl, lpStartupPath)
+    If hResult = 1 Then
+      lpStartupPath = Left$(Trim$(lpStartupPath), InStr(lpStartupPath, Chr(0)) - 1)
+      SpecialFolderPath = Trim$(lpStartupPath) & "\"
+    End If
+  End If
+End Function
+

@@ -1,9 +1,9 @@
 Type=Exe
 Form=fomularios\frmChild.frm
-Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\..\..\WINDOWS\SysWOW64\stdole2.tlb#OLE Automation
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
 Form=fomularios\frmMDI.frm
 Form=fomularios\frmNoChild.frm
-Object={62ED814B-A922-424D-833A-57C22F97CFE7}#3.4#0; JLAnchor.ocx
+Object={62ED814B-A922-424D-833A-57C22F97CFE7}#3.5#0; JLAnchor.ocx
 UserControl=uc-Lea\LabelPlus\LabelPlus.ctl
 PropertyPage=uc-Lea\LabelPlus\PropPagLP.pag
 UserControl=uc-Lea\ucChartArea\ucChartArea.ctl

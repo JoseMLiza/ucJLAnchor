@@ -99,7 +99,7 @@ Begin VB.Form frmChild
          ParentName      =   "frmChild"
          TypeName        =   "TextBox"
          Name            =   "Text1"
-         Object.Index           =   8
+         Object.Index           =   5
          hWnd            =   2493862
          Object.Left            =   1440
          Object.Top             =   120
@@ -118,7 +118,7 @@ Begin VB.Form frmChild
          ParentName      =   "frmChild"
          TypeName        =   "CommandButton"
          Name            =   "Command1"
-         Object.Index           =   9
+         Object.Index           =   6
          hWnd            =   5902796
          Object.Left            =   120
          Object.Top             =   120
@@ -148,7 +148,6 @@ Begin VB.Form frmChild
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
-         AnchorBottom    =   -1  'True
       EndProperty
    End
    Begin VB.Frame Frame1 

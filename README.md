@@ -8,6 +8,6 @@ This control can be used in child forms of an MDIForm.
 
 As always, it will be appreciated if an error is reported to provide the necessary solution.
 
-# UPDATES
+# Updates
 
 22/06/2022: An error was updated when obtaining the percentages of a child control of a frame

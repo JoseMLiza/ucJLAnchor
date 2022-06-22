@@ -13,12 +13,12 @@ Begin VB.Form frmChild
    Begin JLAnchor.ucJLAnchor ucJLAnchor1 
       Height          =   495
       Left            =   8400
-      TabIndex        =   6
+      TabIndex        =   4
       Top             =   120
       Width           =   495
       _ExtentX        =   847
       _ExtentY        =   847
-      ControlsCount   =   7
+      ControlsCount   =   8
       BeginProperty Control_1 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
@@ -39,49 +39,11 @@ Begin VB.Form frmChild
          AnchorBottom    =   -1  'True
       EndProperty
       BeginProperty Control_2 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
-         ParentTypeName  =   "Frame"
-         ParentName      =   "Frame1"
-         TypeName        =   "TextBox"
-         Name            =   "Text4"
-         Object.Index           =   2
-         hWnd            =   2229188
-         Object.Left            =   480
-         Object.Top             =   1200
-         Right           =   1470
-         Bottom          =   1785
-         LeftPercent     =   50
-         TopPercent      =   18.983
-         WidthPercent    =   50
-         HeightPercent   =   18.983
-         AnchorLeft      =   -1  'True
-         AnchorTop       =   -1  'True
-         AnchorRight     =   -1  'True
-      EndProperty
-      BeginProperty Control_3 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
-         ParentTypeName  =   "Frame"
-         ParentName      =   "Frame1"
-         TypeName        =   "TextBox"
-         Name            =   "Text3"
-         Object.Index           =   3
-         hWnd            =   7147782
-         Object.Left            =   480
-         Object.Top             =   480
-         Right           =   1470
-         Bottom          =   2385
-         LeftPercent     =   50
-         TopPercent      =   18.983
-         WidthPercent    =   50
-         HeightPercent   =   18.983
-         AnchorLeft      =   -1  'True
-         AnchorTop       =   -1  'True
-         AnchorRight     =   -1  'True
-      EndProperty
-      BeginProperty Control_4 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
          TypeName        =   "PictureBox"
          Name            =   "Picture1"
-         Object.Index           =   4
+         Object.Index           =   2
          hWnd            =   1839316
          Object.Top             =   840
          Right           =   4485
@@ -94,12 +56,12 @@ Begin VB.Form frmChild
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
-      BeginProperty Control_5 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_3 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
          TypeName        =   "TextBox"
          Name            =   "Text1"
-         Object.Index           =   5
+         Object.Index           =   3
          hWnd            =   2493862
          Object.Left            =   1440
          Object.Top             =   120
@@ -113,12 +75,12 @@ Begin VB.Form frmChild
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
       EndProperty
-      BeginProperty Control_6 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_4 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
          TypeName        =   "CommandButton"
          Name            =   "Command1"
-         Object.Index           =   6
+         Object.Index           =   4
          hWnd            =   5902796
          Object.Left            =   120
          Object.Top             =   120
@@ -131,23 +93,77 @@ Begin VB.Form frmChild
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
       EndProperty
+      BeginProperty Control_5 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+         ParentTypeName  =   "Frame"
+         ParentName      =   "Frame1"
+         TypeName        =   "TextBox"
+         Name            =   "Text2"
+         Object.Index           =   5
+         hWnd            =   3868374
+         Object.Left            =   120
+         Object.Top             =   360
+         Right           =   150
+         Bottom          =   1785
+         LeftPercent     =   2.676
+         UseTopPercent   =   -1  'True
+         TopPercent      =   10.345
+         WidthPercent    =   93.98
+         UseHeightPercent=   -1  'True
+         HeightPercent   =   38.362
+         AnchorLeft      =   -1  'True
+         AnchorRight     =   -1  'True
+      EndProperty
+      BeginProperty Control_6 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+         ParentTypeName  =   "Frame"
+         ParentName      =   "Frame1"
+         TypeName        =   "TextBox"
+         Name            =   "Text3"
+         Object.Index           =   6
+         hWnd            =   4734948
+         Object.Left            =   120
+         Object.Top             =   1800
+         Right           =   150
+         Bottom          =   105
+         LeftPercent     =   2.676
+         UseTopPercent   =   -1  'True
+         TopPercent      =   51.724
+         WidthPercent    =   93.98
+         UseHeightPercent=   -1  'True
+         HeightPercent   =   45.259
+         AnchorLeft      =   -1  'True
+         AnchorRight     =   -1  'True
+      EndProperty
       BeginProperty Control_7 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
          ParentTypeName  =   "PictureBox"
          ParentName      =   "Picture1"
-         TypeName        =   "LabelPlus"
-         Name            =   "LabelPlus1"
+         TypeName        =   "TextBox"
+         Name            =   "Text4"
          Object.Index           =   7
-         Object.Left            =   240
-         Object.Top             =   480
-         Right           =   1410
-         Bottom          =   2460
-         LeftPercent     =   5.424
-         TopPercent      =   13.974
-         WidthPercent    =   62.712
-         HeightPercent   =   14.41
-         AnchorLeft      =   -1  'True
-         AnchorTop       =   -1  'True
-         AnchorRight     =   -1  'True
+         hWnd            =   463752
+         Bottom          =   1717
+         UseLeftPercent  =   -1  'True
+         UseTopPercent   =   -1  'True
+         UseWidthPercent =   -1  'True
+         WidthPercent    =   100
+         UseHeightPercent=   -1  'True
+         HeightPercent   =   50.015
+      EndProperty
+      BeginProperty Control_8 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+         ParentTypeName  =   "PictureBox"
+         ParentName      =   "Picture1"
+         TypeName        =   "TextBox"
+         Name            =   "Text5"
+         Object.Index           =   8
+         hWnd            =   529218
+         Object.Top             =   1718
+         Bottom          =   -1
+         UseLeftPercent  =   -1  'True
+         UseTopPercent   =   -1  'True
+         TopPercent      =   50.015
+         UseWidthPercent =   -1  'True
+         WidthPercent    =   100
+         UseHeightPercent=   -1  'True
+         HeightPercent   =   50.015
       EndProperty
    End
    Begin VB.Frame Frame1 
@@ -157,21 +173,21 @@ Begin VB.Form frmChild
       TabIndex        =   3
       Top             =   840
       Width           =   4485
-      Begin VB.TextBox Text4 
-         Height          =   495
-         Left            =   480
-         TabIndex        =   5
-         Text            =   "Text4"
-         Top             =   1200
-         Width           =   2535
-      End
       Begin VB.TextBox Text3 
-         Height          =   615
-         Left            =   480
-         TabIndex        =   4
+         Height          =   1575
+         Left            =   120
+         TabIndex        =   6
          Text            =   "Text3"
-         Top             =   480
-         Width           =   2535
+         Top             =   1800
+         Width           =   4215
+      End
+      Begin VB.TextBox Text2 
+         Height          =   1335
+         Left            =   120
+         TabIndex        =   5
+         Text            =   "Text2"
+         Top             =   360
+         Width           =   4215
       End
    End
    Begin VB.PictureBox Picture1 
@@ -182,54 +198,21 @@ Begin VB.Form frmChild
       TabIndex        =   2
       Top             =   840
       Width           =   4485
-      Begin Proyecto1.LabelPlus LabelPlus1 
-         Height          =   495
-         Left            =   240
+      Begin VB.TextBox Text5 
+         Height          =   1718
+         Left            =   0
+         TabIndex        =   8
+         Text            =   "Text5"
+         Top             =   1718
+         Width           =   4425
+      End
+      Begin VB.TextBox Text4 
+         Height          =   1718
+         Left            =   0
          TabIndex        =   7
-         Top             =   480
-         Width           =   2775
-         _ExtentX        =   4895
-         _ExtentY        =   873
-         BackColor       =   15296031
-         Border          =   -1  'True
-         BorderColor     =   16232825
-         BorderCornerLeftTop=   5
-         BorderCornerRightTop=   5
-         BorderCornerBottomRight=   5
-         BorderCornerBottomLeft=   5
-         BorderWidth     =   1
-         CaptionAlignmentH=   1
-         CaptionAlignmentV=   1
-         Caption         =   "frmChild.frx":0000
-         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "Lucida Sans"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   600
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         ForeColor       =   16777215
-         ShadowSize      =   2
-         ShadowColor     =   16232825
-         ShadowColorOpacity=   100
-         CallOutAlign    =   0
-         CallOutWidth    =   0
-         CallOutLen      =   0
-         MousePointer    =   0
-         BeginProperty IconFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-            Name            =   "MS Sans Serif"
-            Size            =   8.25
-            Charset         =   0
-            Weight          =   400
-            Underline       =   0   'False
-            Italic          =   0   'False
-            Strikethrough   =   0   'False
-         EndProperty
-         IconForeColor   =   0
-         IconOpacity     =   0
-         PictureArr      =   0
+         Text            =   "Text4"
+         Top             =   0
+         Width           =   4425
       End
    End
    Begin VB.TextBox Text1 

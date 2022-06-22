@@ -11,11 +11,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
-'-----------------------------
-'Author: Jose Liza
-'Class Name: clsControl
-'Date: 18/06/2022
-'-----------------------------
 Option Explicit
 
 'Datos del control

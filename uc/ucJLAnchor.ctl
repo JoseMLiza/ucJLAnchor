@@ -15,12 +15,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
-'-----------------------------
-'Author: Jose Liza
-'Date: 18/06/2022
-'Version: 0.0.1
-'Thanks: Latin Group of VB6
-'-----------------------------
 Option Explicit
 'USER32
 Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal Hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
@@ -380,10 +374,10 @@ Private Sub LoadControls()
                     cControl.Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
                     cControl.Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
                     '--
-                    cControl.LeftPercent = (obj.Left * 100) / obj.Container.ScaleWidth
-                    cControl.TopPercent = (obj.Top * 100) / obj.Container.ScaleHeight
-                    cControl.WidthPercent = (obj.Width * 100) / obj.Container.ScaleWidth
-                    cControl.HeightPercent = (obj.Height * 100) / obj.Container.ScaleHeight
+                    cControl.LeftPercent = (obj.Left * 100) / GetControlScaleWidth(obj.Container)
+                    cControl.TopPercent = (obj.Top * 100) / GetControlScaleHeight(obj.Container)
+                    cControl.WidthPercent = (obj.Width * 100) / GetControlScaleWidth(obj.Container)
+                    cControl.HeightPercent = (obj.Height * 100) / GetControlScaleHeight(obj.Container)
                     '--
                     Controls.Add cControl
                     '--
@@ -412,10 +406,10 @@ Private Sub LoadControls()
                         cControl.Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
                         cControl.Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
                         '--
-                        cControl.LeftPercent = (obj.Left * 100) / obj.Container.ScaleWidth
-                        cControl.TopPercent = (obj.Top * 100) / obj.Container.ScaleHeight
-                        cControl.WidthPercent = (obj.Width * 100) / obj.Container.ScaleWidth
-                        cControl.HeightPercent = (obj.Height * 100) / obj.Container.ScaleHeight
+                        cControl.LeftPercent = (obj.Left * 100) / GetControlScaleWidth(obj.Container)
+                        cControl.TopPercent = (obj.Top * 100) / GetControlScaleHeight(obj.Container)
+                        cControl.WidthPercent = (obj.Width * 100) / GetControlScaleWidth(obj.Container)
+                        cControl.HeightPercent = (obj.Height * 100) / GetControlScaleHeight(obj.Container)
                         '--
                         Controls.Add cControl
                         '--
@@ -453,20 +447,20 @@ Private Sub LoadControls()
                                 IsChange = True
                             End If
                             '--> LeftPercent
-                            If Controls.Item(i).LeftPercent <> (obj.Left * 100) / obj.Container.ScaleWidth Then
-                                Controls.Item(i).LeftPercent = (obj.Left * 100) / obj.Container.ScaleWidth
+                            If Controls.Item(i).LeftPercent <> (obj.Left * 100) / GetControlScaleWidth(obj.Container) Then
+                                Controls.Item(i).LeftPercent = (obj.Left * 100) / GetControlScaleWidth(obj.Container)
                             End If
                             '--> TopPercent
-                            If Controls.Item(i).TopPercent <> (obj.Top * 100) / obj.Container.ScaleHeight Then
-                                Controls.Item(i).TopPercent = (obj.Top * 100) / obj.Container.ScaleHeight
+                            If Controls.Item(i).TopPercent <> (obj.Top * 100) / GetControlScaleHeight(obj.Container) Then
+                                Controls.Item(i).TopPercent = (obj.Top * 100) / GetControlScaleHeight(obj.Container)
                             End If
                             '--> WidthPercent
-                            If Controls.Item(i).WidthPercent <> (obj.Width * 100) / obj.Container.ScaleWidth Then
-                                Controls.Item(i).WidthPercent = (obj.Width * 100) / obj.Container.ScaleWidth
+                            If Controls.Item(i).WidthPercent <> (obj.Width * 100) / GetControlScaleWidth(obj.Container) Then
+                                Controls.Item(i).WidthPercent = (obj.Width * 100) / GetControlScaleWidth(obj.Container)
                             End If
                             '--> HeightPercent
-                            If Controls.Item(i).HeightPercent <> (obj.Height * 100) / obj.Container.ScaleHeight Then
-                                Controls.Item(i).HeightPercent = (obj.Height * 100) / obj.Container.ScaleHeight
+                            If Controls.Item(i).HeightPercent <> (obj.Height * 100) / GetControlScaleHeight(obj.Container) Then
+                                Controls.Item(i).HeightPercent = (obj.Height * 100) / GetControlScaleHeight(obj.Container)
                             End If
                         End If
                     End If
@@ -497,63 +491,56 @@ Private Sub DoResize()
             If Controls.Item(a).TypeName = TypeName(objControl) Then
                 If Controls.Item(a).Name & Controls.Item(a).ControlIndex = objControl.Name & idx Then
                     With Controls.Item(a)
-                        'If .AnchorLeft Or .AnchorTop Or .AnchorRight Or .AnchorBottom Then
-                            If .AnchorRight Then
-                                If .AnchorLeft Then
-                                    objControl.Width = IIf(sWidth - (.Left + .Right) > 0, sWidth - (.Left + .Right), 0)
-                                Else
-                                    'If Not .LeftPercent > 0 Then
-                                    If Not .UseLeftPercent Then
-                                        objControl.Left = sWidth - (objControl.Width + .Right)
-                                    Else
-                                        objControl.Left = sWidth * (.LeftPercent / 100)
-                                    End If
-                                End If
+                        If .AnchorRight Then
+                            If .AnchorLeft Then
+                                objControl.Width = IIf(sWidth - (.Left + .Right) > 0, sWidth - (.Left + .Right), 0)
                             Else
-                                'If Not .AnchorLeft And Not .LeftPercent > 0 Then
-                                If Not .AnchorLeft And Not .UseLeftPercent Then
-                                    If m_Settings.ToAffectToLefts Then
-                                        objControl.Left = .Left
-                                    End If
-                                'ElseIf Not .AnchorLeft And .LeftPercent > 0 Then
-                                ElseIf Not .AnchorLeft And .UseLeftPercent Then
+                                'If Not .LeftPercent > 0 Then
+                                If Not .UseLeftPercent Then
+                                    objControl.Left = sWidth - (objControl.Width + .Right)
+                                Else
                                     objControl.Left = sWidth * (.LeftPercent / 100)
                                 End If
-                                '--
-                                'If .WidthPercent > 0 Then objControl.Width = sWidth * (.WidthPercent / 100)
-                                If .UseWidthPercent Then objControl.Width = sWidth * (.WidthPercent / 100)
                             End If
-                            If .AnchorBottom Then
-                                If .AnchorTop Then
-                                    objControl.Height = IIf(sHeight - (.Top + .Bottom) > 0, sHeight - (.Top + .Bottom), 0)
-                                Else
-                                    'If Not .TopPercent > 0 Then
-                                    If Not .UseTopPercent Then
-                                        objControl.Top = sHeight - (objControl.Height + .Bottom)
-                                    Else
-                                        objControl.Top = sHeight * (.TopPercent / 100)
-                                    End If
+                        Else
+                            'If Not .AnchorLeft And Not .LeftPercent > 0 Then
+                            If Not .AnchorLeft And Not .UseLeftPercent Then
+                                If m_Settings.ToAffectToLefts Then
+                                    objControl.Left = .Left
                                 End If
+                            'ElseIf Not .AnchorLeft And .LeftPercent > 0 Then
+                            ElseIf Not .AnchorLeft And .UseLeftPercent Then
+                                objControl.Left = sWidth * (.LeftPercent / 100)
+                            End If
+                            '--
+                            'If .WidthPercent > 0 Then objControl.Width = sWidth * (.WidthPercent / 100)
+                            If .UseWidthPercent Then objControl.Width = sWidth * (.WidthPercent / 100)
+                        End If
+                        If .AnchorBottom Then
+                            If .AnchorTop Then
+                                objControl.Height = IIf(sHeight - (.Top + .Bottom) > 0, sHeight - (.Top + .Bottom), 0)
                             Else
-                                'If Not .AnchorTop And Not .TopPercent > 0 Then
-                                If Not .AnchorTop And Not .UseTopPercent Then
-                                    If m_Settings.ToAffectToTops Then
-                                        objControl.Top = .Top
-                                    End If
-                                'ElseIf Not .AnchorTop And .TopPercent > 0 Then
-                                ElseIf Not .AnchorTop And .UseTopPercent Then
+                                'If Not .TopPercent > 0 Then
+                                If Not .UseTopPercent Then
+                                    objControl.Top = sHeight - (objControl.Height + .Bottom)
+                                Else
                                     objControl.Top = sHeight * (.TopPercent / 100)
                                 End If
-                                '--
-                                'If .HeightPercent > 0 Then objControl.Height = sHeight * (.HeightPercent / 100)
-                                If .UseHeightPercent Then objControl.Height = sHeight * (.HeightPercent / 100)
                             End If
-                        'Else
-                            'If .LeftPercent > 0 Then objControl.Left = sWidth * (.LeftPercent / 100)
-                            'If .TopPercent > 0 Then objControl.Top = sHeight * (.TopPercent / 100)
-                            'If .WidthPercent > 0 Then objControl.Width = sWidth * (.WidthPercent / 100)
+                        Else
+                            'If Not .AnchorTop And Not .TopPercent > 0 Then
+                            If Not .AnchorTop And Not .UseTopPercent Then
+                                If m_Settings.ToAffectToTops Then
+                                    objControl.Top = .Top
+                                End If
+                            'ElseIf Not .AnchorTop And .TopPercent > 0 Then
+                            ElseIf Not .AnchorTop And .UseTopPercent Then
+                                objControl.Top = sHeight * (.TopPercent / 100)
+                            End If
+                            '--
                             'If .HeightPercent > 0 Then objControl.Height = sHeight * (.HeightPercent / 100)
-                        'End If
+                            If .UseHeightPercent Then objControl.Height = sHeight * (.HeightPercent / 100)
+                        End If
                     End With
                 End If
             End If

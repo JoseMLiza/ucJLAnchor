@@ -1,16 +1,6 @@
 Attribute VB_Name = "mdlAnchor"
-'-----------------------------
-'Author: Jose Liza
-'Module Name: mdlAnchor
-'Date: 18/06/2022
-'Version: 0.0.1
-'-----------------------------
-Option Explicit
-
 Public Const ST_KEYDIGVAL = "0123456789."
 Public CtrlParent As Object
-
-Private i As Long
 
 Public Function GetControlIndex(objControl As Object) As String
     On Error GoTo ErrorFunction

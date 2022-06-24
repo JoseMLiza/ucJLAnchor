@@ -11,3 +11,6 @@ As always, it will be appreciated if an error is reported to provide the necessa
 # Updates
 
 22/06/2022: An error was updated when obtaining the percentages of a child control of a frame
+
+24/06/2022: Fixed some bugs, split percentage resize control into two options:
+dynamic and static.

@@ -80,3 +80,23 @@ Public Sub SafeRange(Value, Min, Max)
     If Value > Max Then Value = Max
 End Sub
 
+Public Function GetMinWidthControl(ByVal objControl As Object) As Long
+    Dim lTemp As Long
+    '--
+    lTemp = objControl.Width
+    objControl.Width = 0
+    GetMinWidthControl = objControl.Width
+    objControl.Width = lTemp
+    '--
+End Function
+
+Public Function GetMinHeightControl(ByVal objControl As Object) As Long
+    Dim lTemp As Long
+    '--
+    lTemp = objControl.Height
+    objControl.Height = 0
+    GetMinHeightControl = objControl.Height
+    objControl.Height = lTemp
+    '--
+End Function
+

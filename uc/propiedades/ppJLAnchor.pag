@@ -6,6 +6,7 @@ Begin VB.PropertyPage ppJLAnchor
    ClientLeft      =   0
    ClientTop       =   0
    ClientWidth     =   6540
+   LockControls    =   -1  'True
    PaletteMode     =   0  'Halftone
    ScaleHeight     =   4725
    ScaleWidth      =   6540
@@ -281,6 +282,44 @@ Begin VB.PropertyPage ppJLAnchor
          TabIndex        =   33
          Top             =   1320
          Width           =   3105
+         Begin VB.OptionButton optPercent 
+            Alignment       =   1  'Right Justify
+            Caption         =   "Static"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   1
+            Left            =   2160
+            TabIndex        =   39
+            Top             =   240
+            Width           =   855
+         End
+         Begin VB.OptionButton optPercent 
+            Caption         =   "Dynamic"
+            BeginProperty Font 
+               Name            =   "Lucida Sans"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            Height          =   195
+            Index           =   0
+            Left            =   120
+            TabIndex        =   38
+            Top             =   240
+            Value           =   -1  'True
+            Width           =   1335
+         End
          Begin VB.CheckBox chkPercent 
             Caption         =   "Width"
             BeginProperty Font 
@@ -296,7 +335,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   2
             Left            =   1080
             TabIndex        =   14
-            Top             =   1770
+            Top             =   1890
             Width           =   975
          End
          Begin VB.CheckBox chkPercent 
@@ -314,7 +353,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   3
             Left            =   1920
             TabIndex        =   16
-            Top             =   930
+            Top             =   1290
             Width           =   975
          End
          Begin VB.CheckBox chkPercent 
@@ -332,7 +371,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   1
             Left            =   1080
             TabIndex        =   12
-            Top             =   210
+            Top             =   660
             Width           =   975
          End
          Begin VB.CheckBox chkPercent 
@@ -350,7 +389,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   0
             Left            =   120
             TabIndex        =   10
-            Top             =   930
+            Top             =   1290
             Width           =   975
          End
          Begin VB.TextBox txtDetPercent 
@@ -370,7 +409,7 @@ Begin VB.PropertyPage ppJLAnchor
             Locked          =   -1  'True
             TabIndex        =   17
             Text            =   "0"
-            Top             =   1170
+            Top             =   1530
             Width           =   840
          End
          Begin VB.TextBox txtDetPercent 
@@ -390,7 +429,7 @@ Begin VB.PropertyPage ppJLAnchor
             Locked          =   -1  'True
             TabIndex        =   13
             Text            =   "0"
-            Top             =   450
+            Top             =   900
             Width           =   840
          End
          Begin VB.TextBox txtDetPercent 
@@ -410,7 +449,7 @@ Begin VB.PropertyPage ppJLAnchor
             Locked          =   -1  'True
             TabIndex        =   15
             Text            =   "0"
-            Top             =   2010
+            Top             =   2130
             Width           =   840
          End
          Begin VB.TextBox txtDetPercent 
@@ -430,7 +469,7 @@ Begin VB.PropertyPage ppJLAnchor
             Locked          =   -1  'True
             TabIndex        =   11
             Text            =   "0"
-            Top             =   1170
+            Top             =   1530
             Width           =   840
          End
          Begin VB.Label lblInfo 
@@ -449,7 +488,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   16
             Left            =   1920
             TabIndex        =   37
-            Top             =   1200
+            Top             =   1560
             Width           =   960
          End
          Begin VB.Label lblInfo 
@@ -468,7 +507,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   17
             Left            =   1080
             TabIndex        =   36
-            Top             =   480
+            Top             =   930
             Width           =   960
          End
          Begin VB.Label lblInfo 
@@ -487,7 +526,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   18
             Left            =   1080
             TabIndex        =   35
-            Top             =   2040
+            Top             =   2160
             Width           =   960
          End
          Begin VB.Label lblInfo 
@@ -506,7 +545,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   19
             Left            =   120
             TabIndex        =   34
-            Top             =   1200
+            Top             =   1560
             Width           =   960
          End
       End
@@ -524,11 +563,13 @@ Begin VB.PropertyPage ppJLAnchor
             BeginProperty Tab1 {1EFB659A-857C-11D1-B16A-00C0F0283628} 
                Caption         =   "Position"
                Key             =   "POS"
+               Object.ToolTipText     =   "According to fixed position."
                ImageVarType    =   2
             EndProperty
             BeginProperty Tab2 {1EFB659A-857C-11D1-B16A-00C0F0283628} 
                Caption         =   "Percents"
                Key             =   "PRC"
+               Object.ToolTipText     =   "Position percentage, based on the height and width of the container."
                ImageVarType    =   2
             EndProperty
          EndProperty
@@ -667,22 +708,22 @@ Private Sub chkPercent_Click(Index As Integer)
     For a = 0 To chkPercent.Count - 1
         Changed = False
         'LeftPercent
-        If chkPercent(0) <> m_ucControl.Controls.Item(cSel).UseLeftPercent Then
+        If a = 0 And chkPercent(a) <> m_ucControl.Controls.Item(cSel).UseLeftPercent Then
             Changed = True
             Exit For
         End If
         'TopPercent
-        If chkPercent(1) <> m_ucControl.Controls.Item(cSel).UseTopPercent Then
+        If a = 1 And chkPercent(a) <> m_ucControl.Controls.Item(cSel).UseTopPercent Then
             Changed = True
             Exit For
         End If
         'WidthPercent
-        If chkPercent(2) <> m_ucControl.Controls.Item(cSel).UseWidthPercent Then
+        If a = 2 And chkPercent(a) <> m_ucControl.Controls.Item(cSel).UseWidthPercent Then
             Changed = True
             Exit For
         End If
         'HeightPercent
-        If chkPercent(3) <> m_ucControl.Controls.Item(cSel).UseHeightPercent Then
+        If a = 3 And chkPercent(a) <> m_ucControl.Controls.Item(cSel).UseHeightPercent Then
             Changed = True
             Exit For
         End If
@@ -722,6 +763,10 @@ Private Sub lblAnchor_Click(Index As Integer)
    End If
 End Sub
 
+Private Sub optPercent_Click(Index As Integer)
+    Changed = Index <> m_ucControl.Controls.Item(cSel).UseModePercent
+End Sub
+
 Private Sub txtDetPercent_GotFocus(Index As Integer)
     txtDetPercent(Index).SelStart = 0
     txtDetPercent(Index).SelLength = Len(txtDetPercent(Index).Text)
@@ -734,33 +779,36 @@ End Sub
 
 Private Sub txtDetPercent_LostFocus(Index As Integer)
     Dim sngTemp As Single
+    Dim bChange As Boolean
+    '--
     If Len(txtDetPercent(Index)) Then
         sngTemp = txtDetPercent(Index)
         Call SafeRange(sngTemp, 0, 100)
         txtDetPercent(Index) = sngTemp
         For i = 0 To txtDetPercent.Count - 1
-            Changed = False
+            bChange = False
             'LeftPercent
-            If txtDetPercent(0) <> m_ucControl.Controls.Item(cSel).LeftPercent Then
-                Changed = True
+            If i = 0 And txtDetPercent(i) <> m_ucControl.Controls.Item(cSel).LeftPercent Then
+                bChange = True
                 Exit For
             End If
             'TopPercent
-            If txtDetPercent(1) <> m_ucControl.Controls.Item(cSel).TopPercent Then
-                Changed = True
+            If i = 1 And txtDetPercent(i) <> m_ucControl.Controls.Item(cSel).TopPercent Then
+                bChange = True
                 Exit For
             End If
             'WidthPercent
-            If txtDetPercent(2) <> m_ucControl.Controls.Item(cSel).WidthPercent Then
-                Changed = True
+            If i = 2 And txtDetPercent(i) <> m_ucControl.Controls.Item(cSel).WidthPercent Then
+                bChange = True
                 Exit For
             End If
             'HeightPercent
-            If txtDetPercent(3) <> m_ucControl.Controls.Item(cSel).HeightPercent Then
-                Changed = True
+            If i = 3 And txtDetPercent(i) <> m_ucControl.Controls.Item(cSel).HeightPercent Then
+                bChange = True
                 Exit For
             End If
         Next
+        Changed = bChange
     Else
         txtDetPercent(Index) = 0
     End If
@@ -787,8 +835,6 @@ Private Sub trvwControls_NodeClick(ByVal Node As MSComctlLib.Node)
     '---
     frmDetails.Visible = Not Node.Index = 1
     '---
-    Changed = False
-    '---
     With m_ucControl
         For i = 1 To .Controls.Count
             PosX1 = InStr(Node.Text, "(")
@@ -809,6 +855,8 @@ Private Sub trvwControls_NodeClick(ByVal Node As MSComctlLib.Node)
                 lblInfo(7) = .Controls.Item(i).Top
                 lblInfo(9) = .Controls.Item(i).Right
                 lblInfo(11) = .Controls.Item(i).Bottom
+                '--
+                optPercent(.Controls.Item(i).UseModePercent).Value = True
                 '--
                 chkPercent(0) = Abs(.Controls.Item(i).UseLeftPercent)
                 txtDetPercent(0) = .Controls.Item(i).LeftPercent
@@ -836,6 +884,8 @@ Private Sub trvwControls_NodeClick(ByVal Node As MSComctlLib.Node)
     '---
     If Not UseExpColl Then LastNode = trvwControls.SelectedItem.Index
     If UseExpColl Then UseExpColl = False
+    '--
+    Changed = False
 End Sub
 
 Private Sub PropertyPage_ApplyChanges()
@@ -875,37 +925,47 @@ Private Sub PropertyPage_ApplyChanges()
                 '--> Actualizar control en tiempo diseño.
                 For Each obj In CtrlParent.Controls
                     If obj.Name & GetControlIndex(obj) = .Controls.Item(i).Name & .Controls.Item(i).ControlIndex Then
-                        If .Controls.Item(i).UseLeftPercent And .Controls.Item(i).LeftPercent <> txtDetPercent(0) Then
+                        '--
+                        If .Controls.Item(i).UseLeftPercent And .Controls.Item(i).LeftPercent <> txtDetPercent(0) And Not CBool(.Controls.Item(i).UseModePercent) Then
                             obj.Left = GetControlScaleWidth(obj.Container) * (txtDetPercent(0) / 100)
                             .Controls.Item(i).Left = obj.Left
                         End If
-                        If .Controls.Item(i).UseTopPercent And .Controls.Item(i).TopPercent <> txtDetPercent(1) Then
+                        If .Controls.Item(i).UseTopPercent And .Controls.Item(i).TopPercent <> txtDetPercent(1) And Not CBool(.Controls.Item(i).UseModePercent) Then
                             obj.Top = GetControlScaleHeight(obj.Container) * (txtDetPercent(1) / 100)
                             .Controls.Item(i).Top = obj.Top
                         End If
-                        If .Controls.Item(i).UseWidthPercent And .Controls.Item(i).WidthPercent <> txtDetPercent(2) Then
+                        If .Controls.Item(i).UseWidthPercent And .Controls.Item(i).WidthPercent <> txtDetPercent(2) And Not CBool(.Controls.Item(i).UseModePercent) Then
                             obj.Width = GetControlScaleWidth(obj.Container) * (txtDetPercent(2) / 100)
                             .Controls.Item(i).Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
                         End If
-                        If .Controls.Item(i).UseHeightPercent And .Controls.Item(i).HeightPercent <> txtDetPercent(3) Then
+                        If .Controls.Item(i).UseHeightPercent And .Controls.Item(i).HeightPercent <> txtDetPercent(3) And Not CBool(.Controls.Item(i).UseModePercent) Then
                             obj.Height = GetControlScaleHeight(obj.Container) * (txtDetPercent(3) / 100)
                             .Controls.Item(i).Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
                         End If
                     End If
                 Next
                 '--> Actualizar propiedades.
+                .Controls.Item(i).UseModePercent = Abs(optPercent(1).Value)
                 'LeftPercent
                 .Controls.Item(i).UseLeftPercent = chkPercent(0)
-                If .Controls.Item(i).UseLeftPercent Then .Controls.Item(i).LeftPercent = txtDetPercent(0)
+                If .Controls.Item(i).UseLeftPercent Then
+                    .Controls.Item(i).LeftPercent = txtDetPercent(0)
+                End If
                 'TopPercent
                 .Controls.Item(i).UseTopPercent = chkPercent(1)
-                If .Controls.Item(i).UseTopPercent Then .Controls.Item(i).TopPercent = txtDetPercent(1)
+                If .Controls.Item(i).UseTopPercent Then
+                    .Controls.Item(i).TopPercent = txtDetPercent(1)
+                End If
                 'WidthPercent
                 .Controls.Item(i).UseWidthPercent = chkPercent(2)
-                If .Controls.Item(i).UseWidthPercent Then .Controls.Item(i).WidthPercent = txtDetPercent(2)
+                If .Controls.Item(i).UseWidthPercent Then
+                    .Controls.Item(i).WidthPercent = txtDetPercent(2)
+                End If
                 'HeightPercent
                 .Controls.Item(i).UseHeightPercent = chkPercent(3)
-                If .Controls.Item(i).UseHeightPercent Then .Controls.Item(i).HeightPercent = txtDetPercent(3)
+                If .Controls.Item(i).UseHeightPercent Then
+                    .Controls.Item(i).HeightPercent = txtDetPercent(3)
+                End If
                 'Devolvemos el valor guardado en variable.
                 m_ucControl.Tag = TmpTag
             End If
@@ -913,14 +973,15 @@ Private Sub PropertyPage_ApplyChanges()
     End With
     '---
     LoadTreeView
-'    trvwControls.Nodes(LastNode).Selected = True
-'    Call trvwControls_NodeClick(trvwControls.Nodes(LastNode))
+    trvwControls.Nodes(LastNode).Selected = True
+    Call trvwControls_NodeClick(trvwControls.Nodes(LastNode))
 End Sub
 
 Private Sub PropertyPage_SelectionChanged()
     Set m_ucControl = SelectedControls(0)
     Set CtrlParent = m_ucControl.Container
     '--
+    LastNode = 0
     LoadTreeView
     '--
     If trvwControls.Nodes.Count > 1 Then

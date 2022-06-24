@@ -29,23 +29,32 @@ Public Function Add(NewControl As clsControl) As clsControl
     objNewControl.TypeName = NewControl.TypeName
     objNewControl.Name = NewControl.Name
     objNewControl.ControlIndex = IIf(CInt(IIf(IsNumeric(NewControl.ControlIndex), NewControl.ControlIndex, -1)) >= 0, NewControl.ControlIndex, "")
-    objNewControl.hWnd = NewControl.hWnd
+    objNewControl.Hwnd = NewControl.Hwnd
     objNewControl.Left = NewControl.Left
     objNewControl.Top = NewControl.Top
     objNewControl.Right = NewControl.Right
     objNewControl.Bottom = NewControl.Bottom
     '--
+    objNewControl.MinWidth = NewControl.MinWidth
+    objNewControl.MinHeight = NewControl.MinHeight
+    '--
+    objNewControl.UseModePercent = NewControl.UseModePercent
+    '--
     objNewControl.UseLeftPercent = NewControl.UseLeftPercent
     objNewControl.LeftPercent = NewControl.LeftPercent
+    objNewControl.LeftPercentStatic = NewControl.LeftPercentStatic
     '--
     objNewControl.UseTopPercent = NewControl.UseTopPercent
     objNewControl.TopPercent = NewControl.TopPercent
+    objNewControl.TopPercentStatic = NewControl.TopPercentStatic
     '--
     objNewControl.UseWidthPercent = NewControl.UseWidthPercent
     objNewControl.WidthPercent = NewControl.WidthPercent
+    objNewControl.RightPercentStatic = NewControl.RightPercentStatic
     '--
     objNewControl.UseHeightPercent = NewControl.UseHeightPercent
     objNewControl.HeightPercent = NewControl.HeightPercent
+    objNewControl.BottomPercentStatic = NewControl.BottomPercentStatic
     '--
     objNewControl.AnchorLeft = NewControl.AnchorLeft
     objNewControl.AnchorTop = NewControl.AnchorTop

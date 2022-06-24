@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.5#0"; "JLAnchor.ocx"
+Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.8#0"; "JLAnchor.ocx"
 Begin VB.Form frmControlsLea 
-   Caption         =   "Form1"
+   Caption         =   "Controles @Leandro - Percent Dynamic"
    ClientHeight    =   6225
    ClientLeft      =   120
    ClientTop       =   465
@@ -11,11 +11,11 @@ Begin VB.Form frmControlsLea
    ScaleHeight     =   6225
    ScaleWidth      =   12615
    Begin JLAnchor.ucJLAnchor ucJLAnchor1 
-      Height          =   495
-      Left            =   4560
+      Height          =   480
+      Left            =   12120
       TabIndex        =   13
       Top             =   0
-      Width           =   495
+      Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
       FormMinWidth    =   12855
@@ -31,6 +31,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   4080
          Right           =   120
          Bottom          =   90
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   78.954
          UseTopPercent   =   -1  'True
@@ -50,6 +52,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   2520
          Right           =   240
          Bottom          =   2490
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   79.905
          UseTopPercent   =   -1  'True
@@ -69,6 +73,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   120
          Right           =   120
          Bottom          =   4050
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   78.954
          UseTopPercent   =   -1  'True
@@ -88,6 +94,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   3960
          Right           =   8040
          Bottom          =   90
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   0.951
          UseTopPercent   =   -1  'True
@@ -107,6 +115,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   4200
          Right           =   2760
          Bottom          =   90
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   37.099
          UseTopPercent   =   -1  'True
@@ -126,6 +136,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   2040
          Right           =   2760
          Bottom          =   2130
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   37.099
          UseTopPercent   =   -1  'True
@@ -145,6 +157,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   1920
          Right           =   8040
          Bottom          =   2370
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   0.951
          UseTopPercent   =   -1  'True
@@ -164,6 +178,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   120
          Right           =   2760
          Bottom          =   4290
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   37.099
          UseTopPercent   =   -1  'True
@@ -185,6 +201,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   360
          Right           =   8160
          Bottom          =   4530
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   24.732
          UseTopPercent   =   -1  'True
@@ -206,6 +224,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   360
          Right           =   9600
          Bottom          =   4530
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   13.317
          UseTopPercent   =   -1  'True
@@ -227,6 +247,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   360
          Right           =   11040
          Bottom          =   4530
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   1.902
          UseTopPercent   =   -1  'True
@@ -246,6 +268,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   120
          Right           =   8040
          Bottom          =   4410
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   0.951
          UseTopPercent   =   -1  'True
@@ -265,6 +289,8 @@ Begin VB.Form frmControlsLea
          Object.Top             =   2280
          Right           =   120
          Bottom          =   2250
+         MinWidth        =   30
+         MinHeight       =   30
          UseLeftPercent  =   -1  'True
          LeftPercent     =   78.954
          UseTopPercent   =   -1  'True

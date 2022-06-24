@@ -23,6 +23,14 @@ Begin VB.MDIForm MDIForm1
          Caption         =   "Controles Lea"
          Index           =   2
       End
+      Begin VB.Menu mnuForms 
+         Caption         =   "-"
+         Index           =   3
+      End
+      Begin VB.Menu mnuForms 
+         Caption         =   "Child 2"
+         Index           =   4
+      End
    End
 End
 Attribute VB_Name = "MDIForm1"
@@ -38,5 +46,8 @@ Private Sub mnuForms_Click(Index As Integer)
             frmNoChild.Show
         Case 2 'Controles Lea
             frmControlsLea.Show
+        Case 3 'Separator
+        Case 4 'Child 2
+            frmChild2.Show
     End Select
 End Sub

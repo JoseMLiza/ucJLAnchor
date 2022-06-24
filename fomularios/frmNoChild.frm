@@ -1,7 +1,7 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.5#0"; "JLAnchor.ocx"
+Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.8#0"; "JLAnchor.ocx"
 Begin VB.Form frmNoChild 
-   Caption         =   "Not Child"
+   Caption         =   "No Child"
    ClientHeight    =   3255
    ClientLeft      =   120
    ClientTop       =   465
@@ -24,11 +24,13 @@ Begin VB.Form frmNoChild
          TypeName        =   "CommandButton"
          Name            =   "Command1"
          Object.Index           =   1
-         hWnd            =   264470
+         hWnd            =   7868802
          Object.Left            =   120
          Object.Top             =   120
          Right           =   2055
          Bottom          =   2640
+         MinWidth        =   75
+         MinHeight       =   195
          LeftPercent     =   3.54
          TopPercent      =   3.687
          WidthPercent    =   35.841
@@ -42,11 +44,13 @@ Begin VB.Form frmNoChild
          TypeName        =   "TextBox"
          Name            =   "Text1"
          Object.Index           =   2
-         hWnd            =   264474
+         hWnd            =   4786524
          Object.Left            =   1440
          Object.Top             =   120
          Right           =   735
          Bottom          =   2640
+         MinWidth        =   150
+         MinHeight       =   285
          LeftPercent     =   42.478
          TopPercent      =   3.687
          WidthPercent    =   35.841
@@ -61,11 +65,13 @@ Begin VB.Form frmNoChild
          TypeName        =   "PictureBox"
          Name            =   "Picture1"
          Object.Index           =   3
-         hWnd            =   329958
+         hWnd            =   9505864
          Object.Left            =   120
          Object.Top             =   840
          Right           =   135
          Bottom          =   120
+         MinWidth        =   15
+         MinHeight       =   15
          LeftPercent     =   3.54
          TopPercent      =   25.806
          WidthPercent    =   92.478
@@ -81,11 +87,13 @@ Begin VB.Form frmNoChild
          TypeName        =   "TextBox"
          Name            =   "Text2"
          Object.Index           =   4
-         hWnd            =   526604
+         hWnd            =   3148000
          Object.Left            =   240
          Object.Top             =   240
          Right           =   540
          Bottom          =   1620
+         MinWidth        =   150
+         MinHeight       =   285
          LeftPercent     =   7.805
          TopPercent      =   10.738
          WidthPercent    =   74.634

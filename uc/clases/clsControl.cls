@@ -14,35 +14,44 @@ Attribute VB_Exposed = True
 Option Explicit
 
 'Datos del control
-Private m_ParentTypeName    As String
-Private m_ParentName        As String
-Private m_ParentIndex       As String
-Private m_TypeName          As String
-Private m_Name              As String
-Private m_ControlIndex      As String
-Private m_Index             As Long
-Private m_Hwnd              As Long
-Private m_Left              As Long
-Private m_Top               As Long
-Private m_Right             As Long
-Private m_Bottom            As Long
+Private m_ParentTypeName        As String
+Private m_ParentName            As String
+Private m_ParentIndex           As String
+Private m_TypeName              As String
+Private m_Name                  As String
+Private m_ControlIndex          As String
+Private m_Index                 As Long
+Private m_Hwnd                  As Long
+Private m_Left                  As Long
+Private m_Top                   As Long
+Private m_Right                 As Long
+Private m_Bottom                As Long
 '--
-Private m_UseLeftPercent    As Boolean
-Private m_LeftPercent       As Single
+Private m_MinWidth              As Long
+Private m_MinHeight             As Long
 '--
-Private m_UseTopPercent     As Boolean
-Private m_TopPercent        As Single
+Private m_UseModePercent        As Integer
 '--
-Private m_UseWidthPercent   As Boolean
-Private m_WidthPercent      As Single
+Private m_UseLeftPercent        As Boolean
+Private m_LeftPercent           As Single
+Private m_LeftPercentStatic     As Long
 '--
-Private m_UseHeightPercent  As Boolean
-Private m_HeightPercent     As Single
+Private m_UseTopPercent         As Boolean
+Private m_TopPercent            As Single
+Private m_TopPercentStatic      As Long
 '--
-Private m_AnchorLeft        As Boolean
-Private m_AnchorTop         As Boolean
-Private m_AnchorRight       As Boolean
-Private m_AnchorBottom      As Boolean
+Private m_UseWidthPercent       As Boolean
+Private m_WidthPercent          As Single
+Private m_RightPercentStatic    As Long
+'--
+Private m_UseHeightPercent      As Boolean
+Private m_HeightPercent         As Single
+Private m_BottomPercentStatic   As Long
+'--
+Private m_AnchorLeft            As Boolean
+Private m_AnchorTop             As Boolean
+Private m_AnchorRight           As Boolean
+Private m_AnchorBottom          As Boolean
 
 'm_ParentTypeName           As String
 Public Property Get ParentTypeName() As String
@@ -152,6 +161,33 @@ Public Property Let Bottom(ByVal newValue As Long)
     PropertyChanged "Bottom"
 End Property
 
+'m_MinWidth                 As Long
+Public Property Get MinWidth() As Long
+    MinWidth = m_MinWidth
+End Property
+Public Property Let MinWidth(ByVal newValue As Long)
+    m_MinWidth = newValue
+    PropertyChanged "MinWidth"
+End Property
+
+'m_MinHeight                As Long
+Public Property Get MinHeight() As Long
+    MinHeight = m_MinHeight
+End Property
+Public Property Let MinHeight(ByVal newValue As Long)
+    m_MinHeight = newValue
+    PropertyChanged "MinHeight"
+End Property
+
+'m_UseModePercent           As Integer
+Public Property Get UseModePercent() As Integer
+    UseModePercent = m_UseModePercent
+End Property
+Public Property Let UseModePercent(ByVal newValue As Integer)
+    m_UseModePercent = newValue
+    PropertyChanged "UseModePercent"
+End Property
+
 'm_UseLeftPercent           As boolean
 Public Property Get UseLeftPercent() As Boolean
     UseLeftPercent = m_UseLeftPercent
@@ -168,6 +204,15 @@ End Property
 Public Property Let LeftPercent(ByVal newValue As Single)
     m_LeftPercent = newValue
     PropertyChanged "LeftPercent"
+End Property
+
+'m_LeftPercentStatic        As Long
+Public Property Get LeftPercentStatic() As Long
+    LeftPercentStatic = m_LeftPercentStatic
+End Property
+Public Property Let LeftPercentStatic(ByVal newValue As Long)
+    m_LeftPercentStatic = newValue
+    PropertyChanged "LeftPercentStatic"
 End Property
 
 'm_UseTopPercent            As boolean
@@ -188,6 +233,15 @@ Public Property Let TopPercent(ByVal newValue As Single)
     PropertyChanged "TopPercent"
 End Property
 
+'m_TopPercentStatic         As Long
+Public Property Get TopPercentStatic() As Long
+    TopPercentStatic = m_TopPercentStatic
+End Property
+Public Property Let TopPercentStatic(ByVal newValue As Long)
+    m_TopPercentStatic = newValue
+    PropertyChanged "TopPercentStatic"
+End Property
+
 'm_UseWidthPercent          As boolean
 Public Property Get UseWidthPercent() As Boolean
     UseWidthPercent = m_UseWidthPercent
@@ -206,6 +260,15 @@ Public Property Let WidthPercent(ByVal newValue As Single)
     PropertyChanged "WidthPercent"
 End Property
 
+'m_RightPercentStatic       As Long
+Public Property Get RightPercentStatic() As Long
+    RightPercentStatic = m_RightPercentStatic
+End Property
+Public Property Let RightPercentStatic(ByVal newValue As Long)
+    m_RightPercentStatic = newValue
+    PropertyChanged "RightPercentStatic"
+End Property
+
 'm_UseHeightPercent         As boolean
 Public Property Get UseHeightPercent() As Boolean
     UseHeightPercent = m_UseHeightPercent
@@ -222,6 +285,15 @@ End Property
 Public Property Let HeightPercent(ByVal newValue As Single)
     m_HeightPercent = newValue
     PropertyChanged "HeightPercent"
+End Property
+
+'m_BottomPercentStatic      As Long
+Public Property Get BottomPercentStatic() As Long
+    BottomPercentStatic = m_BottomPercentStatic
+End Property
+Public Property Let BottomPercentStatic(ByVal newValue As Long)
+    m_BottomPercentStatic = newValue
+    PropertyChanged "BottomPercentStatic"
 End Property
 
 'm_AnchorLeft               As Boolean
@@ -275,17 +347,26 @@ Private Sub Class_ReadProperties(PropBag As PropertyBag)
         m_Right = .ReadProperty("Right", 0)
         m_Bottom = .ReadProperty("Bottom", 0)
         '--
+        m_MinWidth = .ReadProperty("MinWidth", 0)
+        m_MinHeight = .ReadProperty("MinHeight", 0)
+        '--
+        m_UseModePercent = .ReadProperty("UseModePercent", 0)
+        '--
         m_UseLeftPercent = .ReadProperty("UseLeftPercent", 0)
         m_LeftPercent = .ReadProperty("LeftPercent", 0)
+        m_LeftPercentStatic = .ReadProperty("LeftPercentStatic", 0)
         '--
         m_UseTopPercent = .ReadProperty("UseTopPercent", 0)
         m_TopPercent = .ReadProperty("TopPercent", 0)
+        m_TopPercentStatic = .ReadProperty("TopPercentStatic", 0)
         '--
         m_UseWidthPercent = .ReadProperty("UseWidthPercent", 0)
         m_WidthPercent = .ReadProperty("WidthPercent", 0)
+        m_RightPercentStatic = .ReadProperty("RightPercentStatic", 0)
         '--
         m_UseHeightPercent = .ReadProperty("UseHeightPercent", 0)
         m_HeightPercent = .ReadProperty("HeightPercent", 0)
+        m_BottomPercentStatic = .ReadProperty("BottomPercentStatic", 0)
         '--
         m_AnchorLeft = .ReadProperty("AnchorLeft", False)
         m_AnchorTop = .ReadProperty("AnchorTop", False)
@@ -309,17 +390,26 @@ Private Sub Class_WriteProperties(PropBag As PropertyBag)
         .WriteProperty "Right", m_Right, 0
         .WriteProperty "Bottom", m_Bottom, 0
         '--
+        .WriteProperty "MinWidth", m_MinWidth, 0
+        .WriteProperty "MinHeight", m_MinHeight, 0
+        '--
+        .WriteProperty "UseModePercent", m_UseModePercent, 0
+        '--
         .WriteProperty "UseLeftPercent", m_UseLeftPercent, 0
         .WriteProperty "LeftPercent", m_LeftPercent, 0
+        .WriteProperty "LeftPercentStatic", m_LeftPercentStatic, 0
         '--
         .WriteProperty "UseTopPercent", m_UseTopPercent, 0
         .WriteProperty "TopPercent", m_TopPercent, 0
+        .WriteProperty "TopPercentStatic", m_TopPercentStatic, 0
         '--
         .WriteProperty "UseWidthPercent", m_UseWidthPercent, 0
         .WriteProperty "WidthPercent", m_WidthPercent, 0
+        .WriteProperty "RightPercentStatic", m_RightPercentStatic, 0
         '--
         .WriteProperty "UseHeightPercent", m_UseHeightPercent, 0
         .WriteProperty "HeightPercent", m_HeightPercent, 0
+        .WriteProperty "BottomPercentStatic", m_BottomPercentStatic, 0
         '--
         .WriteProperty "AnchorLeft", m_AnchorLeft, False
         .WriteProperty "AnchorTop", m_AnchorTop, False

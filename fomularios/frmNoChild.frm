@@ -1,5 +1,6 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.8#0"; "JLAnchor.ocx"
+Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#4.0#0"; "JLAnchor.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmNoChild 
    Caption         =   "No Child"
    ClientHeight    =   3255
@@ -17,7 +18,9 @@ Begin VB.Form frmNoChild
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
-      ControlsCount   =   4
+      IconPresent     =   0   'False
+      FormIcon        =   0
+      ControlsCount   =   5
       BeginProperty Control_1 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmNoChild"
@@ -102,6 +105,27 @@ Begin VB.Form frmNoChild
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
       EndProperty
+      BeginProperty Control_5 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+         ParentTypeName  =   "PictureBox"
+         ParentName      =   "Picture1"
+         TypeName        =   "ListView"
+         Name            =   "ListView1"
+         Object.Index           =   5
+         Object.Left            =   240
+         Object.Top             =   720
+         Right           =   540
+         Bottom          =   180
+         MinWidth        =   30
+         MinHeight       =   30
+         LeftPercent     =   7.805
+         TopPercent      =   32.215
+         WidthPercent    =   74.634
+         HeightPercent   =   59.732
+         AnchorLeft      =   -1  'True
+         AnchorTop       =   -1  'True
+         AnchorRight     =   -1  'True
+         AnchorBottom    =   -1  'True
+      EndProperty
    End
    Begin VB.CommandButton Command1 
       Caption         =   "Command1"
@@ -127,6 +151,23 @@ Begin VB.Form frmNoChild
       TabIndex        =   0
       Top             =   840
       Width           =   3135
+      Begin MSComctlLib.ListView ListView1 
+         Height          =   1335
+         Left            =   240
+         TabIndex        =   5
+         Top             =   720
+         Width           =   2295
+         _ExtentX        =   4048
+         _ExtentY        =   2355
+         LabelWrap       =   -1  'True
+         HideSelection   =   -1  'True
+         _Version        =   393217
+         ForeColor       =   -2147483640
+         BackColor       =   -2147483643
+         BorderStyle     =   1
+         Appearance      =   1
+         NumItems        =   0
+      End
       Begin VB.TextBox Text2 
          Height          =   375
          Left            =   240

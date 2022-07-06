@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.8#0"; "JLAnchor.ocx"
+Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#4.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmControlsLea 
    Caption         =   "Controles @Leandro - Percent Dynamic"
    ClientHeight    =   6225
@@ -18,6 +18,8 @@ Begin VB.Form frmControlsLea
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
+      IconPresent     =   -1  'True
+      FormIcon        =   "frmControlsLea.frx":0000
       FormMinWidth    =   12855
       FormMinHeight   =   6810
       ControlsCount   =   13
@@ -346,7 +348,7 @@ Begin VB.Form frmControlsLea
       BackShadow      =   0   'False
       CaptionAlignmentH=   1
       CaptionAlignmentV=   1
-      Caption         =   "frmControlsLea.frx":0000
+      Caption         =   "frmControlsLea.frx":0E4E
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Segoe UI"
          Size            =   20.25
@@ -677,7 +679,7 @@ Begin VB.Form frmControlsLea
       _ExtentY        =   2990
       BackColor       =   16777215
       BackShadow      =   0   'False
-      Caption         =   "frmControlsLea.frx":0036
+      Caption         =   "frmControlsLea.frx":0E84
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Segoe UI"
          Size            =   8.25
@@ -715,7 +717,7 @@ Begin VB.Form frmControlsLea
       _ExtentY        =   2990
       BackColor       =   16777215
       BackShadow      =   0   'False
-      Caption         =   "frmControlsLea.frx":006A
+      Caption         =   "frmControlsLea.frx":0EB8
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Segoe UI"
          Size            =   8.25

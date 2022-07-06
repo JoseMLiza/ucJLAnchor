@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.8#0"; "JLAnchor.ocx"
+Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#4.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmChild 
    Caption         =   "Child"
    ClientHeight    =   4425
@@ -18,6 +18,8 @@ Begin VB.Form frmChild
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
+      IconPresent     =   -1  'True
+      FormIcon        =   "frmChild.frx":0000
       ControlsCount   =   7
       BeginProperty Control_1 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
          ParentTypeName  =   "Form"
@@ -220,7 +222,7 @@ Begin VB.Form frmChild
          BorderCornerBottomLeft=   5
          CaptionAlignmentH=   1
          CaptionAlignmentV=   1
-         Caption         =   "frmChild.frx":0000
+         Caption         =   "frmChild.frx":56C36
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Lucida Sans"
             Size            =   8.25

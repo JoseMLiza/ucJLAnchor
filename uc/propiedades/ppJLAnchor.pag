@@ -2,63 +2,17 @@ VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.PropertyPage ppJLAnchor 
    Caption         =   "Anchor"
-   ClientHeight    =   4725
+   ClientHeight    =   4710
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   6540
-   LockControls    =   -1  'True
+   ClientWidth     =   6510
    PaletteMode     =   0  'Halftone
-   ScaleHeight     =   4725
-   ScaleWidth      =   6540
-   Begin VB.OptionButton optExpColl 
-      Caption         =   "Collapse All"
-      Height          =   255
-      Index           =   0
-      Left            =   120
-      TabIndex        =   1
-      Top             =   4320
-      Width           =   1215
-   End
-   Begin VB.OptionButton optExpColl 
-      Caption         =   "Expand All"
-      Height          =   255
-      Index           =   1
-      Left            =   1440
-      TabIndex        =   2
-      Top             =   4320
-      Value           =   -1  'True
-      Width           =   1215
-   End
-   Begin MSComctlLib.TreeView trvwControls 
-      Height          =   3735
-      Left            =   120
-      TabIndex        =   0
-      Top             =   480
-      Width           =   2655
-      _ExtentX        =   4683
-      _ExtentY        =   6588
-      _Version        =   393217
-      HideSelection   =   0   'False
-      Indentation     =   452
-      LabelEdit       =   1
-      Style           =   6
-      HotTracking     =   -1  'True
-      BorderStyle     =   1
-      Appearance      =   0
-      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
-         Name            =   "Lucida Sans"
-         Size            =   8.25
-         Charset         =   0
-         Weight          =   400
-         Underline       =   0   'False
-         Italic          =   0   'False
-         Strikethrough   =   0   'False
-      EndProperty
-   End
+   ScaleHeight     =   4710
+   ScaleWidth      =   6510
    Begin VB.Frame frmDetails 
       Height          =   4215
       Left            =   2880
-      TabIndex        =   19
+      TabIndex        =   5
       Top             =   390
       Width           =   3555
       Begin VB.Frame fmeDetPosPercent 
@@ -74,13 +28,13 @@ Begin VB.PropertyPage ppJLAnchor
          Height          =   2640
          Index           =   0
          Left            =   210
-         TabIndex        =   4
+         TabIndex        =   6
          Top             =   1320
          Width           =   3105
          Begin VB.CommandButton cmdbAnchorAll 
             Height          =   375
             Left            =   1395
-            TabIndex        =   5
+            TabIndex        =   7
             Top             =   1135
             Width           =   375
          End
@@ -92,7 +46,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   375
             Index           =   1
             Left            =   1530
-            TabIndex        =   7
+            TabIndex        =   19
             Top             =   760
             Width           =   135
          End
@@ -104,7 +58,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   375
             Index           =   3
             Left            =   1530
-            TabIndex        =   9
+            TabIndex        =   18
             Top             =   1510
             Width           =   135
          End
@@ -116,7 +70,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   135
             Index           =   0
             Left            =   1020
-            TabIndex        =   6
+            TabIndex        =   17
             Top             =   1245
             Width           =   375
          End
@@ -128,7 +82,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   135
             Index           =   2
             Left            =   1770
-            TabIndex        =   8
+            TabIndex        =   16
             Top             =   1245
             Width           =   375
          End
@@ -140,7 +94,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   11
             Left            =   1200
-            TabIndex        =   32
+            TabIndex        =   15
             Top             =   2280
             Width           =   795
          End
@@ -152,7 +106,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   7
             Left            =   1200
-            TabIndex        =   31
+            TabIndex        =   14
             Top             =   400
             Width           =   795
          End
@@ -164,7 +118,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   9
             Left            =   2235
-            TabIndex        =   30
+            TabIndex        =   13
             Top             =   1320
             Width           =   795
          End
@@ -176,7 +130,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   5
             Left            =   120
-            TabIndex        =   29
+            TabIndex        =   12
             Top             =   1320
             Width           =   795
          End
@@ -195,7 +149,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   10
             Left            =   1200
-            TabIndex        =   28
+            TabIndex        =   11
             Top             =   2055
             Width           =   795
          End
@@ -214,7 +168,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   6
             Left            =   1200
-            TabIndex        =   27
+            TabIndex        =   10
             Top             =   160
             Width           =   795
          End
@@ -233,7 +187,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   8
             Left            =   2235
-            TabIndex        =   26
+            TabIndex        =   9
             Top             =   1080
             Width           =   795
          End
@@ -252,7 +206,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   4
             Left            =   120
-            TabIndex        =   25
+            TabIndex        =   8
             Top             =   1080
             Width           =   795
          End
@@ -279,7 +233,7 @@ Begin VB.PropertyPage ppJLAnchor
          Height          =   2640
          Index           =   1
          Left            =   210
-         TabIndex        =   33
+         TabIndex        =   21
          Top             =   1320
          Width           =   3105
          Begin VB.OptionButton optPercent 
@@ -297,7 +251,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   1
             Left            =   2160
-            TabIndex        =   39
+            TabIndex        =   31
             Top             =   240
             Width           =   855
          End
@@ -315,7 +269,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   0
             Left            =   120
-            TabIndex        =   38
+            TabIndex        =   30
             Top             =   240
             Value           =   -1  'True
             Width           =   1335
@@ -334,7 +288,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   2
             Left            =   1080
-            TabIndex        =   14
+            TabIndex        =   29
             Top             =   1890
             Width           =   975
          End
@@ -352,7 +306,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   3
             Left            =   1920
-            TabIndex        =   16
+            TabIndex        =   28
             Top             =   1290
             Width           =   975
          End
@@ -370,7 +324,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   1
             Left            =   1080
-            TabIndex        =   12
+            TabIndex        =   27
             Top             =   660
             Width           =   975
          End
@@ -388,7 +342,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   255
             Index           =   0
             Left            =   120
-            TabIndex        =   10
+            TabIndex        =   26
             Top             =   1290
             Width           =   975
          End
@@ -407,7 +361,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   3
             Left            =   1920
             Locked          =   -1  'True
-            TabIndex        =   17
+            TabIndex        =   25
             Text            =   "0"
             Top             =   1530
             Width           =   840
@@ -427,7 +381,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   1
             Left            =   1080
             Locked          =   -1  'True
-            TabIndex        =   13
+            TabIndex        =   24
             Text            =   "0"
             Top             =   900
             Width           =   840
@@ -447,7 +401,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   2
             Left            =   1080
             Locked          =   -1  'True
-            TabIndex        =   15
+            TabIndex        =   23
             Text            =   "0"
             Top             =   2130
             Width           =   840
@@ -467,7 +421,7 @@ Begin VB.PropertyPage ppJLAnchor
             Index           =   0
             Left            =   120
             Locked          =   -1  'True
-            TabIndex        =   11
+            TabIndex        =   22
             Text            =   "0"
             Top             =   1530
             Width           =   840
@@ -487,7 +441,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   16
             Left            =   1920
-            TabIndex        =   37
+            TabIndex        =   35
             Top             =   1560
             Width           =   960
          End
@@ -506,7 +460,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   17
             Left            =   1080
-            TabIndex        =   36
+            TabIndex        =   34
             Top             =   930
             Width           =   960
          End
@@ -525,7 +479,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   195
             Index           =   18
             Left            =   1080
-            TabIndex        =   35
+            TabIndex        =   33
             Top             =   2160
             Width           =   960
          End
@@ -544,7 +498,7 @@ Begin VB.PropertyPage ppJLAnchor
             Height          =   315
             Index           =   19
             Left            =   120
-            TabIndex        =   34
+            TabIndex        =   32
             Top             =   1560
             Width           =   960
          End
@@ -552,7 +506,7 @@ Begin VB.PropertyPage ppJLAnchor
       Begin MSComctlLib.TabStrip tsPosPercent 
          Height          =   3135
          Left            =   120
-         TabIndex        =   3
+         TabIndex        =   20
          Top             =   960
          Width           =   3300
          _ExtentX        =   5821
@@ -588,7 +542,7 @@ Begin VB.PropertyPage ppJLAnchor
          Height          =   195
          Index           =   3
          Left            =   1560
-         TabIndex        =   23
+         TabIndex        =   39
          Top             =   600
          Width           =   1725
       End
@@ -606,7 +560,7 @@ Begin VB.PropertyPage ppJLAnchor
          Height          =   195
          Index           =   1
          Left            =   1560
-         TabIndex        =   22
+         TabIndex        =   38
          Top             =   240
          Width           =   1725
       End
@@ -625,7 +579,7 @@ Begin VB.PropertyPage ppJLAnchor
          Height          =   195
          Index           =   0
          Left            =   120
-         TabIndex        =   21
+         TabIndex        =   37
          Top             =   240
          Width           =   1365
       End
@@ -644,10 +598,148 @@ Begin VB.PropertyPage ppJLAnchor
          Height          =   195
          Index           =   2
          Left            =   120
-         TabIndex        =   20
+         TabIndex        =   36
          Top             =   600
          Width           =   1365
       End
+   End
+   Begin VB.Frame fmeIcon 
+      Height          =   4215
+      Index           =   1
+      Left            =   2880
+      TabIndex        =   0
+      Top             =   390
+      Width           =   3555
+      Begin VB.CommandButton cmdbEdicion 
+         Caption         =   "Delete"
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   1
+         Left            =   2280
+         TabIndex        =   3
+         Top             =   3360
+         Width           =   1095
+      End
+      Begin VB.CommandButton cmdbEdicion 
+         Caption         =   "Add"
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   375
+         Index           =   0
+         Left            =   1200
+         TabIndex        =   2
+         Top             =   3360
+         Width           =   975
+      End
+      Begin VB.PictureBox picIcon 
+         AutoRedraw      =   -1  'True
+         BackColor       =   &H00FFFFFF&
+         BorderStyle     =   0  'None
+         Height          =   2775
+         Left            =   135
+         ScaleHeight     =   185
+         ScaleMode       =   3  'Pixel
+         ScaleWidth      =   217
+         TabIndex        =   1
+         Top             =   480
+         Width           =   3255
+      End
+      Begin VB.Label Label1 
+         Alignment       =   2  'Center
+         Caption         =   "Form Icon"
+         BeginProperty Font 
+            Name            =   "Lucida Sans"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   600
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Left            =   135
+         TabIndex        =   45
+         Top             =   240
+         Width           =   3255
+      End
+      Begin VB.Label lblInfo 
+         Caption         =   "Size:"
+         BeginProperty Font 
+            Name            =   "Consolas"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Height          =   255
+         Index           =   12
+         Left            =   120
+         TabIndex        =   4
+         Top             =   3840
+         Width           =   3255
+      End
+   End
+   Begin VB.OptionButton optExpColl 
+      Caption         =   "Collapse All"
+      Height          =   255
+      Index           =   0
+      Left            =   120
+      TabIndex        =   41
+      Top             =   4320
+      Width           =   1215
+   End
+   Begin VB.OptionButton optExpColl 
+      Caption         =   "Expand All"
+      Height          =   255
+      Index           =   1
+      Left            =   1440
+      TabIndex        =   40
+      Top             =   4320
+      Value           =   -1  'True
+      Width           =   1215
+   End
+   Begin MSComctlLib.TreeView trvwControls 
+      Height          =   3735
+      Left            =   120
+      TabIndex        =   42
+      Top             =   480
+      Width           =   2655
+      _ExtentX        =   4683
+      _ExtentY        =   6588
+      _Version        =   393217
+      HideSelection   =   0   'False
+      Indentation     =   452
+      LabelEdit       =   1
+      Style           =   6
+      HotTracking     =   -1  'True
+      BorderStyle     =   1
+      Appearance      =   0
+      BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+         Name            =   "Lucida Sans"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
    End
    Begin VB.Label lblComment 
       BackStyle       =   0  'Transparent
@@ -663,9 +755,9 @@ Begin VB.PropertyPage ppJLAnchor
       EndProperty
       Height          =   255
       Left            =   120
-      TabIndex        =   18
+      TabIndex        =   44
       Top             =   120
-      Width           =   6915
+      Width           =   5910
    End
    Begin VB.Label lblNotify 
       Alignment       =   2  'Center
@@ -681,7 +773,7 @@ Begin VB.PropertyPage ppJLAnchor
       EndProperty
       Height          =   495
       Left            =   2880
-      TabIndex        =   24
+      TabIndex        =   43
       Top             =   1995
       Width           =   3555
    End
@@ -692,16 +784,108 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
 Option Explicit
+'USER32
+Private Declare Function GetDC Lib "user32.dll" (ByVal hWnd As Long) As Long
+Private Declare Function ReleaseDC Lib "user32.dll" (ByVal hWnd As Long, ByVal Hdc As Long) As Long
+'GDI32
+Private Declare Function GetDeviceCaps Lib "gdi32" (ByVal Hdc As Long, ByVal nIndex As Long) As Long
+'GDIPLUS
+'-Function
+Private Declare Function GdiplusStartup Lib "GdiPlus" (token As Long, inputbuf As GDIPlusStartupInput, Optional ByVal outputbuf As Long = 0) As Long
+Private Declare Function GdipLoadImageFromStream Lib "GdiPlus" (ByVal Stream As Any, ByRef Image As Long) As Long
+Private Declare Function GdipDisposeImage Lib "GdiPlus" (ByVal Image As Long) As Long
+Private Declare Function GdipGetImageDimension Lib "GdiPlus" (ByVal Image As Long, ByRef Width As Single, ByRef Height As Single) As Long
+Private Declare Function GdipCreateFromHDC Lib "GdiPlus" (ByVal Hdc As Long, ByRef graphics As Long) As Long
+Private Declare Function GdipDrawImageRectRectI Lib "GdiPlus" (ByVal hGraphics As Long, ByVal hImage As Long, ByVal DstX As Long, ByVal DstY As Long, ByVal DstWidth As Long, ByVal DstHeight As Long, ByVal SrcX As Long, ByVal SrcY As Long, ByVal SrcWidth As Long, ByVal SrcHeight As Long, ByVal srcUnit As Long, Optional ByVal imageAttributes As Long = 0, Optional ByVal Callback As Long = 0, Optional ByVal callbackData As Long = 0) As Long
+Private Declare Function GdipDeleteGraphics Lib "GdiPlus" (ByVal graphics As Long) As Long
+'-Sub
+Private Declare Sub GdiplusShutdown Lib "GdiPlus" (ByVal token As Long)
+'COMDLG32
+Private Declare Function GetFileTitle Lib "comdlg32" Alias "GetFileTitleA" (ByVal szFile As String, ByVal szTitle As String, ByVal cbBuf As Long) As Long
+Private Declare Function GetOpenFileName Lib "comdlg32" Alias "GetOpenFileNameA" (file As OPENFILENAME) As Long
+'KERNEL32
+Private Declare Function lstrlen Lib "kernel32" Alias "lstrlenA" (ByVal lpString As String) As Long
+Private Declare Function GlobalAlloc Lib "kernel32" (ByVal uFlags As Long, ByVal dwBytes As Long) As Long
+Private Declare Function GlobalLock Lib "kernel32" (ByVal hMem As Long) As Long
+Private Declare Function GlobalUnlock Lib "kernel32" (ByVal hMem As Long) As Long
+Private Declare Function GlobalSize Lib "kernel32" (ByVal hMem As Long) As Long
+Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (ByRef Destination As Any, ByRef Source As Any, ByVal length As Long)
+'OLE32
+Private Declare Function CreateStreamOnHGlobal Lib "ole32" (ByVal hGlobal As Any, ByVal fDeleteOnRelease As Long, ppstm As Any) As Long
+'--
+Private Const IMAGE_FILTER  As String = "Imagenes|*.bmp;*.ico;*.png;*.gif;*.jpg;*.jpeg"
+Private Const LOGPIXELSX    As Long = 88
 
-Private Declare Function GetWindow Lib "user32" (ByVal Hwnd As Long, ByVal wCmd As Long) As Long
+Private Enum EOpenFile
+    OFN_READONLY = &H1
+    OFN_OVERWRITEPROMPT = &H2
+    OFN_HIDEREADONLY = &H4
+    OFN_NOCHANGEDIR = &H8
+    OFN_SHOWHELP = &H10
+    OFN_ENABLEHOOK = &H20
+    OFN_ENABLETEMPLATE = &H40
+    OFN_ENABLETEMPLATEHANDLE = &H80
+    OFN_NOVALIDATE = &H100
+    OFN_ALLOWMULTISELECT = &H200
+    OFN_EXTENSIONDIFFERENT = &H400
+    OFN_PATHMUSTEXIST = &H800
+    OFN_FILEMUSTEXIST = &H1000
+    OFN_CREATEPROMPT = &H2000
+    OFN_SHAREAWARE = &H4000
+    OFN_NOREADONLYRETURN = &H8000&
+    OFN_NOTESTFILECREATE = &H10000
+    OFN_NONETWORKBUTTON = &H20000
+    OFN_NOLONGNAMES = &H40000
+    OFN_EXPLORER = &H80000
+    OFN_NODEREFERENCELINKS = &H100000
+    OFN_LONGNAMES = &H200000
+End Enum
+
+Private Type GDIPlusStartupInput
+    GdiPlusVersion              As Long
+    DebugEventCallback          As Long
+    SuppressBackgroundThread    As Long
+    SuppressExternalCodecs      As Long
+End Type
+
+Private Type OPENFILENAME
+    lStructSize As Long          ' Filled with UDT size
+    hwndOwner As Long            ' Tied to Owner
+    hInstance As Long            ' Ignored (used only by templates)
+    lpstrFilter As String        ' Tied to Filter
+    lpstrCustomFilter As String  ' Ignored (exercise for reader)
+    nMaxCustFilter As Long       ' Ignored (exercise for reader)
+    nFilterIndex As Long         ' Tied to FilterIndex
+    lpstrFile As String          ' Tied to FileName
+    nMaxFile As Long             ' Handled internally
+    lpstrFileTitle As String     ' Tied to FileTitle
+    nMaxFileTitle As Long        ' Handled internally
+    lpstrInitialDir As String    ' Tied to InitDir
+    lpstrTitle As String         ' Tied to DlgTitle
+    Flags As Long                ' Tied to Flags
+    nFileOffset As Integer       ' Ignored (exercise for reader)
+    nFileExtension As Integer    ' Ignored (exercise for reader)
+    lpstrDefExt As String        ' Tied to DefaultExt
+    lCustData As Long            ' Ignored (needed for hooks)
+    lpfnHook As Long             ' Ignored (good luck with hooks)
+    lpTemplateName As Long       ' Ignored (good luck with templates)
+End Type
+
 Private Const GW_OWNER = 4
-
+Private Const MAX_PATH = 260
+Private Const MAX_FILE = 260
+'--
+Private bData() As Byte
+'--
 Dim m_ucControl As ucJLAnchor
 Dim i As Long
 Dim TmpTag As String
 Dim LastNode As Integer
 Dim cSel As Long
 Dim UseExpColl As Boolean
+'--
+Dim GdipToken As Long
+Dim ScreenDPI As Single
 
 Private Sub chkPercent_Click(Index As Integer)
     Dim a As Integer
@@ -754,6 +938,27 @@ Private Sub cmdbAnchorAll_Click()
     Changed = True
 End Sub
 
+Private Sub cmdbEdicion_Click(Index As Integer)
+    Dim sFile   As String
+    '---
+    Select Case Index
+        Case 0 'Add
+            If VBGetOpenFileName(sFile, Filter:=IMAGE_FILTER, Owner:=PropertyPage.hWnd) Then
+                Changed = True
+                bData = ReadFile(sFile)
+                DrawImage
+            End If
+        Case 1 'Delete
+            If BytesLength(bData) Then
+                Erase bData
+                LoadIconForm True
+                Changed = True
+            End If
+        Case 2 'Resize
+    End Select
+    '---
+End Sub
+
 Private Sub lblAnchor_Click(Index As Integer)
     Changed = True
     If lblAnchor(Index).BackColor = vbWhite Then
@@ -765,6 +970,14 @@ End Sub
 
 Private Sub optPercent_Click(Index As Integer)
     Changed = Index <> m_ucControl.Controls.Item(cSel).UseModePercent
+End Sub
+
+Private Sub PropertyPage_Initialize()
+    InitGDIPlus
+End Sub
+
+Private Sub PropertyPage_Terminate()
+    TerminateGDIPlus
 End Sub
 
 Private Sub txtDetPercent_GotFocus(Index As Integer)
@@ -850,7 +1063,7 @@ Private Sub trvwControls_NodeClick(ByVal Node As MSComctlLib.Node)
             If .Controls.Item(i).Name & .Controls.Item(i).ControlIndex = Left(nmbControl, Len(.Controls.Item(i).Name) & idx) Then
                 cSel = i
                 lblInfo(1) = .Controls.Item(i).TypeName
-                lblInfo(3) = .Controls.Item(i).Hwnd
+                lblInfo(3) = .Controls.Item(i).hWnd
                 lblInfo(5) = .Controls.Item(i).Left
                 lblInfo(7) = .Controls.Item(i).Top
                 lblInfo(9) = .Controls.Item(i).Right
@@ -970,6 +1183,12 @@ Private Sub PropertyPage_ApplyChanges()
                 m_ucControl.Tag = TmpTag
             End If
         Next
+        If BytesLength(bData) > 0 Then
+            .IconPresent = True
+            .FormIcon = bData
+        Else
+            .IconPresent = False
+        End If
     End With
     '---
     LoadTreeView
@@ -982,6 +1201,9 @@ Private Sub PropertyPage_SelectionChanged()
     Set CtrlParent = m_ucControl.Container
     '--
     LastNode = 0
+    '--
+    Call LoadIconForm
+    '--
     LoadTreeView
     '--
     If trvwControls.Nodes.Count > 1 Then
@@ -1042,6 +1264,198 @@ ErrorFunction:
     IsControlInArray = False
 End Function
 
+Private Function VBGetOpenFileName(FileName As String, _
+       Optional FileTitle As String, _
+       Optional FileMustExist As Boolean = True, _
+       Optional MultiSelect As Boolean = False, _
+       Optional ReadOnly As Boolean = False, _
+       Optional HideReadOnly As Boolean = False, _
+       Optional Filter As String = "All (*.*)| *.*", _
+       Optional FilterIndex As Long = 1, _
+       Optional InitDir As String, _
+       Optional DlgTitle As String, _
+       Optional DefaultExt As String, _
+       Optional Owner As Long = -1, _
+       Optional Flags As Long = 0) As Boolean
+
+    Dim opfile As OPENFILENAME, S As String, afFlags As Long
+  
+    With opfile
+        .lStructSize = Len(opfile)
+        
+        .Flags = (-FileMustExist * OFN_FILEMUSTEXIST) Or _
+           (-MultiSelect * OFN_ALLOWMULTISELECT) Or _
+           (-ReadOnly * OFN_READONLY) Or _
+           (-HideReadOnly * OFN_HIDEREADONLY) Or _
+           (Flags And CLng(Not (OFN_ENABLEHOOK Or _
+           OFN_ENABLETEMPLATE)))
+           
+        If Owner <> -1 Then .hwndOwner = Owner
+        .lpstrInitialDir = InitDir
+        .lpstrDefExt = DefaultExt
+        .lpstrTitle = DlgTitle
+    
+        ' To make Windows-style filter, replace | and : with nulls
+        Dim ch As String, i As Integer
+        For i = 1 To Len(Filter)
+            ch = Mid$(Filter, i, 1)
+            If ch = "|" Or ch = ":" Then
+                S = S & vbNullChar
+            Else
+                S = S & ch
+            End If
+        Next
+        
+        S = S & vbNullChar & vbNullChar
+        .lpstrFilter = S
+        .nFilterIndex = FilterIndex
+
+        ' Pad file and file title buffers to maximum path
+        S = FileName & String$(MAX_PATH - Len(FileName), 0)
+        .lpstrFile = S
+        .nMaxFile = MAX_PATH
+        S = FileTitle & String$(MAX_FILE - Len(FileTitle), 0)
+        .lpstrFileTitle = S
+        .nMaxFileTitle = MAX_FILE
+        ' All other fields set to zero
+    
+        If GetOpenFileName(opfile) = 1 Then
+            ' Success
+            VBGetOpenFileName = True
+            FileName = StrZToStr(.lpstrFile)
+            FileTitle = StrZToStr(.lpstrFileTitle)
+            Flags = .Flags
+            ' Return the filter index
+            FilterIndex = .nFilterIndex
+            ' Look up the filter the user selected and return that
+            Filter = FilterLookup(.lpstrFilter, FilterIndex)
+            If (.Flags And OFN_READONLY) Then ReadOnly = True
+        End If
+    End With
+End Function
+
+Private Function StrZToStr(S As String) As String
+    StrZToStr = Left$(S, lstrlen(S))
+End Function
+
+Private Function FilterLookup(ByVal sFilters As String, ByVal iCur As Long) As String
+    Dim iStart As Long, iEnd As Long, S As String
+    iStart = 1
+    If sFilters = "" Then Exit Function
+    Do
+        ' Cut out both parts marked by null character
+        iEnd = InStr(iStart, sFilters, vbNullChar)
+        If iEnd = 0 Then Exit Function
+        iEnd = InStr(iEnd + 1, sFilters, vbNullChar)
+        If iEnd Then
+            S = Mid$(sFilters, iStart, iEnd - iStart)
+        Else
+            S = Mid$(sFilters, iStart)
+        End If
+        iStart = iEnd + 1
+        If iCur = 1 Then
+            FilterLookup = S
+            Exit Function
+        End If
+        iCur = iCur - 1
+    Loop While iCur
+End Function
+
+Private Function ReadFile(sFileName As String) As Byte()
+    Dim FF As Integer
+    FF = FreeFile
+    Open sFileName For Binary As #FF
+        ReDim ReadFile(LOF(FF) - 1)
+        Get #FF, , ReadFile
+    Close #FF
+End Function
+
+Private Function LoadBitmap(hBmp As Long) As Boolean
+On Error GoTo ErrorFunction
+'--
+    Dim IStream   As IUnknown
+
+    Set IStream = StreamFromArray(VarPtr(bData(0)), UBound(bData) + 1&)
+    If Not IStream Is Nothing Then
+        LoadBitmap = (GdipLoadImageFromStream(IStream, hBmp) = 0)
+    End If
+    Set IStream = Nothing
+'--
+ErrorFunction:
+    If Err.Number Then Debug.Print Err.Description
+End Function
+
+Private Sub UnloadBitmap(ByRef hBmp As Long)
+    If hBmp Then Call GdipDisposeImage(hBmp): hBmp = 0
+End Sub
+
+Private Function StreamFromArray(ArrayPtr As Long, length As Long) As stdole.IUnknown
+On Error GoTo ErrorFunction
+'--
+    Dim o_hMem As Long
+    Dim o_lpMem  As Long
+    '--
+    If ArrayPtr = 0& Then
+        CreateStreamOnHGlobal 0&, 1&, StreamFromArray
+    ElseIf length <> 0& Then
+        o_hMem = GlobalAlloc(&H2&, length)
+        If o_hMem <> 0 Then
+            o_lpMem = GlobalLock(o_hMem)
+            If o_lpMem <> 0 Then
+                CopyMemory ByVal o_lpMem, ByVal ArrayPtr, length
+                Call GlobalUnlock(o_hMem)
+                Call CreateStreamOnHGlobal(o_hMem, 1&, StreamFromArray)
+            End If
+        End If
+    End If
+'--
+ErrorFunction:
+End Function
+
+Public Function GetWindowsDPI() As Double
+    Dim Hdc As Long, LPX  As Double
+    Hdc = GetDC(0)
+    LPX = CDbl(GetDeviceCaps(Hdc, LOGPIXELSX))
+    ReleaseDC 0, Hdc
+
+    If (LPX = 0) Then
+        GetWindowsDPI = 1#
+    Else
+        GetWindowsDPI = LPX / 96#
+    End If
+End Function
+
+Private Function ScalePicture(ByVal lSrcWidth As Long, ByVal lSrcHeight As Long, ByVal lDstWidth As Long, ByVal lDstHeight As Long, ByRef lNewWidth As Long, ByRef lNewHeight As Long, ByRef lNewLeft As Long, ByRef lNewTop As Long)
+    Dim dHRatio As Double
+    Dim dVRatio As Double
+    Dim dRatio  As Double
+    '--
+    If lSrcWidth < lDstWidth And lSrcHeight < lDstHeight Then
+        lNewWidth = lSrcWidth
+        lNewHeight = lSrcHeight
+        lNewLeft = (lDstWidth - lNewWidth) \ 2
+        lNewTop = (lDstHeight - lNewHeight) \ 2
+        Exit Function
+    End If
+    '--
+    dHRatio = lSrcWidth / lDstWidth
+    dVRatio = lSrcHeight / lDstHeight
+    '--
+    If dHRatio > dVRatio Then
+        dRatio = dHRatio
+    Else
+        dRatio = dVRatio
+    End If
+    '--
+    If Not dRatio = 0 Then
+        lNewWidth = lSrcWidth / dRatio
+        lNewHeight = lSrcHeight / dRatio
+    End If
+    '--
+    lNewLeft = (lDstWidth - lNewWidth) / 2
+    lNewTop = (lDstHeight - lNewHeight) / 2
+End Function
+
 Private Sub NodesExpandCollapse(Optional ByVal Expand As Boolean)
     Dim Node As Node
     For Each Node In trvwControls.Nodes
@@ -1051,7 +1465,66 @@ Private Sub NodesExpandCollapse(Optional ByVal Expand As Boolean)
     Next
 End Sub
 
-Private Sub PropertyPage_Initialize()
-    '---
-    'LoadTreeView
+Private Sub InitGDIPlus()
+    Dim GdipStartupInput As GDIPlusStartupInput
+    GdipStartupInput.GdiPlusVersion = 1&
+    Call GdiplusStartup(GdipToken, GdipStartupInput, ByVal 0)
+    ScreenDPI = GetWindowsDPI
+End Sub
+
+Private Sub TerminateGDIPlus()
+    Call GdiplusShutdown(GdipToken)
+End Sub
+
+Private Sub DrawImage()
+    Dim hGraphics   As Long
+    Dim hBmp    As Long
+    Dim oW      As Single
+    Dim oH      As Single
+    Dim lT      As Long
+    Dim lL      As Long
+    Dim lW      As Long
+    Dim lH      As Long
+    If Not LoadBitmap(hBmp) Then Exit Sub
+    GdipGetImageDimension hBmp, oW, oH
+    With picIcon
+        .Cls
+        '--
+        ScalePicture oW, oH, .ScaleWidth - 8, .ScaleHeight - 8, lW, lH, lL, lT
+        If GdipCreateFromHDC(.Hdc, hGraphics) = 0 Then
+            GdipDrawImageRectRectI hGraphics, hBmp, lL, lT, lW, lH, 0, 0, oW, oH, &H2, 0&, 0&, 0&
+        End If
+        GdipDeleteGraphics hGraphics
+        '--
+        lblInfo(12) = "Size: " & oW & "x" & oH
+    End With
+    UnloadBitmap hBmp
+End Sub
+
+Private Sub LoadIconForm(Optional Reset As Boolean)
+    Dim HALF As Single
+    HALF = 0.5!
+    '--
+    cmdbEdicion(1).Enabled = CtrlParent.Icon <> 0
+    'cmdbEdicion(2).Enabled = CtrlParent.Icon <> 0
+    '--
+    picIcon.Cls
+    Call DrawBackAreaIcon(picIcon)
+    '--
+    With CtrlParent
+        If m_ucControl.IconPresent And Not Reset Then
+            bData = m_ucControl.FormIcon
+            Call DrawImage
+            cmdbEdicion(0).Caption = "Change"
+        Else
+            If .Icon <> 0 Then
+                cmdbEdicion(0).Caption = "Change"
+                picIcon.PaintPicture .Icon, (picIcon.ScaleWidth - ScaleX(.Icon.Width, vbHimetric, vbPixels)) * HALF, (picIcon.ScaleHeight - ScaleY(.Icon.Height, vbHimetric, vbPixels)) * HALF
+                lblInfo(12) = "Size: " & CInt(ScaleX(.Icon.Width, vbHimetric, vbPixels)) & "x" & CInt(ScaleY(.Icon.Height, vbHimetric, vbPixels))
+            Else
+                cmdbEdicion(0).Caption = "Add"
+            End If
+        End If
+    End With
+    '--
 End Sub

@@ -16,29 +16,93 @@ Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
 Option Explicit
+
 'USER32
-Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal Hwnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
-Private Declare Function RedrawWindow Lib "user32" (ByVal Hwnd As Long, ByRef lprcUpdate As Any, ByVal hrgnUpdate As Long, ByVal fuRedraw As Long) As Long
+Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
+Private Declare Function RedrawWindow Lib "user32" (ByVal hWnd As Long, ByRef lprcUpdate As Any, ByVal hrgnUpdate As Long, ByVal fuRedraw As Long) As Long
 Private Declare Function GetDesktopWindow Lib "user32" () As Long
-Private Declare Function UpdateWindow Lib "user32" (ByVal Hwnd As Long) As Long
-Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal Hwnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
-Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal Hwnd As Long, ByVal nIndex As Long) As Long
+Private Declare Function UpdateWindow Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
+Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
+'--
+Private Declare Function CreateIconFromResourceEx Lib "user32" (ByRef presbits As Any, ByVal dwResSize As Long, ByVal fIcon As Long, ByVal dwVer As Long, ByVal cxDesired As Long, ByVal cyDesired As Long, ByVal Flags As Long) As Long
+Private Declare Function DestroyIcon Lib "user32" (ByVal hIcon As Long) As Long
+
 'KERNEL32
-Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal Length As Long)
-                                                                         
+Private Declare Sub CopyMemory Lib "kernel32" Alias "RtlMoveMemory" (Destination As Any, Source As Any, ByVal length As Long)
+
+'OLE32
+Private Declare Sub CreateStreamOnHGlobal Lib "ole32.dll" (ByRef hGlobal As Any, ByVal fDeleteOnRelease As Long, ByRef ppstm As Any)
+
+'OLEAUT32
+Private Declare Function OleCreatePictureIndirect Lib "OleAut32" (lpPictDesc As Any, riid As Any, ByVal fPictureOwnsHandle As Long, IPic As IPicture) As Long
+
+'GDIPLUS
+Private Declare Function GdiplusStartup Lib "GdiPlus" (token As Long, inputbuf As GDIPlusStartupInput, Optional ByVal outputbuf As Long = 0) As Long
+Private Declare Sub GdiplusShutdown Lib "GdiPlus" (ByVal token As Long)
+'--
+Private Declare Function GdipDrawImageRect Lib "GdiPlus.dll" (ByVal mGraphics As Long, ByVal mImage As Long, ByVal mX As Single, ByVal mY As Single, ByVal mWidth As Single, ByVal mHeight As Single) As Long
+Private Declare Function GdipSetInterpolationMode Lib "GdiPlus" (ByVal graphics As Long, ByVal InterpolationMode As Long) As Long
+Private Declare Function GdipGetImageGraphicsContext Lib "GdiPlus" (ByVal Image As Long, hGraphics As Long) As Long
+Private Declare Function GdipCreateBitmapFromScan0 Lib "GdiPlus" (ByVal Width As Long, ByVal Height As Long, ByVal Stride As Long, ByVal Format As Long, ByRef Scan0 As Any, ByRef Bitmap As Long) As Long
+Private Declare Function GdipLoadImageFromStream Lib "GdiPlus" (ByVal Stream As Any, ByRef Image As Long) As Long
+Private Declare Function GdipGetImageBounds Lib "GdiPlus" (ByVal mImage As Long, ByRef mSrcRect As RECTF, ByRef mSrcUnit As Long) As Long
+Private Declare Function GdipCreateHICONFromBitmap Lib "GdiPlus" (ByVal Bitmap As Long, hbmReturn As Long) As Long
+Private Declare Function GdipCreateBitmapFromHBITMAP Lib "GdiPlus" (ByVal mHbm As Long, ByVal mhPal As Long, ByRef mBitmap As Long) As Long
+Private Declare Function GdipCreateBitmapFromHICON Lib "GdiPlus" (ByVal mHicon As Long, ByRef mBitmap As Long) As Long
+Private Declare Function GdipDeleteGraphics Lib "GdiPlus.dll" (ByVal mGraphics As Long) As Long
+Private Declare Function GdipDisposeImage Lib "GdiPlus" (ByVal Image As Long) As Long
+
+'GDI32
+Private Declare Function GetObjectType Lib "gdi32" (ByVal hGDIObj As Long) As Long
+
+'MSVBVM60
+Private Declare Function VarPtrArray Lib "msvbvm60.dll" Alias "VarPtr" (ptr() As Any) As Long
+
+Private Type GDIPlusStartupInput
+    GdiPlusVersion           As Long
+    DebugEventCallback       As Long
+    SuppressBackgroundThread As Long
+    SuppressExternalCodecs   As Long
+End Type
+
 Private Type RECT
-   Left   As Long
-   Top    As Long
-   Right  As Long
-   Bottom As Long
+    Left   As Long
+    Top    As Long
+    Right  As Long
+    Bottom As Long
+End Type
+
+Private Type RECTF
+    Left        As Single
+    Top         As Single
+    Width       As Single
+    Height      As Single
 End Type
 
 Private Type Settings
-   RECT             As RECT
-   ToAffectToLefts  As Boolean
-   ToAffectToTops   As Boolean
-   ContainerWidth   As Long
-   ContainerHeight  As Long
+    RECT             As RECT
+    ToAffectToLefts  As Boolean
+    ToAffectToTops   As Boolean
+    ContainerWidth   As Long
+    ContainerHeight  As Long
+End Type
+
+Private Type IconHeader
+    ihReserved          As Integer
+    ihType              As Integer
+    ihCount             As Integer
+End Type
+
+Private Type IconEntry
+    ieWidth             As Byte
+    ieHeight            As Byte
+    ieColorCount        As Byte
+    ieReserved          As Byte
+    iePlanes            As Integer
+    ieBitCount          As Integer
+    ieBytesInRes        As Long
+    ieImageOffset       As Long
 End Type
 
 Private Const WM_SETREDRAW As Long = &HB&
@@ -72,9 +136,22 @@ Private Const WM_PAINT As Long = &HF&
 Private Const WM_SHOWWINDOW = &H18&
 Private Const WM_CHILDACTIVATE = &H22&
 '--
+Private Const UnitPixel                     As Long = &H2&
+Private Const OBJ_BITMAP                    As Long = 7
+'--
+Private Const InterpolationModeHighQuality  As Long = &H2
+Private Const IconVersion                   As Long = &H30000
+Private Const PixelFormat32bppARGB          As Long = &H26200A
+Private Const ICON_JUMBO                    As Long = 256
+Private Const ICON_BIG                      As Long = 1
+Private Const ICON_SMALL                    As Long = 0
+Private Const WM_SETICON                    As Long = &H80
+'--
 Public Controls             As New clsControls
 Private m_Control           As clsControl
 '--
+Private m_IconPresent       As Boolean
+Private m_FormIcon()        As Byte
 Private m_FormMinWidth      As Long
 Private m_FormMinHeight     As Long
 Private m_FormMaxWidth      As Long
@@ -90,6 +167,28 @@ Private cSubClass           As clsSubClass
 Dim WithEvents frmParent As Form
 Attribute frmParent.VB_VarHelpID = -1
 Dim i As Long
+Dim hIcon As Long
+
+'m_IconPresent          As Boolean
+Public Property Get IconPresent() As Boolean
+    IconPresent = m_IconPresent
+End Property
+Public Property Let IconPresent(ByVal newValue As Boolean)
+    m_IconPresent = newValue
+    PropertyChanged "IconPresent"
+End Property
+
+'m_FormIcon             As Byte
+Public Property Get FormIcon() As Variant
+    FormIcon = m_FormIcon
+End Property
+Public Property Let FormIcon(ByRef newValue As Variant)
+    If m_IconPresent Then
+        m_FormIcon = newValue
+        PropertyChanged "FormIcon"
+    End If
+End Property
+
 
 'm_FormMinWidth         As Long
 Public Property Get FormMinWidth() As Long
@@ -160,8 +259,8 @@ Public Property Let FormMaxHeight(ByVal newValue As Long)
 End Property
 
 'm_Hwnd                 As Long
-Public Property Get Hwnd() As Long
-    Hwnd = UserControl.Hwnd
+Public Property Get hWnd() As Long
+    hWnd = UserControl.hWnd
 End Property
 
 'm_Container            As Object
@@ -195,9 +294,9 @@ Private Sub frmParent_Activate()
     '---
     If (m_FormMaxWidth < Screen.Width And m_FormMaxWidth > 0) Or (m_FormMaxHeight < Screen.Height And m_FormMaxHeight > 0) Then
         frmParent.WindowState = vbNormal
-        lStyle = GetWindowLong(frmParent.Hwnd, GWL_STYLE)
+        lStyle = GetWindowLong(frmParent.hWnd, GWL_STYLE)
         lStyle = lStyle And Not WS_MAXIMIZEBOX
-        Call SetWindowLong(frmParent.Hwnd, GWL_STYLE, lStyle)
+        Call SetWindowLong(frmParent.hWnd, GWL_STYLE, lStyle)
     End If
     'Resize Form MinWidth or MinHeight
     If frmParent.Width < m_FormMinWidth And m_FormMinWidth > 0 Then frmParent.Width = m_FormMinWidth
@@ -241,6 +340,9 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
         End If
     End If
     With PropBag
+        m_IconPresent = .ReadProperty("IconPresent", False)
+        If m_IconPresent Then m_FormIcon = .ReadProperty("FormIcon")
+        '--
         m_FormMinWidth = .ReadProperty("FormMinWidth", 0)
         m_FormMinHeight = .ReadProperty("FormMinHeight", 0)
         m_FormMaxWidth = .ReadProperty("FormMaxWidth", 0)
@@ -279,6 +381,13 @@ Private Sub UserControl_Show()
         End With
         Set frmParent = Extender.Parent
     End If
+    'Load icon
+    'If m_IconPresent And App.LogMode Then
+    If m_IconPresent Then
+        'Set frmParent.Icon = Nothing
+        Call SetIconForm(UserControl.Parent.hWnd, m_FormIcon, 32, 32)
+        'IsDrawIcon = True
+    End If
 End Sub
 
 Private Sub UserControl_Hide()
@@ -295,6 +404,7 @@ Private Sub UserControl_Terminate()
     Set Controls = Nothing
     If Not frmParent Is Nothing Then Set frmParent = Nothing
     If Not CtrlParent Is Nothing Then Set CtrlParent = Nothing
+    DestroyIcon hIcon
 End Sub
 
 Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
@@ -303,6 +413,12 @@ Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
     With PropBag
         m_ControlsCount = Controls.Count
         '---
+        .WriteProperty "IconPresent", m_IconPresent
+        If m_IconPresent Then
+            .WriteProperty "FormIcon", m_FormIcon
+        Else
+            .WriteProperty "FormIcon", 0
+        End If
         .WriteProperty "FormMinWidth", m_FormMinWidth, 0
         .WriteProperty "FormMinHeight", m_FormMinHeight, 0
         .WriteProperty "ControlsCount", m_ControlsCount, 0
@@ -363,7 +479,7 @@ Private Sub LoadControls()
                     cControl.TypeName = TypeName(obj)
                     cControl.Name = .Name
                     cControl.ControlIndex = GetControlIndex(obj)
-                    cControl.Hwnd = GetControlHwnd(obj)
+                    cControl.hWnd = GetControlHwnd(obj)
                     cControl.Left = .Left
                     cControl.Top = .Top
                     cControl.Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
@@ -398,7 +514,7 @@ Private Sub LoadControls()
                         cControl.TypeName = TypeName(obj)
                         cControl.Name = .Name
                         cControl.ControlIndex = GetControlIndex(obj)
-                        cControl.Hwnd = GetControlHwnd(obj)
+                        cControl.hWnd = GetControlHwnd(obj)
                         cControl.Left = .Left
                         cControl.Top = .Top
                         cControl.Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
@@ -416,6 +532,18 @@ Private Sub LoadControls()
                         '--
                         IsChange = True
                     Else
+                        '--> Validar cambio de resolucion
+                        If obj.Left <= Screen.Width And (obj.Width) > (Screen.Width - obj.Left) Then
+                            Debug.Print UserControl.Parent.Name & ": Width of control " & obj.Name & " exceeds that of the screen, the positions have been updated, verify."
+                            obj.Width = GetControlScaleWidth(obj.Container) - (obj.Left + (Controls.Item(i).Right))
+                            IsChange = True
+                        End If
+                        If obj.Top <= Screen.Height And (obj.Height) > (Screen.Height - obj.Top) Then
+                            Debug.Print UserControl.Parent.Name & ": Height of control " & obj.Name & " exceeds that of the screen, the positions have been updated, verify."
+                            obj.Height = GetControlScaleHeight(obj.Container) - (obj.Top + (Controls.Item(i).Bottom))
+                            IsChange = True
+                        End If
+                        '--< Fin Validar cambio de resolucion
                         If Not Ambient.UserMode Then
                             If Controls.Item(i).ParentTypeName <> TypeName(obj.Container) Then
                                 Controls.Item(i).ParentTypeName = TypeName(obj.Container)
@@ -503,7 +631,7 @@ Private Sub DoResize()
     Dim sWidth As Long, sHeight As Long, a As Long, lTemp As Long
     Dim cRect As RECT
     'Resize Controls
-    Call SendMessage(frmParent.Hwnd, WM_SETREDRAW, 0&, 0&)
+    Call SendMessage(frmParent.hWnd, WM_SETREDRAW, 0&, 0&)
     '--
     For Each objControl In frmParent
         '--
@@ -606,15 +734,131 @@ Private Sub DoResize()
         Next
     Next
     '---
-    Call SendMessage(frmParent.Hwnd, WM_SETREDRAW, 1&, 0&)
-    RedrawWindow frmParent.Hwnd, ByVal &H0, 0, RDW_INVALIDATE Or RDW_ALLCHILDREN
+    Call SendMessage(frmParent.hWnd, WM_SETREDRAW, 1&, 0&)
+    RedrawWindow frmParent.hWnd, ByVal &H0, 0, RDW_INVALIDATE Or RDW_ALLCHILDREN
     '--
 End Sub
+
+Private Sub SetIconForm(hWnd As Long, ByRef iconData() As Byte, ByVal cx As Long, ByVal cy As Long)
+On Local Error GoTo RutinaError
+    '--
+    Dim gToken      As Long
+    Dim hBitmap     As Long
+    Dim IconPic     As StdPicture
+    '--
+    If Not IsArrayDim(VarPtrArray(iconData)) Then Exit Sub
+    '--
+    If iconData(2) = vbResIcon Or iconData(2) = vbResCursor Then
+        Dim tIconHeader     As IconHeader
+        Dim tIconEntry()    As IconEntry
+        Dim MaxBitCount     As Long
+        Dim MaxSize         As Long
+        Dim Aproximate      As Long
+        Dim IconID          As Long
+        Dim i               As Long
+        '--
+        Call CopyMemory(tIconHeader, iconData(0), Len(tIconHeader))
+        '--
+        If tIconHeader.ihCount >= 1 Then
+            ReDim tIconEntry(tIconHeader.ihCount - 1)
+            Call CopyMemory(tIconEntry(0), iconData(Len(tIconHeader)), Len(tIconEntry(0)) * tIconHeader.ihCount)
+            IconID = -1
+            '--
+            For i = 0 To tIconHeader.ihCount - 1
+                If tIconEntry(i).ieBitCount > MaxBitCount Then MaxBitCount = tIconEntry(i).ieBitCount
+            Next
+            '--
+            For i = 0 To tIconHeader.ihCount - 1
+                If MaxBitCount = tIconEntry(i).ieBitCount Then
+                    MaxSize = CLng(tIconEntry(i).ieWidth) + CLng(tIconEntry(i).ieHeight)
+                    If MaxSize > Aproximate And MaxSize <= (cx + cy) Then
+                        Aproximate = MaxSize
+                        IconID = i
+                    End If
+                End If
+            Next
+            '--
+            If IconID = -1 Then
+                For i = 0 To tIconHeader.ihCount - 1
+                    If MaxBitCount = tIconEntry(i).ieBitCount Then
+                        If (tIconEntry(i).ieWidth) > 0 And (tIconEntry(i).ieHeight > 0) Then
+                            IconID = i
+                        End If
+                    End If
+                Next
+            End If
+            '--
+            With tIconEntry(IconID)
+                hIcon = CreateIconFromResourceEx(iconData(.ieImageOffset), .ieBytesInRes, 1, IconVersion, cx, cy, &H0)
+                If hIcon <> 0 Then
+                    SendMessage hWnd, WM_SETICON, ICON_JUMBO, ByVal hIcon
+                    SendMessage hWnd, WM_SETICON, ICON_BIG, ByVal hIcon
+                    SendMessage hWnd, WM_SETICON, ICON_SMALL, ByVal hIcon
+                End If
+            End With
+        End If
+    Else
+        Dim TR          As RECTF
+        Dim ResizeBmp   As Long
+        Dim ResizeGra   As Long
+        Dim IStream As IUnknown
+        '--
+        Call CreateStreamOnHGlobal(iconData(0), 0&, IStream)
+        If Not IStream Is Nothing Then
+            Dim GDIsi       As GDIPlusStartupInput
+            '--
+            GDIsi.GdiPlusVersion = 1&
+            '--
+            If GdiplusStartup(gToken, GDIsi) = 0 Then
+                If GdipLoadImageFromStream(IStream, hBitmap) = 0 Then
+                    Call GdipGetImageBounds(hBitmap, TR, UnitPixel)
+                    '--
+                    If cx <> TR.Width Or cy <> TR.Height Then
+                        If GdipCreateBitmapFromScan0(cx, cy, 0&, PixelFormat32bppARGB, ByVal 0&, ResizeBmp) = 0 Then
+                            If GdipGetImageGraphicsContext(ResizeBmp, ResizeGra) = 0 Then
+                                GdipSetInterpolationMode ResizeGra, InterpolationModeHighQuality
+                                If GdipDrawImageRect(ResizeGra, hBitmap, 0, 0, cx, cy) = 0 Then
+                                    If GdipCreateHICONFromBitmap(ResizeBmp, hIcon) = 0 Then
+                                        SendMessage hWnd, WM_SETICON, ICON_JUMBO, ByVal hIcon
+                                        SendMessage hWnd, WM_SETICON, ICON_BIG, ByVal hIcon
+                                        SendMessage hWnd, WM_SETICON, ICON_SMALL, ByVal hIcon
+                                        'DestroyIcon hIcon
+                                    End If
+                                End If
+                                Call GdipDeleteGraphics(ResizeGra)
+                            End If
+                            Call GdipDisposeImage(ResizeBmp)
+                        End If
+                    Else
+                        If GdipCreateHICONFromBitmap(hBitmap, hIcon) = 0 Then
+                            SendMessage hWnd, WM_SETICON, ICON_JUMBO, ByVal hIcon
+                            SendMessage hWnd, WM_SETICON, ICON_BIG, ByVal hIcon
+                            SendMessage hWnd, WM_SETICON, ICON_SMALL, ByVal hIcon
+                            'DestroyIcon hIcon
+                        End If
+                    End If
+                End If
+                '--
+                GdiplusShutdown gToken: gToken = 0
+            End If
+        End If
+    End If
+    '--
+RutinaError:
+    If gToken Then GdiplusShutdown gToken
+    Debug.Print Err.Description
+End Sub
+
+Private Function IsArrayDim(ByVal lpArray As Long) As Boolean
+    Dim lAddress As Long
+    Call CopyMemory(lAddress, ByVal lpArray, &H4)
+    IsArrayDim = Not (lAddress = 0)
+End Function
 
 Private Sub WndProc(ByVal bBefore As Boolean, _
                     ByRef bHandled As Boolean, _
                     ByRef lReturn As Long, _
-                    ByVal Hwnd As Long, _
+                    ByVal hWnd As Long, _
                     ByVal uMsg As Long, _
                     ByVal wParam As Long, _
                     ByVal lParam As Long, _

@@ -35,7 +35,7 @@ End Function
 
 Public Function GetControlHwnd(objControl As Object) As Long
     On Error GoTo FunctionError
-    GetControlHwnd = objControl.Hwnd
+    GetControlHwnd = objControl.hWnd
     Exit Function
 FunctionError:
     GetControlHwnd = 0
@@ -99,4 +99,23 @@ Public Function GetMinHeightControl(ByVal objControl As Object) As Long
     objControl.Height = lTemp
     '--
 End Function
+
+Public Function BytesLength(abBytes() As Byte) As Long
+    On Error Resume Next
+    BytesLength = UBound(abBytes) - LBound(abBytes) + 1
+End Function
+
+Public Sub DrawBackAreaIcon(obj As Object)
+    Dim i As Long, j As Long, x As Long
+    '--
+    For j = -1 To obj.ScaleHeight Step 5
+        x = IIf(x = -1, 4, -1)
+        For i = x To obj.ScaleWidth Step 10
+            obj.Line (i, j)-(i + 4, j + 4), &HF2F2F2, BF
+        Next
+    Next
+    '--
+    obj.Line (0, 0)-(obj.ScaleWidth - 1, obj.ScaleHeight - 1), vbButtonShadow, B
+    obj = obj.Image
+End Sub
 

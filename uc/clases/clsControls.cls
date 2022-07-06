@@ -11,8 +11,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+'-----------------------------
+'Autor: Jose Liza
+'ClassName: clsControls(Collection)
+'Date: 12/06/2022
+'Version: 0.0.1
+'-----------------------------
 Option Explicit
-
 Private m_Controls As Collection
 
 Private Sub Class_Initialize()
@@ -29,7 +34,7 @@ Public Function Add(NewControl As clsControl) As clsControl
     objNewControl.TypeName = NewControl.TypeName
     objNewControl.Name = NewControl.Name
     objNewControl.ControlIndex = IIf(CInt(IIf(IsNumeric(NewControl.ControlIndex), NewControl.ControlIndex, -1)) >= 0, NewControl.ControlIndex, "")
-    objNewControl.Hwnd = NewControl.Hwnd
+    objNewControl.hWnd = NewControl.hWnd
     objNewControl.Left = NewControl.Left
     objNewControl.Top = NewControl.Top
     objNewControl.Right = NewControl.Right

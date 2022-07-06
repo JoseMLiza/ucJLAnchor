@@ -11,8 +11,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+'-----------------------------
+'Autor: Jose Liza
+'ClassName: clsControl
+'Date: 12/06/2022
+'Version: 0.0.1
+'-----------------------------
 Option Explicit
-
 'Datos del control
 Private m_ParentTypeName        As String
 Private m_ParentName            As String
@@ -117,10 +122,10 @@ Public Property Let Index(ByVal newValue As Long)
 End Property
 
 'm_hWnd                     As Long
-Public Property Get Hwnd() As Long
-    Hwnd = m_Hwnd
+Public Property Get hWnd() As Long
+    hWnd = m_Hwnd
 End Property
-Public Property Let Hwnd(ByVal newValue As Long)
+Public Property Let hWnd(ByVal newValue As Long)
     m_Hwnd = newValue
     PropertyChanged "hWnd"
 End Property

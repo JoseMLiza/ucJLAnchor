@@ -783,6 +783,11 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+'-----------------------------
+'Autor: Jose Liza
+'Date: 12/06/2022
+'Version: 0.0.1
+'-----------------------------
 Option Explicit
 'USER32
 Private Declare Function GetDC Lib "user32.dll" (ByVal hWnd As Long) As Long

@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#4.0#0"; "JLAnchor.ocx"
+Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmChild 
    Caption         =   "Child"
    ClientHeight    =   4425
@@ -21,7 +21,7 @@ Begin VB.Form frmChild
       IconPresent     =   -1  'True
       FormIcon        =   "frmChild.frx":0000
       ControlsCount   =   7
-      BeginProperty Control_1 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
          TypeName        =   "Frame"
@@ -42,7 +42,7 @@ Begin VB.Form frmChild
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
-      BeginProperty Control_2 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_2 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Frame"
          ParentName      =   "Frame1"
          TypeName        =   "TextBox"
@@ -68,7 +68,7 @@ Begin VB.Form frmChild
          HeightPercent   =   50
          BottomPercentStatic=   -180
       EndProperty
-      BeginProperty Control_3 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_3 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Frame"
          ParentName      =   "Frame1"
          TypeName        =   "TextBox"
@@ -93,7 +93,7 @@ Begin VB.Form frmChild
          HeightPercent   =   50
          BottomPercentStatic=   -120
       EndProperty
-      BeginProperty Control_4 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_4 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
          TypeName        =   "PictureBox"
@@ -113,7 +113,7 @@ Begin VB.Form frmChild
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
-      BeginProperty Control_5 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_5 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
          TypeName        =   "TextBox"
@@ -134,7 +134,7 @@ Begin VB.Form frmChild
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
       EndProperty
-      BeginProperty Control_6 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_6 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
          TypeName        =   "CommandButton"
@@ -154,7 +154,7 @@ Begin VB.Form frmChild
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
       EndProperty
-      BeginProperty Control_7 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_7 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "PictureBox"
          ParentName      =   "Picture1"
          TypeName        =   "LabelPlus"

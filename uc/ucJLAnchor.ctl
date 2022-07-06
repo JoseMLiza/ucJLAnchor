@@ -15,8 +15,13 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = True
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = True
+'-----------------------------
+'Autor: Jose Liza
+'Date: 12/06/2022
+'Version: 0.0.1
+'Thanks: Leandro Ascierto (www.leandroascierto.com) And Latin Group of VB6
+'-----------------------------
 Option Explicit
-
 'USER32
 Private Declare Function SendMessage Lib "user32" Alias "SendMessageA" (ByVal hWnd As Long, ByVal wMsg As Long, ByVal wParam As Long, lParam As Any) As Long
 Private Declare Function RedrawWindow Lib "user32" (ByVal hWnd As Long, ByRef lprcUpdate As Any, ByVal hrgnUpdate As Long, ByVal fuRedraw As Long) As Long

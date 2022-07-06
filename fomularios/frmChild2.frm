@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#3.8#0"; "JLAnchor.ocx"
+Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmChild2 
    Caption         =   "fmrChild2 - Percent Static"
    ClientHeight    =   4305
@@ -39,7 +39,7 @@ Begin VB.Form frmChild2
       _ExtentX        =   847
       _ExtentY        =   847
       ControlsCount   =   6
-      BeginProperty Control_1 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild2"
          TypeName        =   "PictureBox"
@@ -66,7 +66,7 @@ Begin VB.Form frmChild2
          BottomPercentStatic=   -95
          AnchorLeft      =   -1  'True
       EndProperty
-      BeginProperty Control_2 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_2 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild2"
          TypeName        =   "PictureBox"
@@ -92,7 +92,7 @@ Begin VB.Form frmChild2
          BottomPercentStatic=   -100
          AnchorLeft      =   -1  'True
       EndProperty
-      BeginProperty Control_3 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_3 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild2"
          TypeName        =   "PictureBox"
@@ -119,7 +119,7 @@ Begin VB.Form frmChild2
          BottomPercentStatic=   -210
          AnchorLeft      =   -1  'True
       EndProperty
-      BeginProperty Control_4 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_4 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild2"
          TypeName        =   "PictureBox"
@@ -145,7 +145,7 @@ Begin VB.Form frmChild2
          HeightPercent   =   33.333
          BottomPercentStatic=   -100
       EndProperty
-      BeginProperty Control_5 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_5 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild2"
          TypeName        =   "PictureBox"
@@ -172,7 +172,7 @@ Begin VB.Form frmChild2
          HeightPercent   =   33.333
          BottomPercentStatic=   -95
       EndProperty
-      BeginProperty Control_6 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_6 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild2"
          TypeName        =   "PictureBox"

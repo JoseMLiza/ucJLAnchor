@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#4.0#0"; "JLAnchor.ocx"
+Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmControlsLea 
    Caption         =   "Controles @Leandro - Percent Dynamic"
    ClientHeight    =   6225
@@ -23,7 +23,7 @@ Begin VB.Form frmControlsLea
       FormMinWidth    =   12855
       FormMinHeight   =   6810
       ControlsCount   =   13
-      BeginProperty Control_1 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucPieChart"
@@ -44,7 +44,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   33.012
       EndProperty
-      BeginProperty Control_2 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_2 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "LabelPlus"
@@ -65,7 +65,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   19.518
       EndProperty
-      BeginProperty Control_3 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_3 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucPieChart"
@@ -86,7 +86,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   33.012
       EndProperty
-      BeginProperty Control_4 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_4 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartBar"
@@ -107,7 +107,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   34.94
       EndProperty
-      BeginProperty Control_5 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_5 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartArea"
@@ -128,7 +128,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   31.084
       EndProperty
-      BeginProperty Control_6 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_6 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucTreeMaps"
@@ -149,7 +149,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   33.012
       EndProperty
-      BeginProperty Control_7 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_7 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartArea"
@@ -170,7 +170,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   31.084
       EndProperty
-      BeginProperty Control_8 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_8 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartBar"
@@ -191,7 +191,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   29.157
       EndProperty
-      BeginProperty Control_9 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_9 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          ParentIndex     =   "2"
@@ -214,7 +214,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   21.446
       EndProperty
-      BeginProperty Control_10 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_10 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          ParentIndex     =   "1"
@@ -237,7 +237,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   21.446
       EndProperty
-      BeginProperty Control_11 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_11 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          ParentIndex     =   "0"
@@ -260,7 +260,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   21.446
       EndProperty
-      BeginProperty Control_12 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_12 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "LabelPlus"
@@ -281,7 +281,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   27.229
       EndProperty
-      BeginProperty Control_13 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_13 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "LabelPlus"

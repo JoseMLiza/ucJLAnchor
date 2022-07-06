@@ -1,6 +1,6 @@
 VERSION 5.00
-Object = "{62ED814B-A922-424D-833A-57C22F97CFE7}#4.0#0"; "JLAnchor.ocx"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
+Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmNoChild 
    Caption         =   "No Child"
    ClientHeight    =   3255
@@ -21,7 +21,7 @@ Begin VB.Form frmNoChild
       IconPresent     =   0   'False
       FormIcon        =   0
       ControlsCount   =   5
-      BeginProperty Control_1 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmNoChild"
          TypeName        =   "CommandButton"
@@ -41,7 +41,7 @@ Begin VB.Form frmNoChild
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
       EndProperty
-      BeginProperty Control_2 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_2 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmNoChild"
          TypeName        =   "TextBox"
@@ -62,7 +62,7 @@ Begin VB.Form frmNoChild
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
       EndProperty
-      BeginProperty Control_3 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_3 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmNoChild"
          TypeName        =   "PictureBox"
@@ -84,7 +84,7 @@ Begin VB.Form frmNoChild
          AnchorRight     =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
-      BeginProperty Control_4 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_4 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "PictureBox"
          ParentName      =   "Picture1"
          TypeName        =   "TextBox"
@@ -105,7 +105,7 @@ Begin VB.Form frmNoChild
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
       EndProperty
-      BeginProperty Control_5 {F01A6FF4-B13C-432C-BCBF-2B9C8BFB03DE} 
+      BeginProperty Control_5 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "PictureBox"
          ParentName      =   "Picture1"
          TypeName        =   "ListView"

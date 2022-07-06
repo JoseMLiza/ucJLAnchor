@@ -14,3 +14,5 @@ As always, it will be appreciated if an error is reported to provide the necessa
 
 - **24/06/2022:** Fixed some bugs, split percentage resize control into two options, dynamic and static.
 An example form was added for the static percentage option.
+
+- **06/07/2022:** Added option to add icon for form, with support for .ICO, .JPG, .BMP and .PNG.

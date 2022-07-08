@@ -7,6 +7,7 @@ Attribute VB_Name = "mdlAnchor"
 '-----------------------------
 Option Explicit
 Public Const ST_KEYDIGVAL = "0123456789."
+Public Const OBJ_EXCLUDED = "/Error/Menu/ucJLAnchor/Form/"
 Public CtrlParent As Object
 
 Dim i As Long
@@ -107,6 +108,13 @@ Public Function GetMinHeightControl(ByVal objControl As Object) As Long
     GetMinHeightControl = objControl.Height
     objControl.Height = lTemp
     '--
+End Function
+
+Public Function GetContainerTypeName(ByVal objControl As Object) As String
+On Error GoTo FunctionError
+    GetContainerTypeName = TypeName(objControl.Container)
+FunctionError:
+    GetContainerTypeName = "Error"
 End Function
 
 Public Function BytesLength(abBytes() As Byte) As Long

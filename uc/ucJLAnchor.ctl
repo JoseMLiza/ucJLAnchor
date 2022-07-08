@@ -172,7 +172,10 @@ Private cSubClass           As clsSubClass
 Dim WithEvents frmParent As Form
 Attribute frmParent.VB_VarHelpID = -1
 Dim i As Long
-Dim hIcon As Long
+Dim hIconSM As Long
+Dim hIconBG As Long
+Dim hIconEL As Long
+Dim hIconJB As Long
 
 'm_IconPresent          As Boolean
 Public Property Get IconPresent() As Boolean
@@ -390,8 +393,14 @@ Private Sub UserControl_Show()
     'If m_IconPresent And App.LogMode Then
     If m_IconPresent Then
         'Set frmParent.Icon = Nothing
-        Call SetIconForm(UserControl.Parent.hWnd, m_FormIcon, 32, 32)
-        'IsDrawIcon = True
+        'Call SetIconForm(UserControl.Parent.hWnd, m_FormIcon)
+        hIconSM = GetBytesToIcon(m_FormIcon, 16, 16)
+        hIconBG = GetBytesToIcon(m_FormIcon, 32, 32)
+        hIconJB = GetBytesToIcon(m_FormIcon, 256, 256)
+        '--
+        If hIconSM <> 0 Then SendMessage UserControl.Parent.hWnd, WM_SETICON, ICON_SMALL, ByVal hIconSM
+        If hIconBG <> 0 Then SendMessage UserControl.Parent.hWnd, WM_SETICON, ICON_BIG, ByVal hIconBG
+        If hIconJB <> 0 Then SendMessage UserControl.Parent.hWnd, WM_SETICON, ICON_JUMBO, ByVal hIconJB
     End If
 End Sub
 
@@ -409,7 +418,10 @@ Private Sub UserControl_Terminate()
     Set Controls = Nothing
     If Not frmParent Is Nothing Then Set frmParent = Nothing
     If Not CtrlParent Is Nothing Then Set CtrlParent = Nothing
-    DestroyIcon hIcon
+    '---
+    If hIconSM > 0 Then DestroyIcon hIconSM
+    If hIconBG > 0 Then DestroyIcon hIconBG
+    If hIconJB > 0 Then DestroyIcon hIconJB
 End Sub
 
 Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
@@ -464,7 +476,8 @@ Private Sub LoadControls()
                     Exit For
                 End If
             Next
-            If Not IsExists And TypeName(obj) <> "ucJLAnchor" Then
+            'If Not IsExists And TypeName(obj) <> "ucJLAnchor" Then
+            If Not IsExists And InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
                 Controls.Remove i
                 IsChange = True
             End If
@@ -477,7 +490,8 @@ Private Sub LoadControls()
         IsExists = False
         With obj
             If Not cCount > 0 Then
-                If TypeName(obj) <> "ucJLAnchor" Then
+                'If TypeName(obj) <> "ucJLAnchor" Then
+                If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
                     cControl.ParentTypeName = TypeName(obj.Container)
                     cControl.ParentName = obj.Container.Name
                     cControl.ParentIndex = GetControlIndex(obj.Container.Index)
@@ -504,14 +518,16 @@ Private Sub LoadControls()
                 End If
             Else
                 For i = cIni To cCount
-                    If TypeName(obj) <> "ucJLAnchor" Then
+                    'If TypeName(obj) <> "ucJLAnchor" Then
+                    If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
                         If TypeName(obj) & .Name & GetControlIndex(obj) = Controls.Item(i).TypeName & Controls.Item(i).Name & Controls.Item(i).ControlIndex Then
                             IsExists = True
                             Exit For
                         End If
                     End If
                 Next
-                If TypeName(obj) <> "ucJLAnchor" Then
+                'If TypeName(obj) <> "ucJLAnchor" Then
+                If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
                     If Not IsExists Then
                         cControl.ParentTypeName = TypeName(obj.Container)
                         cControl.ParentName = obj.Container.Name
@@ -639,24 +655,41 @@ Private Sub DoResize()
     Call SendMessage(frmParent.hWnd, WM_SETREDRAW, 0&, 0&)
     '--
     For Each objControl In frmParent
-        '--
-        idx = GetControlIndex(objControl)
-        '--
-        sWidth = GetControlScaleWidth(objControl.Container)
-        sHeight = GetControlScaleHeight(objControl.Container)
-        '--
-        For a = 1 To Controls.Count
-            If Controls.Item(a).TypeName = TypeName(objControl) Then
-                If Controls.Item(a).Name & Controls.Item(a).ControlIndex = objControl.Name & idx Then
-                    With Controls.Item(a)
-                        If .AnchorRight Then
-                            If .AnchorLeft Then
-                                objControl.Width = IIf(sWidth - (.Left + .Right) > 0, sWidth - (.Left + .Right), 0)
-                            Else
-                                'If Not .LeftPercent > 0 Then
-                                If Not .UseLeftPercent Then
-                                    objControl.Left = sWidth - (objControl.Width + .Right)
+        If InStr(OBJ_EXCLUDED, TypeName(objControl)) = 0 Then
+            '--
+            idx = GetControlIndex(objControl)
+            '--
+            sWidth = GetControlScaleWidth(objControl.Container)
+            sHeight = GetControlScaleHeight(objControl.Container)
+            '--
+            For a = 1 To Controls.Count
+                If Controls.Item(a).TypeName = TypeName(objControl) Then
+                    If Controls.Item(a).Name & Controls.Item(a).ControlIndex = objControl.Name & idx Then
+                        With Controls.Item(a)
+                            If .AnchorRight Then
+                                If .AnchorLeft Then
+                                    objControl.Width = IIf(sWidth - (.Left + .Right) > 0, sWidth - (.Left + .Right), 0)
                                 Else
+                                    'If Not .LeftPercent > 0 Then
+                                    If Not .UseLeftPercent Then
+                                        objControl.Left = sWidth - (objControl.Width + .Right)
+                                    Else
+                                        If .UseModePercent Then
+                                            'AQUIIIIII
+                                            objControl.Left = sWidth * (.LeftPercent / 100) + .LeftPercentStatic
+                                        Else
+                                            objControl.Left = sWidth * (.LeftPercent / 100)
+                                        End If
+                                    End If
+                                End If
+                            Else
+                                'If Not .AnchorLeft And Not .LeftPercent > 0 Then
+                                If Not .AnchorLeft And Not .UseLeftPercent Then
+                                    If m_Settings.ToAffectToLefts Then
+                                        objControl.Left = .Left
+                                    End If
+                                'ElseIf Not .AnchorLeft And .LeftPercent > 0 Then
+                                ElseIf Not .AnchorLeft And .UseLeftPercent Then
                                     If .UseModePercent Then
                                         'AQUIIIIII
                                         objControl.Left = sWidth * (.LeftPercent / 100) + .LeftPercentStatic
@@ -664,41 +697,41 @@ Private Sub DoResize()
                                         objControl.Left = sWidth * (.LeftPercent / 100)
                                     End If
                                 End If
-                            End If
-                        Else
-                            'If Not .AnchorLeft And Not .LeftPercent > 0 Then
-                            If Not .AnchorLeft And Not .UseLeftPercent Then
-                                If m_Settings.ToAffectToLefts Then
-                                    objControl.Left = .Left
+                                '--
+                                'If .WidthPercent > 0 Then objControl.Width = sWidth * (.WidthPercent / 100)
+                                If .UseWidthPercent Then
+                                    If .UseModePercent Then
+                                        'AQUIIIIII
+                                        objControl.Width = IIf(sWidth * (.WidthPercent / 100) + .RightPercentStatic - .LeftPercentStatic > 0, sWidth * (.WidthPercent / 100) + .RightPercentStatic - .LeftPercentStatic, 0)
+                                    Else
+                                        objControl.Width = sWidth * (.WidthPercent / 100)
+                                    End If
                                 End If
-                            'ElseIf Not .AnchorLeft And .LeftPercent > 0 Then
-                            ElseIf Not .AnchorLeft And .UseLeftPercent Then
-                                If .UseModePercent Then
-                                    'AQUIIIIII
-                                    objControl.Left = sWidth * (.LeftPercent / 100) + .LeftPercentStatic
+                            End If
+                            If .AnchorBottom Then
+                                If .AnchorTop Then
+                                    objControl.Height = IIf(sHeight - (.Top + .Bottom) > 0, sHeight - (.Top + .Bottom), 0)
                                 Else
-                                    objControl.Left = sWidth * (.LeftPercent / 100)
+                                    'If Not .TopPercent > 0 Then
+                                    If Not .UseTopPercent Then
+                                        objControl.Top = sHeight - (objControl.Height + .Bottom)
+                                    Else
+                                        If .UseModePercent Then
+                                            'AQUIIIIII
+                                            objControl.Top = sHeight * (.TopPercent / 100) + .TopPercentStatic
+                                        Else
+                                            objControl.Top = sHeight * (.TopPercent / 100)
+                                        End If
+                                    End If
                                 End If
-                            End If
-                            '--
-                            'If .WidthPercent > 0 Then objControl.Width = sWidth * (.WidthPercent / 100)
-                            If .UseWidthPercent Then
-                                If .UseModePercent Then
-                                    'AQUIIIIII
-                                    objControl.Width = IIf(sWidth * (.WidthPercent / 100) + .RightPercentStatic - .LeftPercentStatic > 0, sWidth * (.WidthPercent / 100) + .RightPercentStatic - .LeftPercentStatic, 0)
-                                Else
-                                    objControl.Width = sWidth * (.WidthPercent / 100)
-                                End If
-                            End If
-                        End If
-                        If .AnchorBottom Then
-                            If .AnchorTop Then
-                                objControl.Height = IIf(sHeight - (.Top + .Bottom) > 0, sHeight - (.Top + .Bottom), 0)
                             Else
-                                'If Not .TopPercent > 0 Then
-                                If Not .UseTopPercent Then
-                                    objControl.Top = sHeight - (objControl.Height + .Bottom)
-                                Else
+                                'If Not .AnchorTop And Not .TopPercent > 0 Then
+                                If Not .AnchorTop And Not .UseTopPercent Then
+                                    If m_Settings.ToAffectToTops Then
+                                        objControl.Top = .Top
+                                    End If
+                                'ElseIf Not .AnchorTop And .TopPercent > 0 Then
+                                ElseIf Not .AnchorTop And .UseTopPercent Then
                                     If .UseModePercent Then
                                         'AQUIIIIII
                                         objControl.Top = sHeight * (.TopPercent / 100) + .TopPercentStatic
@@ -706,37 +739,22 @@ Private Sub DoResize()
                                         objControl.Top = sHeight * (.TopPercent / 100)
                                     End If
                                 End If
-                            End If
-                        Else
-                            'If Not .AnchorTop And Not .TopPercent > 0 Then
-                            If Not .AnchorTop And Not .UseTopPercent Then
-                                If m_Settings.ToAffectToTops Then
-                                    objControl.Top = .Top
-                                End If
-                            'ElseIf Not .AnchorTop And .TopPercent > 0 Then
-                            ElseIf Not .AnchorTop And .UseTopPercent Then
-                                If .UseModePercent Then
-                                    'AQUIIIIII
-                                    objControl.Top = sHeight * (.TopPercent / 100) + .TopPercentStatic
-                                Else
-                                    objControl.Top = sHeight * (.TopPercent / 100)
+                                '--
+                                'If .HeightPercent > 0 Then objControl.Height = sHeight * (.HeightPercent / 100)
+                                If .UseHeightPercent Then
+                                    If .UseModePercent Then
+                                        'AQUIIIIII
+                                        objControl.Height = IIf(sHeight * (.HeightPercent / 100) + .BottomPercentStatic - .TopPercentStatic > 0, sHeight * (.HeightPercent / 100) + .BottomPercentStatic - .TopPercentStatic, 0)
+                                    Else
+                                        objControl.Height = sHeight * (.HeightPercent / 100)
+                                    End If
                                 End If
                             End If
-                            '--
-                            'If .HeightPercent > 0 Then objControl.Height = sHeight * (.HeightPercent / 100)
-                            If .UseHeightPercent Then
-                                If .UseModePercent Then
-                                    'AQUIIIIII
-                                    objControl.Height = IIf(sHeight * (.HeightPercent / 100) + .BottomPercentStatic - .TopPercentStatic > 0, sHeight * (.HeightPercent / 100) + .BottomPercentStatic - .TopPercentStatic, 0)
-                                Else
-                                    objControl.Height = sHeight * (.HeightPercent / 100)
-                                End If
-                            End If
-                        End If
-                    End With
+                        End With
+                    End If
                 End If
-            End If
-        Next
+            Next
+        End If
     Next
     '---
     Call SendMessage(frmParent.hWnd, WM_SETREDRAW, 1&, 0&)
@@ -744,14 +762,15 @@ Private Sub DoResize()
     '--
 End Sub
 
-Private Sub SetIconForm(hWnd As Long, ByRef iconData() As Byte, ByVal cx As Long, ByVal cy As Long)
+Private Function GetBytesToIcon(ByRef iconData() As Byte, ByVal cx As Long, ByVal cy As Long) As Long
 On Local Error GoTo RutinaError
     '--
+    Dim hIcon       As Long
     Dim gToken      As Long
     Dim hBitmap     As Long
     Dim IconPic     As StdPicture
     '--
-    If Not IsArrayDim(VarPtrArray(iconData)) Then Exit Sub
+    If Not IsArrayDim(VarPtrArray(iconData)) Then Exit Function
     '--
     If iconData(2) = vbResIcon Or iconData(2) = vbResCursor Then
         Dim tIconHeader     As IconHeader
@@ -795,11 +814,8 @@ On Local Error GoTo RutinaError
             '--
             With tIconEntry(IconID)
                 hIcon = CreateIconFromResourceEx(iconData(.ieImageOffset), .ieBytesInRes, 1, IconVersion, cx, cy, &H0)
-                If hIcon <> 0 Then
-                    SendMessage hWnd, WM_SETICON, ICON_JUMBO, ByVal hIcon
-                    SendMessage hWnd, WM_SETICON, ICON_BIG, ByVal hIcon
-                    SendMessage hWnd, WM_SETICON, ICON_SMALL, ByVal hIcon
-                End If
+                GetBytesToIcon = hIcon
+                '---
             End With
         End If
     Else
@@ -824,10 +840,7 @@ On Local Error GoTo RutinaError
                                 GdipSetInterpolationMode ResizeGra, InterpolationModeHighQuality
                                 If GdipDrawImageRect(ResizeGra, hBitmap, 0, 0, cx, cy) = 0 Then
                                     If GdipCreateHICONFromBitmap(ResizeBmp, hIcon) = 0 Then
-                                        SendMessage hWnd, WM_SETICON, ICON_JUMBO, ByVal hIcon
-                                        SendMessage hWnd, WM_SETICON, ICON_BIG, ByVal hIcon
-                                        SendMessage hWnd, WM_SETICON, ICON_SMALL, ByVal hIcon
-                                        'DestroyIcon hIcon
+                                        GetBytesToIcon = hIcon
                                     End If
                                 End If
                                 Call GdipDeleteGraphics(ResizeGra)
@@ -836,10 +849,7 @@ On Local Error GoTo RutinaError
                         End If
                     Else
                         If GdipCreateHICONFromBitmap(hBitmap, hIcon) = 0 Then
-                            SendMessage hWnd, WM_SETICON, ICON_JUMBO, ByVal hIcon
-                            SendMessage hWnd, WM_SETICON, ICON_BIG, ByVal hIcon
-                            SendMessage hWnd, WM_SETICON, ICON_SMALL, ByVal hIcon
-                            'DestroyIcon hIcon
+                            GetBytesToIcon = hIcon
                         End If
                     End If
                 End If
@@ -849,10 +859,11 @@ On Local Error GoTo RutinaError
         End If
     End If
     '--
+    Exit Function
 RutinaError:
     If gToken Then GdiplusShutdown gToken
-    Debug.Print Err.Description
-End Sub
+    GetBytesToIcon = 0
+End Function
 
 Private Function IsArrayDim(ByVal lpArray As Long) As Boolean
     Dim lAddress As Long

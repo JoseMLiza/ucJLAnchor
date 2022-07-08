@@ -5,7 +5,7 @@ Begin VB.Form frmNoChild
    Caption         =   "No Child"
    ClientHeight    =   3255
    ClientLeft      =   120
-   ClientTop       =   465
+   ClientTop       =   765
    ClientWidth     =   3390
    LinkTopic       =   "Form1"
    ScaleHeight     =   3255
@@ -18,8 +18,8 @@ Begin VB.Form frmNoChild
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
-      IconPresent     =   0   'False
-      FormIcon        =   0
+      IconPresent     =   -1  'True
+      FormIcon        =   "frmNoChild.frx":0000
       ControlsCount   =   5
       BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
@@ -176,6 +176,9 @@ Begin VB.Form frmNoChild
          Top             =   240
          Width           =   2295
       End
+   End
+   Begin VB.Menu mnPrueba 
+      Caption         =   "Menu"
    End
 End
 Attribute VB_Name = "frmNoChild"

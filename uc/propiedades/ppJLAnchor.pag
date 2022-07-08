@@ -1235,7 +1235,7 @@ Private Sub LoadTreeView()
     Node.Bold = True
     'Add Controls Child Root (Parents)
     For Each obj In CtrlParent.Controls
-        If GetControlsCount(obj) > 0 And TypeName(obj.Container) <> "Form" Then
+        If GetControlsCount(obj) > 0 And InStr(OBJ_EXCLUDED, GetContainerTypeName(obj)) = 0 Then
             If sTemp <> TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container) Then
                 sTemp = TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container)
                 '---
@@ -1246,10 +1246,12 @@ Private Sub LoadTreeView()
     Next
     'Add Controls Child Root (Childs)
     For Each obj In CtrlParent.Controls
-        If GetControlsCount(obj) = 0 And TypeName(obj) <> "ucJLAnchor" Then
-            sTemp = TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container)
-            If TypeName(obj.Container) = "Form" Then sTemp = "r"
-            Set Node = trvwControls.Nodes.Add(sTemp, tvwChild, TypeName(obj) & obj.Name & GetControlIndex(obj), IIf(Len(GetControlIndex(obj)), obj.Name & "(" & GetControlIndex(obj) & ")", obj.Name))
+        If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
+            If GetControlsCount(obj) = 0 And TypeName(obj) <> "ucJLAnchor" Then
+                sTemp = TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container)
+                If TypeName(obj.Container) = "Form" Then sTemp = "r"
+                Set Node = trvwControls.Nodes.Add(sTemp, tvwChild, TypeName(obj) & obj.Name & GetControlIndex(obj), IIf(Len(GetControlIndex(obj)), obj.Name & "(" & GetControlIndex(obj) & ")", obj.Name))
+            End If
         End If
     Next
     '---

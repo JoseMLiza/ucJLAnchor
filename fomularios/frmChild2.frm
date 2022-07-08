@@ -38,6 +38,8 @@ Begin VB.Form frmChild2
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
+      IconPresent     =   -1  'True
+      FormIcon        =   "frmChild2.frx":0000
       ControlsCount   =   6
       BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"

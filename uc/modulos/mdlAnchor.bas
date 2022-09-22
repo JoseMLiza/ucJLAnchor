@@ -7,7 +7,7 @@ Attribute VB_Name = "mdlAnchor"
 '-----------------------------
 Option Explicit
 Public Const ST_KEYDIGVAL = "0123456789."
-Public Const OBJ_EXCLUDED = "/Error/Menu/ucJLAnchor/Form/"
+Public Const OBJ_EXCLUDED = "/Error/Menu/ucJLAnchor/Form/Toolbar/StatusBar"
 Public CtrlParent As Object
 
 Dim i As Long
@@ -55,8 +55,8 @@ Public Function GetControlsParent(objParent As Object) As Long
     On Error GoTo ErrorFunction
     Dim c As Long
     For i = 0 To objParent.Controls.Count - 1
-        If Len(objParent.Controls(i).Name) > 0 Then
-            If objParent.Controls(i).Name <> "ucJLAnchor" Then
+        If Len(objParent.Controls(i).name) > 0 Then
+            If objParent.Controls(i).name <> "ucJLAnchor" Then
                 c = c + 1
             End If
         End If
@@ -70,8 +70,21 @@ End Function
 Public Function GetControlsCount(objControl As Object) As Integer
     On Error GoTo ErrorFunction
     GetControlsCount = objControl.Controls.Count
+    Exit Function
 ErrorFunction:
     GetControlsCount = 0
+End Function
+
+Public Function GetControlInContainer(objControl As Object) As Boolean
+On Error GoTo ErrorFunction
+'---
+    Dim name As String
+    name = TypeName(objControl.Container)
+    GetControlInContainer = True
+    Exit Function
+'---
+ErrorFunction:
+    GetControlInContainer = False
 End Function
 
 Public Function ValidarKey(txtObject As TextBox, ValKey As Integer) As Integer

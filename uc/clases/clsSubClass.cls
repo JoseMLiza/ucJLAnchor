@@ -45,7 +45,7 @@ Private Const IDX_UNICODE   As Long = 75    'Must be Ubound(subclass thunkdata)+
 Private Const ALL_MESSAGES  As Long = -1    'All messages callback
 Private Const MSG_ENTRIES   As Long = 32    'Number of msg table entries. Set to 1 if using ALL_MESSAGES for all subclassed windows
 
-Private Declare Sub RtlMoveMemory Lib "kernel32" (ByVal Destination As Long, ByVal Source As Long, ByVal Length As Long)
+Private Declare Sub RtlMoveMemory Lib "kernel32" (ByVal Destination As Long, ByVal Source As Long, ByVal length As Long)
 Private Declare Function IsBadCodePtr Lib "kernel32" (ByVal lpFn As Long) As Long
 Private Declare Function VirtualAlloc Lib "kernel32" (ByVal lpAddress As Long, ByVal dwSize As Long, ByVal flAllocationType As Long, ByVal flProtect As Long) As Long
 Private Declare Function VirtualFree Lib "kernel32" (ByVal lpAddress As Long, ByVal dwSize As Long, ByVal dwFreeType As Long) As Long
@@ -516,7 +516,7 @@ Private Function zAddressOf(ByVal oCallback As Object, ByVal nOrdinal As Long) A
     Dim bVal  As Byte
     Dim nAddr As Long                                                           'Address of the vTable
     Dim i     As Long                                                           'Loop index
-    Dim J     As Long                                                           'Loop limit
+    Dim j     As Long                                                           'Loop limit
   
     RtlMoveMemory VarPtr(nAddr), ObjPtr(oCallback), 4                           'Get the address of the callback object's instance
     If Not zProbe(nAddr + &H1C, i, bSub) Then                                   'Probe for a Class method
@@ -531,8 +531,8 @@ Private Function zAddressOf(ByVal oCallback As Object, ByVal nOrdinal As Long) A
     End If
   
     i = i + 4                                                                   'Bump to the next entry
-    J = i + 1024                                                                'Set a reasonable limit, scan 256 vTable entries
-    Do While i < J
+    j = i + 1024                                                                'Set a reasonable limit, scan 256 vTable entries
+    Do While i < j
         RtlMoveMemory VarPtr(nAddr), i, 4                                       'Get the address stored in this vTable entry
     
         If IsBadCodePtr(nAddr) Then                                             'Is the entry an invalid code address?
@@ -688,10 +688,3 @@ Private Sub WndProc(ByVal bBefore As Boolean, _
 RaiseEvent WindowProc(bHandled, lReturn, hWnd, uMsg, wParam, lParam)
     
 End Sub
-
-
-
-
-
-
-

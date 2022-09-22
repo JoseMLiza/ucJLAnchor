@@ -1065,7 +1065,7 @@ Private Sub trvwControls_NodeClick(ByVal Node As MSComctlLib.Node)
                 nmbControl = Node.Text
                 idx = ""
             End If
-            If .Controls.Item(i).Name & .Controls.Item(i).ControlIndex = Left(nmbControl, Len(.Controls.Item(i).Name) & idx) Then
+            If .Controls.Item(i).name & .Controls.Item(i).ControlIndex = Left(nmbControl, Len(.Controls.Item(i).name) & idx) Then
                 cSel = i
                 lblInfo(1) = .Controls.Item(i).TypeName
                 lblInfo(3) = .Controls.Item(i).hWnd
@@ -1128,7 +1128,7 @@ Private Sub PropertyPage_ApplyChanges()
                 idx = ""
             End If
             '--
-            If .Controls.Item(i).Name & .Controls.Item(i).ControlIndex = Left(nmbControl, Len(.Controls.Item(i).Name) & idx) Then
+            If .Controls.Item(i).name & .Controls.Item(i).ControlIndex = Left(nmbControl, Len(.Controls.Item(i).name) & idx) Then
                 'Segun posicion fija:
                 'Anchor Left
                 .Controls.Item(i).AnchorLeft = IIf(lblAnchor(0).BackColor = vbBlack, True, False)
@@ -1142,7 +1142,7 @@ Private Sub PropertyPage_ApplyChanges()
                 'Segun posicion y tamaño porcentual:
                 '--> Actualizar control en tiempo diseño.
                 For Each obj In CtrlParent.Controls
-                    If obj.Name & GetControlIndex(obj) = .Controls.Item(i).Name & .Controls.Item(i).ControlIndex Then
+                    If obj.name & GetControlIndex(obj) = .Controls.Item(i).name & .Controls.Item(i).ControlIndex Then
                         '--
                         If .Controls.Item(i).UseLeftPercent And .Controls.Item(i).LeftPercent <> txtDetPercent(0) And Not CBool(.Controls.Item(i).UseModePercent) Then
                             obj.Left = GetControlScaleWidth(obj.Container) * (txtDetPercent(0) / 100)
@@ -1230,27 +1230,27 @@ Private Sub LoadTreeView()
     'Clear TreeView
     If trvwControls.Nodes.Count > 0 Then trvwControls.Nodes.Clear
     'Add Node Root
-    Set Node = trvwControls.Nodes.Add(, , "r", CtrlParent.Name)
+    Set Node = trvwControls.Nodes.Add(, , "r", CtrlParent.name)
     Node.Expanded = True
     Node.Bold = True
     'Add Controls Child Root (Parents)
     For Each obj In CtrlParent.Controls
         If GetControlsCount(obj) > 0 And InStr(OBJ_EXCLUDED, GetContainerTypeName(obj)) = 0 Then
-            If sTemp <> TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container) Then
-                sTemp = TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container)
+            If sTemp <> TypeName(obj.Container) & obj.Container.name & GetControlIndex(obj.Container) Then
+                sTemp = TypeName(obj.Container) & obj.Container.name & GetControlIndex(obj.Container)
                 '---
-                Set Node = trvwControls.Nodes.Add("r", tvwChild, sTemp, IIf(Len(GetControlIndex(obj.Container)), obj.Container.Name & "(" & GetControlIndex(obj.Container) & ")", obj.Container.Name))
+                Set Node = trvwControls.Nodes.Add("r", tvwChild, sTemp, IIf(Len(GetControlIndex(obj.Container)), obj.Container.name & "(" & GetControlIndex(obj.Container) & ")", obj.Container.name))
             End If
             
         End If
     Next
-    'Add Controls Child Root (Childs)
+    'Add Controls Childs (Childs)
     For Each obj In CtrlParent.Controls
         If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
-            If GetControlsCount(obj) = 0 And TypeName(obj) <> "ucJLAnchor" Then
-                sTemp = TypeName(obj.Container) & obj.Container.Name & GetControlIndex(obj.Container)
+            If GetControlsCount(obj) = 0 And TypeName(obj) <> "ucJLAnchor" And GetControlInContainer(obj) Then
+                sTemp = TypeName(obj.Container) & obj.Container.name & GetControlIndex(obj.Container)
                 If TypeName(obj.Container) = "Form" Then sTemp = "r"
-                Set Node = trvwControls.Nodes.Add(sTemp, tvwChild, TypeName(obj) & obj.Name & GetControlIndex(obj), IIf(Len(GetControlIndex(obj)), obj.Name & "(" & GetControlIndex(obj) & ")", obj.Name))
+                Set Node = trvwControls.Nodes.Add(sTemp, tvwChild, TypeName(obj) & obj.name & GetControlIndex(obj), IIf(Len(GetControlIndex(obj)), obj.name & "(" & GetControlIndex(obj) & ")", obj.name))
             End If
         End If
     Next

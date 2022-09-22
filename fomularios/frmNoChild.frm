@@ -3,18 +3,18 @@ Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmNoChild 
    Caption         =   "No Child"
-   ClientHeight    =   3255
+   ClientHeight    =   3285
    ClientLeft      =   120
    ClientTop       =   765
    ClientWidth     =   3390
    LinkTopic       =   "Form1"
-   ScaleHeight     =   3255
+   ScaleHeight     =   3285
    ScaleWidth      =   3390
    Begin JLAnchor.ucJLAnchor ucJLAnchor1 
       Height          =   480
-      Left            =   2760
+      Left            =   0
       TabIndex        =   4
-      Top             =   120
+      Top             =   0
       Width           =   480
       _ExtentX        =   847
       _ExtentY        =   847
@@ -31,13 +31,13 @@ Begin VB.Form frmNoChild
          Object.Left            =   120
          Object.Top             =   120
          Right           =   2055
-         Bottom          =   2640
+         Bottom          =   2670
          MinWidth        =   75
          MinHeight       =   195
          LeftPercent     =   3.54
-         TopPercent      =   3.687
+         TopPercent      =   3.653
          WidthPercent    =   35.841
-         HeightPercent   =   15.207
+         HeightPercent   =   15.068
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
       EndProperty
@@ -50,14 +50,14 @@ Begin VB.Form frmNoChild
          hWnd            =   4786524
          Object.Left            =   1440
          Object.Top             =   120
-         Right           =   735
-         Bottom          =   2640
+         Right           =   135
+         Bottom          =   2670
          MinWidth        =   150
          MinHeight       =   285
          LeftPercent     =   42.478
-         TopPercent      =   3.687
-         WidthPercent    =   35.841
-         HeightPercent   =   15.207
+         TopPercent      =   3.653
+         WidthPercent    =   53.54
+         HeightPercent   =   15.068
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
@@ -72,13 +72,13 @@ Begin VB.Form frmNoChild
          Object.Left            =   120
          Object.Top             =   840
          Right           =   135
-         Bottom          =   120
+         Bottom          =   150
          MinWidth        =   15
          MinHeight       =   15
          LeftPercent     =   3.54
-         TopPercent      =   25.806
+         TopPercent      =   25.571
          WidthPercent    =   92.478
-         HeightPercent   =   70.507
+         HeightPercent   =   69.863
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
@@ -141,7 +141,7 @@ Begin VB.Form frmNoChild
       TabIndex        =   2
       Text            =   "Text1"
       Top             =   120
-      Width           =   1215
+      Width           =   1815
    End
    Begin VB.PictureBox Picture1 
       Height          =   2295

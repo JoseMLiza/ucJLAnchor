@@ -2,14 +2,14 @@ VERSION 5.00
 Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmChild 
    Caption         =   "Child"
-   ClientHeight    =   4425
+   ClientHeight    =   4410
    ClientLeft      =   120
    ClientTop       =   465
-   ClientWidth     =   8970
+   ClientWidth     =   9060
    LinkTopic       =   "Form1"
    MDIChild        =   -1  'True
-   ScaleHeight     =   4425
-   ScaleWidth      =   8970
+   ScaleHeight     =   4410
+   ScaleWidth      =   9060
    Begin JLAnchor.ucJLAnchor ucJLAnchor1 
       Height          =   480
       Left            =   8400
@@ -20,7 +20,7 @@ Begin VB.Form frmChild
       _ExtentY        =   847
       IconPresent     =   -1  'True
       FormIcon        =   "frmChild.frx":0000
-      ControlsCount   =   7
+      ControlsCount   =   8
       BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
@@ -30,15 +30,16 @@ Begin VB.Form frmChild
          hWnd            =   2637912
          Object.Left            =   4485
          Object.Top             =   840
-         Bottom          =   105
+         Right           =   90
+         Bottom          =   90
          MinWidth        =   15
          MinHeight       =   15
          UseLeftPercent  =   -1  'True
-         LeftPercent     =   50
-         TopPercent      =   18.983
+         LeftPercent     =   49.503
+         TopPercent      =   19.048
          UseWidthPercent =   -1  'True
-         WidthPercent    =   50
-         HeightPercent   =   78.644
+         WidthPercent    =   49.503
+         HeightPercent   =   78.912
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
@@ -101,15 +102,15 @@ Begin VB.Form frmChild
          Object.Index           =   4
          hWnd            =   6623644
          Object.Top             =   840
-         Right           =   4485
-         Bottom          =   90
+         Right           =   4575
+         Bottom          =   75
          MinWidth        =   15
          MinHeight       =   15
          UseLeftPercent  =   -1  'True
-         TopPercent      =   18.983
+         TopPercent      =   19.048
          UseWidthPercent =   -1  'True
-         WidthPercent    =   50
-         HeightPercent   =   78.983
+         WidthPercent    =   49.503
+         HeightPercent   =   79.252
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
@@ -122,14 +123,14 @@ Begin VB.Form frmChild
          hWnd            =   7932554
          Object.Left            =   1440
          Object.Top             =   120
-         Right           =   675
-         Bottom          =   3810
+         Right           =   765
+         Bottom          =   3795
          MinWidth        =   150
          MinHeight       =   285
-         LeftPercent     =   16.054
-         TopPercent      =   2.712
-         WidthPercent    =   76.421
-         HeightPercent   =   11.186
+         LeftPercent     =   15.894
+         TopPercent      =   2.721
+         WidthPercent    =   75.662
+         HeightPercent   =   11.224
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
@@ -143,14 +144,14 @@ Begin VB.Form frmChild
          hWnd            =   38340526
          Object.Left            =   120
          Object.Top             =   120
-         Right           =   7635
-         Bottom          =   3810
+         Right           =   7725
+         Bottom          =   3795
          MinWidth        =   75
          MinHeight       =   195
-         LeftPercent     =   1.338
-         TopPercent      =   2.712
-         WidthPercent    =   13.545
-         HeightPercent   =   11.186
+         LeftPercent     =   1.325
+         TopPercent      =   2.721
+         WidthPercent    =   13.411
+         HeightPercent   =   11.224
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
       EndProperty
@@ -173,6 +174,11 @@ Begin VB.Form frmChild
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
+      EndProperty
+      BeginProperty Control_8 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+         TypeName        =   "Timer"
+         Name            =   "Timer1"
+         Object.Index           =   8
       EndProperty
    End
    Begin VB.Frame Frame1 

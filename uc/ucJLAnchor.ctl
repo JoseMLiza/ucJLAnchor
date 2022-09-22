@@ -205,7 +205,7 @@ End Property
 Public Property Let FormMinWidth(ByVal newValue As Long)
     If newValue < 0 Then newValue = 0
     If newValue > 0 And newValue > m_FormMaxWidth And m_FormMaxWidth > 0 Then
-        MsgBox "FormMinWidth cannot be larger than FormMaxWidth", vbExclamation + vbOKOnly, UserControl.Name
+        MsgBox "FormMinWidth cannot be larger than FormMaxWidth", vbExclamation + vbOKOnly, UserControl.name
         Exit Property
     End If
     m_FormMinWidth = newValue
@@ -219,7 +219,7 @@ End Property
 Public Property Let FormMinHeight(ByVal newValue As Long)
     If newValue < 0 Then newValue = 0
     If newValue > 0 And newValue > m_FormMaxHeight And m_FormMaxHeight > 0 Then
-        MsgBox "FormMinHeight cannot be larger than FormMaxHeight", vbExclamation + vbOKOnly, UserControl.Name
+        MsgBox "FormMinHeight cannot be larger than FormMaxHeight", vbExclamation + vbOKOnly, UserControl.name
         Exit Property
     End If
     m_FormMinHeight = newValue
@@ -233,13 +233,13 @@ End Property
 Public Property Let FormMaxWidth(ByVal newValue As Long)
     If newValue < 0 Then newValue = 0
     If newValue > 0 And newValue < m_FormMinWidth And m_FormMinWidth > 0 Then
-        MsgBox "FormMaxWidth cannot be smaller than FormMinWidth", vbExclamation + vbOKOnly, UserControl.Name
+        MsgBox "FormMaxWidth cannot be smaller than FormMinWidth", vbExclamation + vbOKOnly, UserControl.name
         Exit Property
     End If
     If newValue > Screen.Width Then
         MsgBox "FormMaxWidth can not be greater than the limit of the screen." & vbCrLf & _
                "Maximum width (twips): " & Screen.Width & vbCrLf & _
-               "Maximum width (pixels): " & ScaleX(Screen.Width, vbTwips, vbPixels), vbExclamation + vbOKOnly, UserControl.Name
+               "Maximum width (pixels): " & ScaleX(Screen.Width, vbTwips, vbPixels), vbExclamation + vbOKOnly, UserControl.name
         Exit Property
     End If
     m_FormMaxWidth = newValue
@@ -253,13 +253,13 @@ End Property
 Public Property Let FormMaxHeight(ByVal newValue As Long)
     If newValue < 0 Then newValue = 0
     If newValue > 0 And newValue < FormMinHeight And FormMinHeight > 0 Then
-        MsgBox "FormMaxHeight cannot be smaller than FormMinHeight", vbExclamation + vbOKOnly, UserControl.Name
+        MsgBox "FormMaxHeight cannot be smaller than FormMinHeight", vbExclamation + vbOKOnly, UserControl.name
         Exit Property
     End If
     If newValue > Screen.Height Then
         MsgBox "FormMaxHeight can not be greater than the limit of the screen." & vbCrLf & _
                "Maximum height (twips): " & Screen.Height & vbCrLf & _
-               "Maximum height (pixels): " & ScaleY(Screen.Height, vbTwips, vbPixels), vbExclamation + vbOKOnly, UserControl.Name
+               "Maximum height (pixels): " & ScaleY(Screen.Height, vbTwips, vbPixels), vbExclamation + vbOKOnly, UserControl.name
         Exit Property
     End If
     m_FormMaxHeight = newValue
@@ -471,13 +471,13 @@ Private Sub LoadControls()
         For i = cIni To cCount
             IsExists = False
             For Each obj In CtrlParent.Controls
-                If TypeName(obj) & obj.Name & GetControlIndex(obj) = Controls.Item(i).TypeName & Controls.Item(i).Name & Controls.Item(i).ControlIndex Then
+                If TypeName(obj) & obj.name & GetControlIndex(obj) = Controls.Item(i).TypeName & Controls.Item(i).name & Controls.Item(i).ControlIndex Then
                     IsExists = True
                     Exit For
                 End If
             Next
             'If Not IsExists And TypeName(obj) <> "ucJLAnchor" Then
-            If Not IsExists And InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
+            If Not IsExists And InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 And GetControlInContainer(obj) Then
                 Controls.Remove i
                 IsChange = True
             End If
@@ -491,12 +491,12 @@ Private Sub LoadControls()
         With obj
             If Not cCount > 0 Then
                 'If TypeName(obj) <> "ucJLAnchor" Then
-                If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
+                If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 And GetControlInContainer(obj) Then
                     cControl.ParentTypeName = TypeName(obj.Container)
-                    cControl.ParentName = obj.Container.Name
+                    cControl.ParentName = obj.Container.name
                     cControl.ParentIndex = GetControlIndex(obj.Container.Index)
                     cControl.TypeName = TypeName(obj)
-                    cControl.Name = .Name
+                    cControl.name = .name
                     cControl.ControlIndex = GetControlIndex(obj)
                     cControl.hWnd = GetControlHwnd(obj)
                     cControl.Left = .Left
@@ -519,21 +519,21 @@ Private Sub LoadControls()
             Else
                 For i = cIni To cCount
                     'If TypeName(obj) <> "ucJLAnchor" Then
-                    If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
-                        If TypeName(obj) & .Name & GetControlIndex(obj) = Controls.Item(i).TypeName & Controls.Item(i).Name & Controls.Item(i).ControlIndex Then
+                    If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 And GetControlInContainer(obj) Then
+                        If TypeName(obj) & .name & GetControlIndex(obj) = Controls.Item(i).TypeName & Controls.Item(i).name & Controls.Item(i).ControlIndex Then
                             IsExists = True
                             Exit For
                         End If
                     End If
                 Next
                 'If TypeName(obj) <> "ucJLAnchor" Then
-                If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then
+                If InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 And GetControlInContainer(obj) Then
                     If Not IsExists Then
                         cControl.ParentTypeName = TypeName(obj.Container)
-                        cControl.ParentName = obj.Container.Name
+                        cControl.ParentName = obj.Container.name
                         cControl.ParentIndex = GetControlIndex(obj.Container.Index)
                         cControl.TypeName = TypeName(obj)
-                        cControl.Name = .Name
+                        cControl.name = .name
                         cControl.ControlIndex = GetControlIndex(obj)
                         cControl.hWnd = GetControlHwnd(obj)
                         cControl.Left = .Left
@@ -554,14 +554,24 @@ Private Sub LoadControls()
                         IsChange = True
                     Else
                         '--> Validar cambio de resolucion
+                        '--> Width & Left
                         If obj.Left <= Screen.Width And (obj.Width) > (Screen.Width - obj.Left) Then
-                            Debug.Print UserControl.Parent.Name & ": Width of control " & obj.Name & " exceeds that of the screen, the positions have been updated, verify."
+                            Debug.Print UserControl.Parent.name & ": Width of control " & obj.name & " exceeds that of the screen, the positions have been updated, verify."
                             obj.Width = GetControlScaleWidth(obj.Container) - (obj.Left + (Controls.Item(i).Right))
                             IsChange = True
+                        ElseIf obj.Left >= Screen.Width Then
+                            Debug.Print UserControl.Parent.name & ": Left position of control " & obj.name & " exceeds that of the screen, the positions have been updated, verify."
+                            obj.Left = GetControlScaleWidth(obj.Container) - (GetControlScaleWidth(obj) + Controls.Item(i).Right)
+                            IsChange = True
                         End If
+                        '--> Height & Top
                         If obj.Top <= Screen.Height And (obj.Height) > (Screen.Height - obj.Top) Then
-                            Debug.Print UserControl.Parent.Name & ": Height of control " & obj.Name & " exceeds that of the screen, the positions have been updated, verify."
+                            Debug.Print UserControl.Parent.name & ": Height of control " & obj.name & " exceeds that of the screen, the positions have been updated, verify."
                             obj.Height = GetControlScaleHeight(obj.Container) - (obj.Top + (Controls.Item(i).Bottom))
+                            IsChange = True
+                        ElseIf obj.Top >= Screen.Height Then
+                            Debug.Print UserControl.Parent.name & ": Top position of control " & obj.name & " exceeds that of the screen, the positions have been updated, verify."
+                            obj.Top = GetControlScaleHeight(obj.Container) - (GetControlScaleHeight(obj) + Controls.Item(i).Bottom)
                             IsChange = True
                         End If
                         '--< Fin Validar cambio de resolucion
@@ -569,8 +579,8 @@ Private Sub LoadControls()
                             If Controls.Item(i).ParentTypeName <> TypeName(obj.Container) Then
                                 Controls.Item(i).ParentTypeName = TypeName(obj.Container)
                             End If
-                            If Controls.Item(i).ParentName <> obj.Container.Name Then
-                                Controls.Item(i).ParentName = obj.Container.Name
+                            If Controls.Item(i).ParentName <> obj.Container.name Then
+                                Controls.Item(i).ParentName = obj.Container.name
                             End If
                             If Controls.Item(i).ParentIndex <> GetControlIndex(obj) Then
                                 Controls.Item(i).ParentIndex = GetControlIndex(obj)
@@ -655,7 +665,7 @@ Private Sub DoResize()
     Call SendMessage(frmParent.hWnd, WM_SETREDRAW, 0&, 0&)
     '--
     For Each objControl In frmParent
-        If InStr(OBJ_EXCLUDED, TypeName(objControl)) = 0 Then
+        If InStr(OBJ_EXCLUDED, TypeName(objControl)) = 0 And GetControlInContainer(objControl) Then
             '--
             idx = GetControlIndex(objControl)
             '--
@@ -664,7 +674,7 @@ Private Sub DoResize()
             '--
             For a = 1 To Controls.Count
                 If Controls.Item(a).TypeName = TypeName(objControl) Then
-                    If Controls.Item(a).Name & Controls.Item(a).ControlIndex = objControl.Name & idx Then
+                    If Controls.Item(a).name & Controls.Item(a).ControlIndex = objControl.name & idx Then
                         With Controls.Item(a)
                             If .AnchorRight Then
                                 If .AnchorLeft Then

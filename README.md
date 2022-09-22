@@ -16,3 +16,5 @@ As always, it will be appreciated if an error is reported to provide the necessa
 An example form was added for the static percentage option.
 
 - **06/07/2022:** Added option to add icon for form, with support for .ICO, .JPG, .BMP and .PNG.
+
+- **22/09/2022:** Fixed a bug with some controls not handling the container property.

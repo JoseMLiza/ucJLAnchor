@@ -11,3 +11,7 @@ ucTreeMaps = 0, 0, 0, 0, C, 26, 26, 433, 538, C
 ppProgressCircular = 0, 0, 0, 0, C, 52, 52, 459, 564, C
 frmControlsLea = 0, 0, 0, 0, C, 78, 78, 485, 590, C
 frmChild2 = 0, 0, 0, 0, C, 104, 104, 511, 616, C
+ucScrollbar = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+ucGridPlus = 0, 0, 0, 0, C, 0, 0, 0, 0, C
+mIOleInPlaceActivate = 0, 0, 0, 0, C
+ucText = 0, 0, 0, 0, C, 0, 0, 0, 0, C

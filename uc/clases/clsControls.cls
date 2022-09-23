@@ -32,7 +32,7 @@ Public Function Add(NewControl As clsControl) As clsControl
     objNewControl.ParentName = NewControl.ParentName
     objNewControl.ParentIndex = NewControl.ParentIndex
     objNewControl.TypeName = NewControl.TypeName
-    objNewControl.Name = NewControl.Name
+    objNewControl.name = NewControl.name
     objNewControl.ControlIndex = IIf(CInt(IIf(IsNumeric(NewControl.ControlIndex), NewControl.ControlIndex, -1)) >= 0, NewControl.ControlIndex, "")
     objNewControl.hWnd = NewControl.hWnd
     objNewControl.Left = NewControl.Left
@@ -65,12 +65,13 @@ Public Function Add(NewControl As clsControl) As clsControl
     objNewControl.AnchorTop = NewControl.AnchorTop
     objNewControl.AnchorRight = NewControl.AnchorRight
     objNewControl.AnchorBottom = NewControl.AnchorBottom
-    '---
-    If Len(Trim(objNewControl.ControlIndex)) = 0 Then
-        m_Controls.Add objNewControl
-    Else
-        m_Controls.Add objNewControl, objNewControl.ControlIndex
-    End If
+    '--> Agregar controles a la colección:
+    m_Controls.Add objNewControl, CStr(m_Controls.Count)
+    'If Len(Trim(objNewControl.ControlIndex)) = 0 Then
+    '    m_Controls.Add objNewControl
+    'Else
+    '    m_Controls.Add objNewControl, m_Controls.Count ', objNewControl.ControlIndex
+    'End If
     objNewControl.Index = m_Controls.Count
     Set Add = objNewControl
     Set objNewControl = Nothing

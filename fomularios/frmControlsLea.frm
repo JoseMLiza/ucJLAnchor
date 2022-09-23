@@ -753,7 +753,7 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private Sub Form_Load()
     Dim cPalette As Collection
-    Dim i As Long, j As Long
+    Dim i As Long, J As Long
     Dim Value As Collection
     Dim Lables As Collection
     Dim Icons As Collection
@@ -799,21 +799,21 @@ Private Sub Form_Load()
     ucChartBar2.AddAxisItems Lables, True, , 2
     ucChartBar2.AddSerie "Serie 1", vbRed, Value, cPalette
     
-    For j = 1 To 3
+    For J = 1 To 3
         Set Value = New Collection
         For i = 1 To cPalette.Count
             Value.Add Random(10 * i, 100 * i)
         Next
-        ucChartArea1.AddLineSeries "Serie " & j, Value, cPalette(j)
+        ucChartArea1.AddLineSeries "Serie " & J, Value, cPalette(J)
     Next
     
     
-    For j = 1 To 2
+    For J = 1 To 2
         Set Value = New Collection
         For i = 1 To cPalette.Count
             Value.Add Random(10 * i, 100 * i)
         Next
-        ucChartArea2.AddLineSeries "Serie " & j, Value, cPalette(j + 5)
+        ucChartArea2.AddLineSeries "Serie " & J, Value, cPalette(J + 5)
     Next
     
 

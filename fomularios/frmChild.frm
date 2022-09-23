@@ -20,7 +20,7 @@ Begin VB.Form frmChild
       _ExtentY        =   847
       IconPresent     =   -1  'True
       FormIcon        =   "frmChild.frx":0000
-      ControlsCount   =   8
+      ControlsCount   =   12
       BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmChild"
@@ -161,14 +161,14 @@ Begin VB.Form frmChild
          TypeName        =   "LabelPlus"
          Name            =   "LabelPlus1"
          Object.Index           =   7
-         Object.Left            =   480
-         Object.Top             =   600
-         Right           =   1650
-         Bottom          =   2340
+         Object.Left            =   120
+         Object.Top             =   120
+         Right           =   2010
+         Bottom          =   2820
          MinWidth        =   30
          MinHeight       =   30
-         LeftPercent     =   10.847
-         TopPercent      =   17.467
+         LeftPercent     =   2.712
+         TopPercent      =   3.493
          WidthPercent    =   51.864
          HeightPercent   =   14.41
          AnchorLeft      =   -1  'True
@@ -179,6 +179,96 @@ Begin VB.Form frmChild
          TypeName        =   "Timer"
          Name            =   "Timer1"
          Object.Index           =   8
+      EndProperty
+      BeginProperty Control_9 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+         ParentTypeName  =   "PictureBox"
+         ParentName      =   "Picture1"
+         TypeName        =   "ucGridPlus"
+         Name            =   "ucGridPlus1"
+         Object.Index           =   9
+         hWnd            =   987862
+         Object.Left            =   120
+         Object.Top             =   720
+         Right           =   1050
+         Bottom          =   780
+         MinWidth        =   30
+         MinHeight       =   30
+         LeftPercent     =   2.712
+         TopPercent      =   20.961
+         WidthPercent    =   73.559
+         HeightPercent   =   56.332
+         AnchorLeft      =   -1  'True
+         AnchorTop       =   -1  'True
+         AnchorRight     =   -1  'True
+         AnchorBottom    =   -1  'True
+      EndProperty
+      BeginProperty Control_10 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+         ParentTypeName  =   "ucGridPlus"
+         ParentName      =   "ucGridPlus1"
+         TypeName        =   "TextBox"
+         Name            =   "Text4"
+         Object.Index           =   10
+         hWnd            =   3089264
+         Object.Left            =   960
+         Object.Top             =   600
+         Right           =   1200
+         Bottom          =   840
+         MinWidth        =   150
+         MinHeight       =   285
+         LeftPercent     =   29.493
+         TopPercent      =   31.008
+         WidthPercent    =   33.641
+         HeightPercent   =   25.581
+         AnchorLeft      =   -1  'True
+         AnchorTop       =   -1  'True
+         AnchorRight     =   -1  'True
+      EndProperty
+      BeginProperty Control_11 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+         ParentTypeName  =   "PictureBox"
+         ParentName      =   "Picture1"
+         ParentIndex     =   "0"
+         TypeName        =   "ucGridPlus"
+         Name            =   "ucGridPlus1"
+         ControlIndex    =   "0"
+         Object.Index           =   11
+         hWnd            =   3285872
+         Object.Left            =   120
+         Object.Top             =   720
+         Right           =   1050
+         Bottom          =   780
+         MinWidth        =   30
+         MinHeight       =   30
+         LeftPercent     =   2.712
+         TopPercent      =   20.961
+         WidthPercent    =   73.559
+         HeightPercent   =   56.332
+         AnchorLeft      =   -1  'True
+         AnchorTop       =   -1  'True
+         AnchorRight     =   -1  'True
+         AnchorBottom    =   -1  'True
+      EndProperty
+      BeginProperty Control_12 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+         ParentTypeName  =   "ucGridPlus"
+         ParentName      =   "ucGridPlus1"
+         ParentIndex     =   "0"
+         TypeName        =   "ucText"
+         Name            =   "ucText1"
+         ControlIndex    =   "0"
+         Object.Index           =   12
+         hWnd            =   3345658
+         Object.Left            =   120
+         Object.Top             =   120
+         Right           =   2040
+         Bottom          =   1440
+         MinWidth        =   30
+         MinHeight       =   30
+         LeftPercent     =   3.687
+         TopPercent      =   6.202
+         WidthPercent    =   33.641
+         HeightPercent   =   19.38
+         AnchorLeft      =   -1  'True
+         AnchorTop       =   -1  'True
+         AnchorRight     =   -1  'True
       EndProperty
    End
    Begin VB.Frame Frame1 
@@ -213,11 +303,64 @@ Begin VB.Form frmChild
       TabIndex        =   2
       Top             =   840
       Width           =   4485
+      Begin Proyecto1.ucGridPlus ucGridPlus1 
+         Height          =   1935
+         Index           =   0
+         Left            =   120
+         TabIndex        =   8
+         Top             =   720
+         Width           =   3255
+         _ExtentX        =   5741
+         _ExtentY        =   3413
+         HeaderHeight    =   50
+         BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   400
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         BeginProperty HeaderFont {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+            Name            =   "MS Sans Serif"
+            Size            =   8.25
+            Charset         =   0
+            Weight          =   700
+            Underline       =   0   'False
+            Italic          =   0   'False
+            Strikethrough   =   0   'False
+         EndProperty
+         Begin Proyecto1.ucText ucText1 
+            Height          =   375
+            Index           =   0
+            Left            =   120
+            TabIndex        =   9
+            Top             =   120
+            Width           =   1095
+            _ExtentX        =   1931
+            _ExtentY        =   661
+            BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
+               Name            =   "MS Sans Serif"
+               Size            =   8.25
+               Charset         =   0
+               Weight          =   400
+               Underline       =   0   'False
+               Italic          =   0   'False
+               Strikethrough   =   0   'False
+            EndProperty
+            BackColor       =   -2147483643
+            Text            =   "frmChild.frx":56C36
+            ImgLeft         =   "frmChild.frx":56C64
+            ImgRight        =   "frmChild.frx":56C7C
+            RightButtonStyle=   0
+         End
+      End
       Begin Proyecto1.LabelPlus LabelPlus1 
          Height          =   495
-         Left            =   480
+         Left            =   120
          TabIndex        =   6
-         Top             =   600
+         Top             =   120
          Width           =   2295
          _ExtentX        =   4048
          _ExtentY        =   873
@@ -228,7 +371,7 @@ Begin VB.Form frmChild
          BorderCornerBottomLeft=   5
          CaptionAlignmentH=   1
          CaptionAlignmentV=   1
-         Caption         =   "frmChild.frx":56C36
+         Caption         =   "frmChild.frx":56C94
          BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
             Name            =   "Lucida Sans"
             Size            =   8.25

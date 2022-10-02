@@ -18,3 +18,5 @@ An example form was added for the static percentage option.
 - **06/07/2022:** Added option to add icon for form, with support for .ICO, .JPG, .BMP and .PNG.
 
 - **22/09/2022:** Fixed a bug with some controls not handling the container property.
+
+- **01/10/2022:** Bug fix in handling multiple scales in containers that don't expose the ScaleMode property.

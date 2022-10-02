@@ -31,6 +31,10 @@ Begin VB.MDIForm MDIForm1
          Caption         =   "Child 2"
          Index           =   4
       End
+      Begin VB.Menu mnuForms 
+         Caption         =   "Test"
+         Index           =   5
+      End
    End
 End
 Attribute VB_Name = "MDIForm1"
@@ -49,5 +53,7 @@ Private Sub mnuForms_Click(Index As Integer)
         Case 3 'Separator
         Case 4 'Child 2
             frmChild2.Show
+        Case 5 'Test
+            frmTest.Show
     End Select
 End Sub

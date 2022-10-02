@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
+Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.1#0"; "JLAnchor.ocx"
 Begin VB.Form frmControlsLea 
    Caption         =   "Controles @Leandro - Percent Dynamic"
    ClientHeight    =   6225
@@ -23,12 +23,13 @@ Begin VB.Form frmControlsLea
       FormMinWidth    =   12855
       FormMinHeight   =   6810
       ControlsCount   =   13
-      BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_1 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucPieChart"
          Name            =   "ucPieChart2"
          Object.Index           =   1
+         ScaleModeParent =   1
          Object.Left            =   9960
          Object.Top             =   4080
          Right           =   120
@@ -44,12 +45,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   33.012
       EndProperty
-      BeginProperty Control_2 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_2 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "LabelPlus"
          Name            =   "LabelPlus3"
          Object.Index           =   2
+         ScaleModeParent =   1
          Object.Left            =   10080
          Object.Top             =   2520
          Right           =   240
@@ -65,12 +67,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   19.518
       EndProperty
-      BeginProperty Control_3 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_3 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucPieChart"
          Name            =   "ucPieChart1"
          Object.Index           =   3
+         ScaleModeParent =   1
          Object.Left            =   9960
          Object.Top             =   120
          Right           =   120
@@ -86,12 +89,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   33.012
       EndProperty
-      BeginProperty Control_4 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_4 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartBar"
          Name            =   "ucChartBar2"
          Object.Index           =   4
+         ScaleModeParent =   1
          Object.Left            =   120
          Object.Top             =   3960
          Right           =   8040
@@ -107,12 +111,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   34.94
       EndProperty
-      BeginProperty Control_5 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_5 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartArea"
          Name            =   "ucChartArea2"
          Object.Index           =   5
+         ScaleModeParent =   1
          Object.Left            =   4680
          Object.Top             =   4200
          Right           =   2760
@@ -128,12 +133,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   31.084
       EndProperty
-      BeginProperty Control_6 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_6 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucTreeMaps"
          Name            =   "ucTreeMaps1"
          Object.Index           =   6
+         ScaleModeParent =   1
          Object.Left            =   4680
          Object.Top             =   2040
          Right           =   2760
@@ -149,12 +155,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   33.012
       EndProperty
-      BeginProperty Control_7 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_7 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartArea"
          Name            =   "ucChartArea1"
          Object.Index           =   7
+         ScaleModeParent =   1
          Object.Left            =   120
          Object.Top             =   1920
          Right           =   8040
@@ -170,12 +177,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   31.084
       EndProperty
-      BeginProperty Control_8 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_8 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "ucChartBar"
          Name            =   "ucChartBar1"
          Object.Index           =   8
+         ScaleModeParent =   1
          Object.Left            =   4680
          Object.Top             =   120
          Right           =   2760
@@ -191,7 +199,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   29.157
       EndProperty
-      BeginProperty Control_9 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_9 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          ParentIndex     =   "2"
@@ -199,6 +207,7 @@ Begin VB.Form frmControlsLea
          Name            =   "ucProgressCircular1"
          ControlIndex    =   "2"
          Object.Index           =   9
+         ScaleModeParent =   1
          Object.Left            =   3120
          Object.Top             =   360
          Right           =   8160
@@ -214,7 +223,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   21.446
       EndProperty
-      BeginProperty Control_10 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_10 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          ParentIndex     =   "1"
@@ -222,6 +231,7 @@ Begin VB.Form frmControlsLea
          Name            =   "ucProgressCircular1"
          ControlIndex    =   "1"
          Object.Index           =   10
+         ScaleModeParent =   1
          Object.Left            =   1680
          Object.Top             =   360
          Right           =   9600
@@ -237,7 +247,7 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   21.446
       EndProperty
-      BeginProperty Control_11 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_11 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          ParentIndex     =   "0"
@@ -245,6 +255,7 @@ Begin VB.Form frmControlsLea
          Name            =   "ucProgressCircular1"
          ControlIndex    =   "0"
          Object.Index           =   11
+         ScaleModeParent =   1
          Object.Left            =   240
          Object.Top             =   360
          Right           =   11040
@@ -260,12 +271,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   21.446
       EndProperty
-      BeginProperty Control_12 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_12 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "LabelPlus"
          Name            =   "LabelPlus1"
          Object.Index           =   12
+         ScaleModeParent =   1
          Object.Left            =   120
          Object.Top             =   120
          Right           =   8040
@@ -281,12 +293,13 @@ Begin VB.Form frmControlsLea
          UseHeightPercent=   -1  'True
          HeightPercent   =   27.229
       EndProperty
-      BeginProperty Control_13 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_13 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmControlsLea"
          TypeName        =   "LabelPlus"
          Name            =   "LabelPlus2"
          Object.Index           =   13
+         ScaleModeParent =   1
          Object.Left            =   9960
          Object.Top             =   2280
          Right           =   120
@@ -754,7 +767,7 @@ Attribute VB_Exposed = False
 Private Sub Form_Load()
     Dim cPalette As Collection
     Dim i As Long, J As Long
-    Dim Value As Collection
+    Dim value As Collection
     Dim Lables As Collection
     Dim Icons As Collection
     Dim keys As Collection
@@ -766,9 +779,9 @@ Private Sub Form_Load()
         ucPieChart1.AddItem "2000" + i, Random(10, 30), CLng(cPalette(i + 1))
     Next
     
-    Set Value = New Collection
+    Set value = New Collection
     For i = 0 To 6
-        Value.Add Random(10, 10 * i)
+        value.Add Random(10, 10 * i)
     Next
     Set Lables = New Collection
     With Lables
@@ -780,40 +793,40 @@ Private Sub Form_Load()
         .Add "Twiter"
         .Add "Youtube"
     End With
-    ucTreeMaps1.AddLineSeries vbNullString, vbBlue, Value, Lables
-    Set Value = New Collection
+    ucTreeMaps1.AddLineSeries vbNullString, vbBlue, value, Lables
+    Set value = New Collection
     Set colDate = New Collection
     For i = 1 To 12
-        Value.Add Random(10, 300)
+        value.Add Random(10, 300)
         colDate.Add Format(DateSerial(2020, i, 1), "mmm")
     Next
     
     ucChartBar1.AddAxisItems colDate, , 305, 2
-    ucChartBar1.AddSerie "ASDF", vbRed, Value
+    ucChartBar1.AddSerie "ASDF", vbRed, value
     
-    Set Value = New Collection
+    Set value = New Collection
     For i = 1 To cPalette.Count
-        Value.Add Random(0, 100 * i)
+        value.Add Random(0, 100 * i)
     Next
     
     ucChartBar2.AddAxisItems Lables, True, , 2
-    ucChartBar2.AddSerie "Serie 1", vbRed, Value, cPalette
+    ucChartBar2.AddSerie "Serie 1", vbRed, value, cPalette
     
     For J = 1 To 3
-        Set Value = New Collection
+        Set value = New Collection
         For i = 1 To cPalette.Count
-            Value.Add Random(10 * i, 100 * i)
+            value.Add Random(10 * i, 100 * i)
         Next
-        ucChartArea1.AddLineSeries "Serie " & J, Value, cPalette(J)
+        ucChartArea1.AddLineSeries "Serie " & J, value, cPalette(J)
     Next
     
     
     For J = 1 To 2
-        Set Value = New Collection
+        Set value = New Collection
         For i = 1 To cPalette.Count
-            Value.Add Random(10 * i, 100 * i)
+            value.Add Random(10 * i, 100 * i)
         Next
-        ucChartArea2.AddLineSeries "Serie " & J, Value, cPalette(J + 5)
+        ucChartArea2.AddLineSeries "Serie " & J, value, cPalette(J + 5)
     Next
     
 
@@ -823,10 +836,10 @@ Private Sub Form_Load()
 End Sub
 
 Private Function NewCollection(ParamArray vArgList() As Variant) As Collection
-    Dim Value As Variant
+    Dim value As Variant
     Set NewCollection = New Collection
-    For Each Value In vArgList
-        NewCollection.Add Value
+    For Each value In vArgList
+        NewCollection.Add value
     Next
 End Function
 

@@ -27,6 +27,7 @@ Private m_Name                  As String
 Private m_ControlIndex          As String
 Private m_Index                 As Long
 Private m_Hwnd                  As Long
+Private m_ScaleModeParent       As ScaleModeConstants
 Private m_Left                  As Long
 Private m_Top                   As Long
 Private m_Right                 As Long
@@ -95,10 +96,10 @@ Public Property Let TypeName(ByVal newValue As String)
 End Property
 
 'm_Name                     As String
-Public Property Get Name() As String
-    Name = m_Name
+Public Property Get name() As String
+    name = m_Name
 End Property
-Public Property Let Name(ByVal newValue As String)
+Public Property Let name(ByVal newValue As String)
     m_Name = newValue
     PropertyChanged "Name"
 End Property
@@ -128,6 +129,15 @@ End Property
 Public Property Let hWnd(ByVal newValue As Long)
     m_Hwnd = newValue
     PropertyChanged "hWnd"
+End Property
+
+'m_ScaleModeParent          As ScaleModeConstants
+Public Property Get ScaleModeParent() As ScaleModeConstants
+    ScaleModeParent = m_ScaleModeParent
+End Property
+Public Property Let ScaleModeParent(ByVal newValue As ScaleModeConstants)
+    m_ScaleModeParent = newValue
+    PropertyChanged "ScaleModeParent"
 End Property
 
 'm_Left                     As Long
@@ -347,6 +357,7 @@ Private Sub Class_ReadProperties(PropBag As PropertyBag)
         m_ControlIndex = .ReadProperty("ControlIndex", "")
         m_Index = .ReadProperty("Index", 0)
         m_Hwnd = .ReadProperty("hWnd", 0)
+        m_ScaleModeParent = .ReadProperty("ScaleModeParent", 0)
         m_Left = .ReadProperty("Left", 0)
         m_Top = .ReadProperty("Top", 0)
         m_Right = .ReadProperty("Right", 0)
@@ -390,6 +401,7 @@ Private Sub Class_WriteProperties(PropBag As PropertyBag)
         .WriteProperty "ControlIndex", m_ControlIndex, ""
         .WriteProperty "Index", m_Index, 0
         .WriteProperty "hWnd", m_Hwnd, 0
+        .WriteProperty "ScaleModeParent", m_ScaleModeParent, 0
         .WriteProperty "Left", m_Left, 0
         .WriteProperty "Top", m_Top, 0
         .WriteProperty "Right", m_Right, 0

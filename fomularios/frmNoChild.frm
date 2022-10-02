@@ -1,6 +1,6 @@
 VERSION 5.00
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
-Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.0#0"; "JLAnchor.ocx"
+Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.1#0"; "JLAnchor.ocx"
 Begin VB.Form frmNoChild 
    Caption         =   "No Child"
    ClientHeight    =   3285
@@ -21,13 +21,14 @@ Begin VB.Form frmNoChild
       IconPresent     =   -1  'True
       FormIcon        =   "frmNoChild.frx":0000
       ControlsCount   =   5
-      BeginProperty Control_1 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_1 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmNoChild"
          TypeName        =   "CommandButton"
          Name            =   "Command1"
          Object.Index           =   1
          hWnd            =   7868802
+         ScaleModeParent =   1
          Object.Left            =   120
          Object.Top             =   120
          Right           =   2055
@@ -41,13 +42,14 @@ Begin VB.Form frmNoChild
          AnchorLeft      =   -1  'True
          AnchorTop       =   -1  'True
       EndProperty
-      BeginProperty Control_2 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_2 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmNoChild"
          TypeName        =   "TextBox"
          Name            =   "Text1"
          Object.Index           =   2
          hWnd            =   4786524
+         ScaleModeParent =   1
          Object.Left            =   1440
          Object.Top             =   120
          Right           =   135
@@ -62,13 +64,14 @@ Begin VB.Form frmNoChild
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
       EndProperty
-      BeginProperty Control_3 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_3 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "Form"
          ParentName      =   "frmNoChild"
          TypeName        =   "PictureBox"
          Name            =   "Picture1"
          Object.Index           =   3
          hWnd            =   9505864
+         ScaleModeParent =   1
          Object.Left            =   120
          Object.Top             =   840
          Right           =   135
@@ -84,13 +87,14 @@ Begin VB.Form frmNoChild
          AnchorRight     =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
-      BeginProperty Control_4 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_4 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "PictureBox"
          ParentName      =   "Picture1"
          TypeName        =   "TextBox"
          Name            =   "Text2"
          Object.Index           =   4
          hWnd            =   3148000
+         ScaleModeParent =   1
          Object.Left            =   240
          Object.Top             =   240
          Right           =   540
@@ -105,12 +109,13 @@ Begin VB.Form frmNoChild
          AnchorTop       =   -1  'True
          AnchorRight     =   -1  'True
       EndProperty
-      BeginProperty Control_5 {1820B3AA-C9AA-4184-8C03-110DA90D2ECB} 
+      BeginProperty Control_5 {881E793B-2C4F-4BDE-963C-25AE290F2EA6} 
          ParentTypeName  =   "PictureBox"
          ParentName      =   "Picture1"
          TypeName        =   "ListView"
          Name            =   "ListView1"
          Object.Index           =   5
+         ScaleModeParent =   1
          Object.Left            =   240
          Object.Top             =   720
          Right           =   540

@@ -27,12 +27,32 @@ Fin:
     GetControlIndex = ""
 End Function
 
+Public Function GetUseScaleWidth(objControl As Object) As Boolean
+    On Error GoTo FunctionError
+    Dim lW As Long
+    lW = objControl.ScaleWidth
+    GetUseScaleWidth = True
+    Exit Function
+FunctionError:
+    GetUseScaleWidth = False
+End Function
+
 Public Function GetControlScaleWidth(objControl As Object) As Long
     On Error GoTo FunctionError
     GetControlScaleWidth = objControl.ScaleWidth
     Exit Function
 FunctionError:
     GetControlScaleWidth = objControl.Width
+End Function
+
+Public Function GetUseScaleHeight(objControl As Object) As Boolean
+    On Error GoTo FunctionError
+    Dim lW As Long
+    lW = objControl.ScaleHeight
+    GetUseScaleHeight = True
+    Exit Function
+FunctionError:
+    GetUseScaleHeight = False
 End Function
 
 Public Function GetControlScaleHeight(objControl As Object) As Long
@@ -126,9 +146,29 @@ End Function
 Public Function GetContainerTypeName(ByVal objControl As Object) As String
 On Error GoTo FunctionError
     GetContainerTypeName = TypeName(objControl.Container)
+    Exit Function
 FunctionError:
     GetContainerTypeName = "Error"
 End Function
+
+Public Function GetParentScaleMode(ByVal objControl As Object) As ScaleModeConstants
+On Error GoTo FunctionError
+    GetParentScaleMode = objControl.Container.ScaleMode
+    Exit Function
+FunctionError:
+    GetParentScaleMode = vbTwips
+End Function
+
+Public Function GetParentUseScaleMode(ByVal objControl As Object) As Boolean
+On Error GoTo FunctionError
+    Dim sMode As ScaleModeConstants
+    sMode = objControl.Container.ScaleMode
+    GetParentUseScaleMode = True
+    Exit Function
+FunctionError:
+    GetParentUseScaleMode = False
+End Function
+
 
 Public Function BytesLength(abBytes() As Byte) As Long
     On Error Resume Next

@@ -1,14 +1,18 @@
 VERSION 5.00
 Begin VB.UserControl ucJLAnchor 
-   ClientHeight    =   480
+   ClientHeight    =   495
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   480
+   ClientWidth     =   975
    Picture         =   "ucJLAnchor.ctx":0000
    PropertyPages   =   "ucJLAnchor.ctx":0CCA
-   ScaleHeight     =   480
-   ScaleWidth      =   480
+   ScaleHeight     =   495
+   ScaleWidth      =   975
    ToolboxBitmap   =   "ucJLAnchor.ctx":0CDB
+   Begin VB.Timer tmrControls 
+      Left            =   480
+      Top             =   0
+   End
 End
 Attribute VB_Name = "ucJLAnchor"
 Attribute VB_GlobalNameSpace = False
@@ -20,6 +24,13 @@ Attribute VB_Exposed = True
 'Date: 12/06/2022
 'Version: 0.0.1
 'Thanks: Leandro Ascierto (www.leandroascierto.com) And Latin Group of VB6
+
+'UPDATES:
+'22/06/2022: An error was updated when obtaining the percentages of a child control of a frame
+'24/06/2022: Fixed some bugs, split percentage resize control into two options, dynamic and static. An example form was added for the static percentage option.
+'06/07/2022: Added option to add icon for form, with support for .ICO, .JPG, .BMP and .PNG.'
+'22/09/2022: Fixed a bug with some controls not handling the container property.
+'01/10/2022: Bug fix in handling multiple scales in containers that don't expose the ScaleMode property.
 '-----------------------------
 Option Explicit
 'USER32
@@ -29,6 +40,15 @@ Private Declare Function GetDesktopWindow Lib "user32" () As Long
 Private Declare Function UpdateWindow Lib "user32" (ByVal hWnd As Long) As Long
 Private Declare Function SetWindowLong Lib "user32" Alias "SetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long, ByVal dwNewLong As Long) As Long
 Private Declare Function GetWindowLong Lib "user32" Alias "GetWindowLongA" (ByVal hWnd As Long, ByVal nIndex As Long) As Long
+'--
+Private Declare Function GetAsyncKeyState Lib "user32" (ByVal vKey As Long) As Integer
+Private Declare Function WindowFromPoint Lib "user32" (ByVal xPoint As Long, ByVal yPoint As Long) As Long
+Private Declare Function GetCursorPos Lib "user32" (lpPoint As POINTAPI) As Long
+Private Declare Function ScreenToClient Lib "user32" (ByVal hWnd As Long, ByRef lpPoint As POINTAPI) As Long
+Private Declare Function GetClientRect Lib "user32" (ByVal hWnd As Long, ByRef lpRect As RECT) As Long
+Private Declare Function GetParent Lib "user32" (ByVal hWnd As Long) As Long
+Private Declare Function GetWindowRect Lib "user32" (ByVal hWnd As Long, ByRef lpRect As RECT) As Long
+Private Declare Function PtInRect Lib "user32" (ByRef lpRect As RECT, ByVal x As Long, ByVal Y As Long) As Long
 '--
 Private Declare Function CreateIconFromResourceEx Lib "user32" (ByRef presbits As Any, ByVal dwResSize As Long, ByVal fIcon As Long, ByVal dwVer As Long, ByVal cxDesired As Long, ByVal cyDesired As Long, ByVal Flags As Long) As Long
 Private Declare Function DestroyIcon Lib "user32" (ByVal hIcon As Long) As Long
@@ -69,6 +89,11 @@ Private Type GDIPlusStartupInput
     DebugEventCallback       As Long
     SuppressBackgroundThread As Long
     SuppressExternalCodecs   As Long
+End Type
+
+Private Type POINTAPI
+    x As Long
+    Y As Long
 End Type
 
 Private Type RECT
@@ -315,6 +340,10 @@ Private Sub frmParent_Activate()
     DoResize
 End Sub
 
+Private Sub frmParent_Paint()
+ 'Debug.Print "Update paint form"
+End Sub
+
 Private Sub frmParent_Resize()
     If ((m_FormMaxWidth < Screen.Width And m_FormMaxWidth > 0) Or (m_FormMaxHeight < Screen.Height And m_FormMaxHeight > 0)) And frmParent.WindowState = vbMaximized Then
         frmParent.WindowState = vbNormal
@@ -329,6 +358,25 @@ Private Sub frmParent_Resize()
         Else
             frmParent.Height = Screen.Height
         End If
+    End If
+End Sub
+
+Private Sub tmrControls_Timer()
+    Dim PT  As POINTAPI
+    Dim R   As RECT
+    '---
+    If tmrControls.Interval = 1 Then
+        If (GetAsyncKeyState(vbLeftButton) < 0) Or (GetAsyncKeyState(vbRightButton) < 0) Then
+            GetCursorPos PT
+            GetWindowRect frmParent.hWnd, R
+            If PtInRect(R, PT.x, PT.Y) Then
+                tmrControls.Interval = 2
+            End If
+        End If
+    End If
+    If tmrControls.Interval = 2 Then
+        DoResize
+        tmrControls.Interval = 1
     End If
 End Sub
 
@@ -460,6 +508,7 @@ Private Sub LoadControls()
     Dim cCount As Long, cIni As Long, cCountP As Long, lTemp As Long
     Dim IsExists As Boolean, IsChange As Boolean
     Dim sTemp As String
+    Dim lRight As Long, lBottom As Long, lWidth As Long, lHeight As Long
     'If CtrlParent Is Nothing Then Set CtrlParent = Extender.Container
     Set CtrlParent = Extender.Container
     '--
@@ -477,7 +526,8 @@ Private Sub LoadControls()
                 End If
             Next
             'If Not IsExists And TypeName(obj) <> "ucJLAnchor" Then
-            If Not IsExists And InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 And GetControlInContainer(obj) Then
+            If Not IsExists And InStr(OBJ_EXCLUDED, TypeName(obj)) = 0 Then 'And GetControlInContainer(obj) Then
+                'Debug.Print "Orphan control: Type[" & Controls.Item(i).TypeName & "] Name[" & Controls.Item(i).name & "] Index[" & Controls.Item(i).ControlIndex & "]"
                 Controls.Remove i
                 IsChange = True
             End If
@@ -499,18 +549,44 @@ Private Sub LoadControls()
                     cControl.name = .name
                     cControl.ControlIndex = GetControlIndex(obj)
                     cControl.hWnd = GetControlHwnd(obj)
+                    cControl.ScaleModeParent = GetParentScaleMode(obj)
                     cControl.Left = .Left
                     cControl.Top = .Top
-                    cControl.Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
-                    cControl.Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                    '--> RIGHT
+                    If GetParentUseScaleMode(obj) Then
+                        lRight = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
+                    Else
+                        lRight = ScaleX(GetControlScaleWidth(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent) - (obj.Left + obj.Width)
+                    End If
+                    cControl.Right = lRight
+                    '--> BOTTOM
+                    If GetParentUseScaleMode(obj) Then
+                        lBottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                    Else
+                        lBottom = ScaleY(GetControlScaleHeight(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent) - (obj.Top + obj.Height)
+                    End If
+                    'cControl.Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                    cControl.Bottom = lBottom
                     '--
                     cControl.MinWidth = GetMinWidthControl(obj)
                     cControl.MinHeight = GetMinHeightControl(obj)
                     '--
-                    cControl.LeftPercent = (obj.Left * 100) / GetControlScaleWidth(obj.Container)
-                    cControl.TopPercent = (obj.Top * 100) / GetControlScaleHeight(obj.Container)
-                    cControl.WidthPercent = (obj.Width * 100) / GetControlScaleWidth(obj.Container)
-                    cControl.HeightPercent = (obj.Height * 100) / GetControlScaleHeight(obj.Container)
+                    If GetParentUseScaleMode(obj) Then
+                        lWidth = GetControlScaleWidth(obj.Container)
+                    Else
+                        lWidth = ScaleX(GetControlScaleWidth(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent)
+                    End If
+                    '--
+                    If GetParentUseScaleMode(obj) Then
+                        lHeight = GetControlScaleHeight(obj.Container)
+                    Else
+                        lHeight = ScaleY(GetControlScaleHeight(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent)
+                    End If
+                    '--
+                    cControl.LeftPercent = (obj.Left * 100) / lWidth 'GetControlScaleWidth(obj.Container)
+                    cControl.TopPercent = (obj.Top * 100) / lHeight 'GetControlScaleHeight(obj.Container)
+                    cControl.WidthPercent = (obj.Width * 100) / lWidth 'GetControlScaleWidth(obj.Container)
+                    cControl.HeightPercent = (obj.Height * 100) / lHeight 'GetControlScaleHeight(obj.Container)
                     '--
                     Controls.Add cControl
                     '--
@@ -536,18 +612,43 @@ Private Sub LoadControls()
                         cControl.name = .name
                         cControl.ControlIndex = GetControlIndex(obj)
                         cControl.hWnd = GetControlHwnd(obj)
+                        cControl.ScaleModeParent = GetParentScaleMode(obj)
                         cControl.Left = .Left
                         cControl.Top = .Top
-                        cControl.Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
-                        cControl.Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                        '--> RIGHT
+                        If GetParentUseScaleMode(obj) Then
+                            lRight = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
+                        Else
+                            lRight = ScaleX(GetControlScaleWidth(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent) - (obj.Left + obj.Width)
+                        End If
+                        cControl.Right = lRight
+                        '--> BOTTOM
+                        If GetParentUseScaleMode(obj) Then
+                            lBottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                        Else
+                            lBottom = ScaleY(GetControlScaleHeight(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent) - (obj.Top + obj.Height)
+                        End If
+                        cControl.Bottom = lBottom
                         '--
                         cControl.MinWidth = GetMinWidthControl(obj)
                         cControl.MinHeight = GetMinHeightControl(obj)
                         '--
-                        cControl.LeftPercent = (obj.Left * 100) / GetControlScaleWidth(obj.Container)
-                        cControl.TopPercent = (obj.Top * 100) / GetControlScaleHeight(obj.Container)
-                        cControl.WidthPercent = (obj.Width * 100) / GetControlScaleWidth(obj.Container)
-                        cControl.HeightPercent = (obj.Height * 100) / GetControlScaleHeight(obj.Container)
+                        If GetParentUseScaleMode(obj) Then
+                            lWidth = GetControlScaleWidth(obj.Container)
+                        Else
+                            lWidth = ScaleX(GetControlScaleWidth(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent)
+                        End If
+                        '--
+                        If GetParentUseScaleMode(obj) Then
+                            lHeight = GetControlScaleHeight(obj.Container)
+                        Else
+                            lHeight = ScaleY(GetControlScaleHeight(obj.Container), CtrlParent.ScaleMode, cControl.ScaleModeParent)
+                        End If
+                        '--
+                        cControl.LeftPercent = (obj.Left * 100) / lWidth 'GetControlScaleWidth(obj.Container)
+                        cControl.TopPercent = (obj.Top * 100) / lHeight 'GetControlScaleHeight(obj.Container)
+                        cControl.WidthPercent = (obj.Width * 100) / lWidth 'GetControlScaleWidth(obj.Container)
+                        cControl.HeightPercent = (obj.Height * 100) / lHeight 'GetControlScaleHeight(obj.Container)
                         '--
                         Controls.Add cControl
                         '--
@@ -589,6 +690,10 @@ Private Sub LoadControls()
                                 Controls.Item(i).ControlIndex = GetControlIndex(obj)
                                 IsChange = True
                             End If
+                            If Controls.Item(i).ScaleModeParent <> GetParentScaleMode(obj) Then
+                                Controls.Item(i).ScaleModeParent = GetParentScaleMode(obj)
+                                IsChange = True
+                            End If
                             'If Controls.Item(i).hWnd <> GetControlHwnd(obj) Then cControl.hWnd = GetControlHwnd(obj)
                             If Controls.Item(i).Left <> .Left Then
                                 Controls.Item(i).Left = .Left
@@ -598,51 +703,78 @@ Private Sub LoadControls()
                                 Controls.Item(i).Top = .Top
                                 IsChange = True
                             End If
-                            If Controls.Item(i).Right <> GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width) Then
-                                Controls.Item(i).Right = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
+                            '--> RIGHT
+                            If GetParentUseScaleMode(obj) Then
+                                lRight = GetControlScaleWidth(obj.Container) - (obj.Left + obj.Width)
+                            Else
+                                lRight = ScaleX(GetControlScaleWidth(obj.Container), CtrlParent.ScaleMode, Controls.Item(i).ScaleModeParent) - (obj.Left + obj.Width)
+                            End If
+                            If Controls.Item(i).Right <> lRight Then
+                                Controls.Item(i).Right = lRight
                                 IsChange = True
                             End If
-                            If Controls.Item(i).Bottom <> GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height) Then
-                                Controls.Item(i).Bottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                            '--> BOTTOM
+                            If GetParentUseScaleMode(obj) Then
+                                lBottom = GetControlScaleHeight(obj.Container) - (obj.Top + obj.Height)
+                            Else
+                                lBottom = ScaleY(GetControlScaleHeight(obj.Container), CtrlParent.ScaleMode, Controls.Item(i).ScaleModeParent) - (obj.Top + obj.Height)
+                            End If
+                            If Controls.Item(i).Bottom <> lBottom Then
+                                Controls.Item(i).Bottom = lBottom
                                 IsChange = True
                             End If
                             '--> MinSize Controls
                             Controls.Item(i).MinWidth = GetMinWidthControl(obj)
                             Controls.Item(i).MinHeight = GetMinHeightControl(obj)
+                            '--
+                            If GetParentUseScaleMode(obj) Then
+                                lWidth = GetControlScaleWidth(obj.Container)
+                            Else
+                                lWidth = ScaleX(GetControlScaleWidth(obj.Container), CtrlParent.ScaleMode, Controls.Item(i).ScaleModeParent)
+                            End If
+                            '--
+                            If GetParentUseScaleMode(obj) Then
+                                lHeight = GetControlScaleHeight(obj.Container)
+                            Else
+                                lHeight = ScaleY(GetControlScaleHeight(obj.Container), CtrlParent.ScaleMode, Controls.Item(i).ScaleModeParent)
+                            End If
+                            '--
                             '--> LeftPercent
-                            If Controls.Item(i).LeftPercent <> (obj.Left * 100) / GetControlScaleWidth(obj.Container) Then
+                            'If Controls.Item(i).LeftPercent <> (obj.Left * 100) / GetControlScaleWidth(obj.Container) Then
+                            If Controls.Item(i).LeftPercent <> (obj.Left * 100) / lWidth Then
                                 If Not CBool(Controls.Item(i).UseModePercent) Then
-                                    Controls.Item(i).LeftPercent = (obj.Left * 100) / GetControlScaleWidth(obj.Container)
+                                    Controls.Item(i).LeftPercent = (obj.Left * 100) / lWidth
                                     Controls.Item(i).LeftPercentStatic = 0
                                 Else
-                                    Controls.Item(i).LeftPercentStatic = obj.Left - (GetControlScaleWidth(obj.Container) * (Controls.Item(i).LeftPercent / 100))
+                                    Controls.Item(i).LeftPercentStatic = obj.Left - (lWidth * (Controls.Item(i).LeftPercent / 100))
                                 End If
                             End If
                             '--> TopPercent
-                            If Controls.Item(i).TopPercent <> (obj.Top * 100) / GetControlScaleHeight(obj.Container) Then
+                            'If Controls.Item(i).TopPercent <> (obj.Top * 100) / GetControlScaleHeight(obj.Container) Then
+                            If Controls.Item(i).TopPercent <> (obj.Top * 100) / lHeight Then
                                 If Not CBool(Controls.Item(i).UseModePercent) Then
-                                    Controls.Item(i).TopPercent = (obj.Top * 100) / GetControlScaleHeight(obj.Container)
+                                    Controls.Item(i).TopPercent = (obj.Top * 100) / lHeight
                                     Controls.Item(i).TopPercentStatic = 0
                                 Else
-                                    Controls.Item(i).TopPercentStatic = obj.Top - (GetControlScaleHeight(obj.Container) * (Controls.Item(i).TopPercent / 100))
+                                    Controls.Item(i).TopPercentStatic = obj.Top - (lHeight * (Controls.Item(i).TopPercent / 100))
                                 End If
                             End If
                             '--> WidthPercent
-                            If Controls.Item(i).WidthPercent <> (obj.Width * 100) / GetControlScaleWidth(obj.Container) Then
+                            If Controls.Item(i).WidthPercent <> (obj.Width * 100) / lWidth Then
                                 If Not CBool(Controls.Item(i).UseModePercent) Then
-                                    Controls.Item(i).WidthPercent = (obj.Width * 100) / GetControlScaleWidth(obj.Container)
+                                    Controls.Item(i).WidthPercent = (obj.Width * 100) / lWidth
                                     Controls.Item(i).RightPercentStatic = 0
                                 Else
-                                    Controls.Item(i).RightPercentStatic = (obj.Width + (IIf(Controls.Item(i).UseLeftPercent, Controls.Item(i).LeftPercentStatic, obj.Left))) - (GetControlScaleWidth(obj.Container) * (Controls.Item(i).WidthPercent / 100))
+                                    Controls.Item(i).RightPercentStatic = (obj.Width + (IIf(Controls.Item(i).UseLeftPercent, Controls.Item(i).LeftPercentStatic, obj.Left))) - (lWidth * (Controls.Item(i).WidthPercent / 100))
                                 End If
                             End If
                             '--> HeightPercent
-                            If Controls.Item(i).HeightPercent <> (obj.Height * 100) / GetControlScaleHeight(obj.Container) Then
+                            If Controls.Item(i).HeightPercent <> (obj.Height * 100) / lHeight Then
                                 If Not CBool(Controls.Item(i).UseModePercent) Then
-                                    Controls.Item(i).HeightPercent = (obj.Height * 100) / GetControlScaleHeight(obj.Container)
+                                    Controls.Item(i).HeightPercent = (obj.Height * 100) / lHeight
                                     Controls.Item(i).BottomPercentStatic = 0
                                 Else
-                                    Controls.Item(i).BottomPercentStatic = (obj.Height + (IIf(Controls.Item(i).UseTopPercent, Controls.Item(i).TopPercentStatic, obj.Top))) - (GetControlScaleHeight(obj.Container) * (Controls.Item(i).HeightPercent / 100))
+                                    Controls.Item(i).BottomPercentStatic = (obj.Height + (IIf(Controls.Item(i).UseTopPercent, Controls.Item(i).TopPercentStatic, obj.Top))) - (lHeight * (Controls.Item(i).HeightPercent / 100))
                                 End If
                             End If
                         End If
@@ -657,10 +789,11 @@ Private Sub LoadControls()
 End Sub
 
 Private Sub DoResize()
-    Dim objControl As Control
-    Dim idx As String
-    Dim sWidth As Long, sHeight As Long, a As Long, lTemp As Long
-    Dim cRect As RECT
+    Dim objControl  As Control
+    Dim idx         As String
+    Dim sWidth      As Long, sHeight As Long, a As Long, lTemp As Long
+    Dim cRect       As RECT
+    Dim bTimer      As Boolean
     'Resize Controls
     Call SendMessage(frmParent.hWnd, WM_SETREDRAW, 0&, 0&)
     '--
@@ -669,13 +802,24 @@ Private Sub DoResize()
             '--
             idx = GetControlIndex(objControl)
             '--
-            sWidth = GetControlScaleWidth(objControl.Container)
-            sHeight = GetControlScaleHeight(objControl.Container)
-            '--
             For a = 1 To Controls.Count
                 If Controls.Item(a).TypeName = TypeName(objControl) Then
                     If Controls.Item(a).name & Controls.Item(a).ControlIndex = objControl.name & idx Then
                         With Controls.Item(a)
+                            '--> Update position in runtime
+                            '--
+                            If GetParentUseScaleMode(objControl) Then
+                                sWidth = GetControlScaleWidth(objControl.Container)
+                            Else
+                                sWidth = ScaleX(GetControlScaleWidth(objControl.Container), frmParent.ScaleMode, .ScaleModeParent)
+                            End If
+                            '--
+                            If GetParentUseScaleMode(objControl) Then
+                                sHeight = GetControlScaleHeight(objControl.Container)
+                            Else
+                                sHeight = ScaleY(GetControlScaleHeight(objControl.Container), frmParent.ScaleMode, .ScaleModeParent)
+                            End If
+                            '--
                             If .AnchorRight Then
                                 If .AnchorLeft Then
                                     objControl.Width = IIf(sWidth - (.Left + .Right) > 0, sWidth - (.Left + .Right), 0)
@@ -684,11 +828,16 @@ Private Sub DoResize()
                                     If Not .UseLeftPercent Then
                                         objControl.Left = sWidth - (objControl.Width + .Right)
                                     Else
+                                        If objControl.Left + objControl.Width > 0 Then bTimer = True
                                         If .UseModePercent Then
                                             'AQUIIIIII
-                                            objControl.Left = sWidth * (.LeftPercent / 100) + .LeftPercentStatic
+                                            If objControl.Left + objControl.Width > 0 Then
+                                                objControl.Left = sWidth * (.LeftPercent / 100) + .LeftPercentStatic
+                                            End If
                                         Else
-                                            objControl.Left = sWidth * (.LeftPercent / 100)
+                                            If objControl.Left + objControl.Width > 0 Then
+                                                objControl.Left = sWidth * (.LeftPercent / 100)
+                                            End If
                                         End If
                                     End If
                                 End If
@@ -700,11 +849,16 @@ Private Sub DoResize()
                                     End If
                                 'ElseIf Not .AnchorLeft And .LeftPercent > 0 Then
                                 ElseIf Not .AnchorLeft And .UseLeftPercent Then
+                                    If objControl.Left + objControl.Width > 0 Then bTimer = True
                                     If .UseModePercent Then
                                         'AQUIIIIII
-                                        objControl.Left = sWidth * (.LeftPercent / 100) + .LeftPercentStatic
+                                        If objControl.Left + objControl.Width > 0 Then
+                                            objControl.Left = sWidth * (.LeftPercent / 100) + .LeftPercentStatic
+                                        End If
                                     Else
-                                        objControl.Left = sWidth * (.LeftPercent / 100)
+                                        If objControl.Left + objControl.Width > 0 Then
+                                            objControl.Left = sWidth * (.LeftPercent / 100)
+                                        End If
                                     End If
                                 End If
                                 '--
@@ -770,6 +924,7 @@ Private Sub DoResize()
     Call SendMessage(frmParent.hWnd, WM_SETREDRAW, 1&, 0&)
     RedrawWindow frmParent.hWnd, ByVal &H0, 0, RDW_INVALIDATE Or RDW_ALLCHILDREN
     '--
+    If bTimer Then tmrControls.Interval = 1
 End Sub
 
 Private Function GetBytesToIcon(ByRef iconData() As Byte, ByVal cx As Long, ByVal cy As Long) As Long
@@ -890,7 +1045,7 @@ Private Sub WndProc(ByVal bBefore As Boolean, _
                     ByVal lParam As Long, _
                     ByRef lParamUser As Long)
                     
-    Dim r As RECT
+    Dim R As RECT
     Dim sMinWidth As Long, sMinHeight As Long
     Dim sMaxWidth As Long, sMaxHeight As Long
     '---
@@ -914,18 +1069,18 @@ Private Sub WndProc(ByVal bBefore As Boolean, _
             sMaxWidth = ScaleX(m_FormMaxWidth, vbTwips, vbPixels)
             sMaxHeight = ScaleY(m_FormMaxHeight, vbTwips, vbPixels)
             '---
-            Call CopyMemory(r, ByVal lParam, Len(r))
+            Call CopyMemory(R, ByVal lParam, Len(R))
             '/////////
             '* WIDTH *
             '/////////
             'MinWidth
-            If (r.Right - r.Left < sMinWidth) And m_FormMinWidth > 0 Then
+            If (R.Right - R.Left < sMinWidth) And m_FormMinWidth > 0 Then
                 Select Case wParam
                     Case WMSZ_TOPLEFT, WMSZ_LEFT, WMSZ_BOTTOMLEFT 'Left Part
-                        r.Left = r.Right - sMinWidth
+                        R.Left = R.Right - sMinWidth
                         m_Settings.ToAffectToLefts = True
                     Case WMSZ_TOPRIGHT, WMSZ_RIGHT, WMSZ_BOTTOMRIGHT 'Right Part
-                        r.Right = r.Left + sMinWidth
+                        R.Right = R.Left + sMinWidth
                         m_Settings.ToAffectToLefts = False
                 End Select
             Else
@@ -937,13 +1092,13 @@ Private Sub WndProc(ByVal bBefore As Boolean, _
                 End Select
             End If
             'MaxWidth
-            If (r.Right - r.Left > sMaxWidth) And m_FormMaxWidth > 0 Then
+            If (R.Right - R.Left > sMaxWidth) And m_FormMaxWidth > 0 Then
                 Select Case wParam
                     Case WMSZ_LEFT, WMSZ_BOTTOMLEFT, WMSZ_TOPLEFT
-                        r.Left = r.Right - sMaxWidth
+                        R.Left = R.Right - sMaxWidth
                         m_Settings.ToAffectToLefts = True
                     Case WMSZ_RIGHT, WMSZ_BOTTOMRIGHT, WMSZ_TOPRIGHT
-                        r.Right = r.Left + sMaxWidth
+                        R.Right = R.Left + sMaxWidth
                         m_Settings.ToAffectToLefts = False
                 End Select
             Else
@@ -958,13 +1113,13 @@ Private Sub WndProc(ByVal bBefore As Boolean, _
             '* HEIGHT *
             '//////////
             'MinHeight
-            If (r.Bottom - r.Top < sMinHeight) And m_FormMinHeight > 0 Then
+            If (R.Bottom - R.Top < sMinHeight) And m_FormMinHeight > 0 Then
                 Select Case wParam
                     Case WMSZ_TOPLEFT, WMSZ_TOP, WMSZ_TOPRIGHT 'Top Part
-                        r.Top = r.Bottom - sMinHeight
+                        R.Top = R.Bottom - sMinHeight
                         m_Settings.ToAffectToTops = True
                     Case WMSZ_BOTTOMLEFT, WMSZ_BOTTOM, WMSZ_BOTTOMRIGHT 'Bottom Part
-                        r.Bottom = r.Top + sMinHeight
+                        R.Bottom = R.Top + sMinHeight
                         m_Settings.ToAffectToTops = False
                 End Select
             Else
@@ -976,13 +1131,13 @@ Private Sub WndProc(ByVal bBefore As Boolean, _
                 End Select
             End If
             'MaxHeight
-            If (r.Bottom - r.Top > sMaxHeight) And m_FormMaxHeight > 0 Then
+            If (R.Bottom - R.Top > sMaxHeight) And m_FormMaxHeight > 0 Then
                 Select Case wParam
                     Case WMSZ_TOP, WMSZ_TOPLEFT, WMSZ_TOPRIGHT
-                        r.Top = r.Bottom - sMaxHeight
+                        R.Top = R.Bottom - sMaxHeight
                         m_Settings.ToAffectToTops = True
                     Case WMSZ_BOTTOM, WMSZ_BOTTOMLEFT, WMSZ_BOTTOMRIGHT
-                        r.Bottom = r.Top + sMaxHeight
+                        R.Bottom = R.Top + sMaxHeight
                         m_Settings.ToAffectToTops = False
                 End Select
             Else
@@ -994,7 +1149,7 @@ Private Sub WndProc(ByVal bBefore As Boolean, _
                 End Select
             End If
             '----------------------------------------------------------------------
-            Call CopyMemory(ByVal lParam, r, Len(r))
+            Call CopyMemory(ByVal lParam, R, Len(R))
         Case WM_SIZE
             m_Settings.ContainerWidth = Extender.Container.ScaleWidth
             m_Settings.ContainerHeight = Extender.Container.ScaleHeight

@@ -828,7 +828,7 @@ Private Sub DoResize()
                                     If Not .UseLeftPercent Then
                                         objControl.Left = sWidth - (objControl.Width + .Right)
                                     Else
-                                        If objControl.Left + objControl.Width > 0 Then bTimer = True
+                                        If objControl.Left + objControl.Width > 0 And Not TypeOf objControl.Parent Is Form And bTimer = False Then bTimer = True
                                         If .UseModePercent Then
                                             'AQUIIIIII
                                             If objControl.Left + objControl.Width > 0 Then
@@ -849,7 +849,7 @@ Private Sub DoResize()
                                     End If
                                 'ElseIf Not .AnchorLeft And .LeftPercent > 0 Then
                                 ElseIf Not .AnchorLeft And .UseLeftPercent Then
-                                    If objControl.Left + objControl.Width > 0 Then bTimer = True
+                                    If objControl.Left + objControl.Width > 0 And Not TypeOf objControl.Parent Is Form And bTimer = False Then bTimer = True
                                     If .UseModePercent Then
                                         'AQUIIIIII
                                         If objControl.Left + objControl.Width > 0 Then

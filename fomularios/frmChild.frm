@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#1.1#0"; "JLAnchor.ocx"
+Object = "{917DED51-9D95-4D2C-9431-281FAC2C6FF4}#2.0#0"; "JLAnchor.ocx"
 Begin VB.Form frmChild 
    Caption         =   "Child"
    ClientHeight    =   4410
@@ -42,6 +42,7 @@ Begin VB.Form frmChild
          UseWidthPercent =   -1  'True
          WidthPercent    =   37.561
          HeightPercent   =   76.531
+         BottomPercentStatic=   840
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
@@ -135,6 +136,7 @@ Begin VB.Form frmChild
          UseWidthPercent =   -1  'True
          WidthPercent    =   30.732
          HeightPercent   =   78.912
+         BottomPercentStatic=   840
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
@@ -203,6 +205,7 @@ Begin VB.Form frmChild
          UseWidthPercent =   -1  'True
          WidthPercent    =   29.171
          HeightPercent   =   79.252
+         BottomPercentStatic=   840
          AnchorTop       =   -1  'True
          AnchorBottom    =   -1  'True
       EndProperty
